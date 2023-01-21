@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public NavMeshAgent agent;
     public GameObject target;
+    public Animator animator;
 	
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        animator.SetFloat("Move", agent.velocity.magnitude);
     }
 }
