@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //animator.SetFloat("x", agent.velocity.x);
+        //animator.SetFloat("y", agent.velocity.y);
         animator.SetFloat("Move", agent.velocity.magnitude);
     }
 }
