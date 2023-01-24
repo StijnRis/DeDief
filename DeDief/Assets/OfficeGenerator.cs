@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class OfficeGenerator : MonoBehaviour
 {
+<<<<<<< Updated upstream
     public int width = 10;
     public int length = 30;
     public GameObject wall;
+=======
+    public int size = 50;
+>>>>>>> Stashed changes
 
     Office office;
     GameObject building;
@@ -20,6 +24,7 @@ public class OfficeGenerator : MonoBehaviour
 
     public void generate()
     {
+<<<<<<< Updated upstream
         this.office = new Office(width, length);
         this.rooms = 0;
         foreach (Transform child in building.transform)
@@ -41,14 +46,37 @@ public class OfficeGenerator : MonoBehaviour
                 placeCorridorRow(x);
 
                 x += 1;
+=======
+        grid = new Cell[size, size];
+        int boundry = 1;
+        Vector2 position = new Vector2(0, 0);
+        Vector2 movement = new Vector2(1, 0);
+        for (int i = 0; i < size * size; i++)
+        {
+            position += movement;
+            bool xBoundry = (position.x >= size - boundry || position.x < boundry) && movement.x != 0;
+            bool yBoundry = (position.y >= size - boundry || position.y < boundry) && movement.y != 0;
+            if (xBoundry || yBoundry)
+            {
+                Debug.Log("Switch")
+                float x = movement.x;
+                movement.x = movement.y;
+                movement.y = -x;
+>>>>>>> Stashed changes
             }
+            string text = position.x + " " + position.y;
+            Debug.Log(text);
         }
+<<<<<<< Updated upstream
         placeWalls();
     }
 
     void placeCorridorRow(int x)
     {
         for (int y = 0; y < office.getLength(); y++)
+=======
+        /*for (int y = 0; y < size; y++)
+>>>>>>> Stashed changes
         {
             office.setCell(x, y, "C");
         }
@@ -70,14 +98,28 @@ public class OfficeGenerator : MonoBehaviour
                     office.setCell(x, y, "O" + id);
                 }
             }
+<<<<<<< Updated upstream
             startY += length + 1;
         }
         return;
+=======
+        }*/
+    }
+
+    void getClosestCorridor(int x, int y)
+    {
+
+>>>>>>> Stashed changes
     }
 
     public void placeWalls()
     {
+<<<<<<< Updated upstream
         for (int z = 0; z < office.getLength(); z++)
+=======
+        if (!Application.isPlaying) return;
+        /*for (int y = 0; y < size; y++)
+>>>>>>> Stashed changes
         {
             placeWall(0, z + 0.5, 0);
         }
@@ -95,7 +137,7 @@ public class OfficeGenerator : MonoBehaviour
                     placeWall(x + 0.5, z + 1, 90);
                 }
             }
-        }
+        }*/
     }
 
     public void placeWall(double x, double z, double rotation)
