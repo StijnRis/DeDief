@@ -18,6 +18,8 @@ public class UIController : MonoBehaviour
 
     private void startGame()
     {
-        SceneManager.LoadScene("Agent", LoadSceneMode.Single);
+        //SceneManager.LoadScene("Agent", LoadSceneMode.Single);
+
+        Destroy(gameObject);
     }
 }

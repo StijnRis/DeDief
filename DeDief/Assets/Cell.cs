@@ -1,9 +1,9 @@
 public class Cell
 {
-    public bool isWater;
+    public int type;
 
-    public Cell(bool isWater)
+    public Cell(int type)
     {
-        this.isWater = isWater;
+        this.type = type;
     }
 }
