@@ -4,66 +4,104 @@ using UnityEngine;
 
 public class OfficeGenerator : MonoBehaviour
 {
-    public float waterLevel = .4f;
-    public float scale = .1f;
-    public int size = 100;
+    public int width = 10;
+    public int length = 30;
+    public GameObject wall;
 
-    Cell[,] grid;
+    Office office;
+    GameObject building;
+    int rooms;
 
     void Start()
+    {        
+        building = new GameObject("Office");
+        generate();
+    }
+
+    public void generate()
     {
-        float[,] noiseMap = new float[size, size];
-        (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
-        for (int y = 0; y < size; y++)
+        this.office = new Office(width, length);
+        this.rooms = 0;
+        foreach (Transform child in building.transform)
         {
-            for (int x = 0; x < size; x++)
-            {
-                float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
-                noiseMap[x, y] = noiseValue;
-            }
+            Destroy(child.gameObject);
         }
 
-        float[,] falloffMap = new float[size, size];
-        for (int y = 0; y < size; y++)
+        int x = 0;
+        int rows = 0;
+        while (x < office.getWidth())
         {
-            for (int x = 0; x < size; x++)
+            int width = Random.Range(3, 5);
+            placeRoomsRow(x, x + width);
+
+            rows += 1;
+            x += width;
+            if (rows % 2 != 0)
             {
-                float xv = x / (float)size * 2 - 1;
-                float yv = y / (float)size * 2 - 1;
-                float v = Mathf.Max(Mathf.Abs(xv), Mathf.Abs(yv));
-                falloffMap[x, y] = Mathf.Pow(v, 3f) / (Mathf.Pow(v, 3f) + Mathf.Pow(2.2f - 2.2f * v, 3f));
+                placeCorridorRow(x);
+
+                x += 1;
             }
         }
+        placeWalls();
+    }
 
-        grid = new Cell[size, size];
-        for (int y = 0; y < size; y++)
+    void placeCorridorRow(int x)
+    {
+        for (int y = 0; y < office.getLength(); y++)
         {
-            for (int x = 0; x < size; x++)
+            office.setCell(x, y, "C");
+        }
+    }
+
+    void placeRoomsRow(int x1, int x2)
+    {
+
+        int startY = 0;
+        while (startY < office.getLength())
+        {
+            int length = Random.Range(2, 4);
+            this.rooms += 1;
+            int id = 1 + this.rooms;
+            for (int y = startY; y <= startY + length; y++)
             {
-                float noiseValue = noiseMap[x, y];
-                noiseValue -= falloffMap[x, y];
-                bool isWater = noiseValue < waterLevel;
-                Cell cell = new Cell(isWater);
-                grid[x, y] = cell;
+                for (int x = x1; x <= x2; x++)
+                {
+                    office.setCell(x, y, "O" + id);
+                }
+            }
+            startY += length + 1;
+        }
+        return;
+    }
+
+    public void placeWalls()
+    {
+        for (int z = 0; z < office.getLength(); z++)
+        {
+            placeWall(0, z + 0.5, 0);
+        }
+        for (int x = 0; x < office.getWidth(); x++)
+        {
+            placeWall(x + 0.5, 0, 90);
+            for (int z = 0; z < office.getLength(); z++)
+            {
+                if (office.getCell(x, z) != office.getCell(x+1, z))
+                {
+                    placeWall(x + 1, z + 0.5, 0);
+                }
+                if (office.getCell(x, z) != office.getCell(x, z + 1))
+                {
+                    placeWall(x + 0.5, z + 1, 90);
+                }
             }
         }
     }
 
-    void OnDrawGizmos()
+    public void placeWall(double x, double z, double rotation)
     {
-        if (!Application.isPlaying) return;
-        for (int y = 0; y < size; y++)
-        {
-            for (int x = 0; x < size; x++)
-            {
-                Cell cell = grid[x, y];
-                if (cell.isWater)
-                    Gizmos.color = Color.blue;
-                else
-                    Gizmos.color = Color.green;
-                Vector3 pos = new Vector3(x, 0, y);
-                Gizmos.DrawCube(pos, Vector3.one);
-            }
-        }
+        Vector3 position = new Vector3((float)(x), 0, (float) (z));
+        Quaternion quaternion = Quaternion.AngleAxis((float) rotation, Vector3.up);
+        GameObject wallObject = Instantiate(wall, position, quaternion, building.transform);
     }
 }
