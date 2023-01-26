@@ -1,118 +1,138 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using System.Linq;
 
 public class OfficeGenerator : MonoBehaviour
 {
-<<<<<<< Updated upstream
-    public int width = 10;
-    public int length = 30;
-    public GameObject wall;
-=======
-    public int size = 50;
->>>>>>> Stashed changes
+    public int MinSplittableArea = 3;
+    public float MaxHallRate = 0.15F;
 
-    Office office;
-    GameObject building;
-    int rooms;
+    public int width = 20;
+    public int height = 40;
 
-    void Start()
-    {        
-        building = new GameObject("Office");
-        generate();
-    }
+    private Area House;
+    private double TotalHallArea;
+    private List<Area> Chunks, Halls, Blocks, Rooms;
 
-    public void generate()
+    public void Generate()
     {
-<<<<<<< Updated upstream
-        this.office = new Office(width, length);
-        this.rooms = 0;
-        foreach (Transform child in building.transform)
+        foreach (Office c in this.GetComponents<Office>())
         {
-            Destroy(child.gameObject);
+            Destroy(c);
         }
 
-        int x = 0;
-        int rows = 0;
-        while (x < office.getWidth())
-        {
-            int width = Random.Range(3, 5);
-            placeRoomsRow(x, x + width);
+        TotalHallArea = 0;
+        House = new Area(0, 0, width, height);
+        Chunks = new List<Area>();
+        Halls = new List<Area>();
+        Blocks = new List<Area>();
+        Rooms = new List<Area>();
 
-            rows += 1;
-            x += width;
-            if (rows % 2 != 0)
-            {
-                placeCorridorRow(x);
+        ChunksToBlocks();
+        BlocksToRooms();
 
-                x += 1;
-=======
-        grid = new Cell[size, size];
-        int boundry = 1;
-        Vector2 position = new Vector2(0, 0);
-        Vector2 movement = new Vector2(1, 0);
-        for (int i = 0; i < size * size; i++)
+        GameObject office = new GameObject("Office");
+        Office officeScript = office.gameObject.AddComponent<Office>();
+        officeScript.setup();
+        foreach (Area room in Rooms)
         {
-            position += movement;
-            bool xBoundry = (position.x >= size - boundry || position.x < boundry) && movement.x != 0;
-            bool yBoundry = (position.y >= size - boundry || position.y < boundry) && movement.y != 0;
-            if (xBoundry || yBoundry)
+            officeScript.AddRoom(room);
+        }
+
+        //// TODO:
+
+        // carve halls;
+        // where hall faces much older hall:
+        // place wall;
+
+        // carve rooms, leaving walls;
+
+        // put every room in queue of unreachable rooms;
+        // while this queue is not empty:
+        // get next room from queue;
+        // if room is touching any number of halls:
+        // make door, facing any avaliable hall;
+        // put this room in queue of reachable rooms;
+        // `continue`;
+        // if room is touching any other reachable room:
+        // connect this with other;
+        // place door, if Random wants so;
+        // `continue`;
+        // put this room in queue of unreachable rooms;
+
+        // place windows;
+    }
+
+    private void ChunksToBlocks()
+    {
+        Chunks.Add(House);
+        while ((Chunks.Count > 0) && (TotalHallArea / (double)House.GetArea() < MaxHallRate))
+        {
+            Area chunk = Chunks.Max();
+            Chunks.Remove(chunk);
+
+            if (chunk.GetArea() > MinSplittableArea)
             {
-                Debug.Log("Switch")
-                float x = movement.x;
-                movement.x = movement.y;
-                movement.y = -x;
->>>>>>> Stashed changes
+                (Area chunk_a, Area hall, Area chunk_b) = chunk.SplitThree();
+                Chunks.Add(chunk_a);
+                Chunks.Add(chunk_b);
+                Halls.Add(hall);
+                TotalHallArea += hall.GetArea();
             }
-            string text = position.x + " " + position.y;
-            Debug.Log(text);
-        }
-<<<<<<< Updated upstream
-        placeWalls();
-    }
-
-    void placeCorridorRow(int x)
-    {
-        for (int y = 0; y < office.getLength(); y++)
-=======
-        /*for (int y = 0; y < size; y++)
->>>>>>> Stashed changes
-        {
-            office.setCell(x, y, "C");
-        }
-    }
-
-    void placeRoomsRow(int x1, int x2)
-    {
-
-        int startY = 0;
-        while (startY < office.getLength())
-        {
-            int length = Random.Range(2, 4);
-            this.rooms += 1;
-            int id = 1 + this.rooms;
-            for (int y = startY; y <= startY + length; y++)
+            else
             {
-                for (int x = x1; x <= x2; x++)
-                {
-                    office.setCell(x, y, "O" + id);
-                }
+                Blocks.Add(chunk);
             }
-<<<<<<< Updated upstream
-            startY += length + 1;
         }
-        return;
-=======
-        }*/
+        Blocks.AddRange(Chunks);
+        Chunks.Clear();
     }
 
-    void getClosestCorridor(int x, int y)
+    private void BlocksToRooms()
     {
+        while (Blocks.Count > 0)
+        {
+            Area block = Blocks.Max();
+            Blocks.Remove(block);
 
->>>>>>> Stashed changes
+            if (WantSplitBlock(block))
+            {
+                (Area block_a, Area block_b) = block.SplitTwo();
+                Blocks.Add(block_a);
+                Blocks.Add(block_b);
+            }
+            else
+            {
+                Rooms.Add(block);
+            }
+        }
     }
 
-    public void placeWalls()
+    private bool WantSplitBlock(Area block)
+    {
+        if (block.GetArea() < 4)
+        {
+            return false;
+        }
+        else
+        {
+            double chance = Random.Range(0, (float)block.GetArea());
+            if (chance < 5)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+
+
+
+    /*public void placeWalls()
     {
 <<<<<<< Updated upstream
         for (int z = 0; z < office.getLength(); z++)
@@ -137,13 +157,12 @@ public class OfficeGenerator : MonoBehaviour
                     placeWall(x + 0.5, z + 1, 90);
                 }
             }
-        }*/
+        }
     }
-
     public void placeWall(double x, double z, double rotation)
     {
         Vector3 position = new Vector3((float)(x), 0, (float) (z));
         Quaternion quaternion = Quaternion.AngleAxis((float) rotation, Vector3.up);
         GameObject wallObject = Instantiate(wall, position, quaternion, building.transform);
-    }
+    }*/
 }
