@@ -2,45 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Office
+public class Office : MonoBehaviour
 {
-    string[,] grid;
+    List<GameObject> rooms;
 
-    public Office(int width, int length)
+    public void setup()
     {
-        this.grid = new string[width, length];
+        this.rooms = new List<GameObject>();
     }
 
-    public int getWidth()
+    public void AddRoom(Area arae)
     {
-        return grid.GetLength(1);
+        GameObject room = new GameObject("Room");
+        room.transform.SetParent(this.transform);
+        OfficeRoom roomScript = room.gameObject.AddComponent<OfficeRoom>();
+        roomScript.setArea(arae);
+        roomScript.SurroundWithWall();
+        this.rooms.Add(room);
     }
 
-    public int getLength()
+    public void OnDestroy()
     {
-        return grid.GetLength(0);
-    }
-
-    public int getAmountOfCells()
-    {
-        return getLength() * getWidth();
-    }
-
-    public string? getCell(int x, int y)
-    {
-        if (x < 0 || x >= getWidth() || y < 0 || y >= getLength())
-        {
-            return null;
+        foreach (GameObject room in this.rooms){
+            Destroy(room);
         }
-        return grid[y, x];
-    }
-
-    public void setCell(int x, int y, string value)
-    {
-        if (x < 0 || x >= getWidth() || y < 0 || y >= getLength())
-        {
-            return;
-        }
-        grid[y, x] = value;
     }
 }

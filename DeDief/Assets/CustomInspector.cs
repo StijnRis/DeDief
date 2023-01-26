@@ -14,7 +14,7 @@ public class CustomInspector : Editor
         OfficeGenerator office = (OfficeGenerator)target;
         if (GUILayout.Button("Generate"))
         {
-            office.generate();
+            office.Generate();
         }
     }
 }
