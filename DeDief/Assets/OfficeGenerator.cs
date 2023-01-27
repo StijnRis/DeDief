@@ -1,44 +1,49 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using System.Linq;
 
 public class OfficeGenerator : MonoBehaviour
 {
-    public int MinSplittableArea = 3;
+    public float Width = 20;
+    public float Length = 40;
+    public float Height = 2;
+    public float MinArea = 3;
     public float MaxHallRate = 0.15F;
-
-    public int width = 20;
-    public int height = 40;
+    public float MinHallSize = 1;
 
     private Area House;
     private double TotalHallArea;
-    private List<Area> Chunks, Halls, Blocks, Rooms;
+    private List<Area> Chunks, Halls, Blocks, Areas;
+
+    public List<RoomType> RoomTypes;
+    List<GameObject> Rooms;
+
+    private void Start()
+    {
+        Generate();
+    }
 
     public void Generate()
     {
-        foreach (Office c in this.GetComponents<Office>())
-        {
-            Destroy(c);
+        // Remove and reset everyting
+        foreach (Transform c in transform) {
+            Destroy(c.gameObject);
         }
-
+        Rooms = new List<GameObject>();
         TotalHallArea = 0;
-        House = new Area(0, 0, width, height);
+        House = new Area(0, 0, Width, Length);
         Chunks = new List<Area>();
         Halls = new List<Area>();
         Blocks = new List<Area>();
-        Rooms = new List<Area>();
+        Areas = new List<Area>();
 
+        // Generate office
         ChunksToBlocks();
-        BlocksToRooms();
+        BlocksToAreas();
 
-        GameObject office = new GameObject("Office");
-        Office officeScript = office.gameObject.AddComponent<Office>();
-        officeScript.setup();
-        foreach (Area room in Rooms)
+        foreach (Area area in Areas)
         {
-            officeScript.AddRoom(room);
+            PlaceArea(area);
         }
 
         //// TODO:
@@ -73,7 +78,7 @@ public class OfficeGenerator : MonoBehaviour
             Area chunk = Chunks.Max();
             Chunks.Remove(chunk);
 
-            if (chunk.GetArea() > MinSplittableArea)
+            if (chunk.GetArea() > MinArea)
             {
                 (Area chunk_a, Area hall, Area chunk_b) = chunk.SplitThree();
                 Chunks.Add(chunk_a);
@@ -90,7 +95,7 @@ public class OfficeGenerator : MonoBehaviour
         Chunks.Clear();
     }
 
-    private void BlocksToRooms()
+    private void BlocksToAreas()
     {
         while (Blocks.Count > 0)
         {
@@ -105,7 +110,7 @@ public class OfficeGenerator : MonoBehaviour
             }
             else
             {
-                Rooms.Add(block);
+                Areas.Add(block);
             }
         }
     }
@@ -130,39 +135,45 @@ public class OfficeGenerator : MonoBehaviour
         }
     }
 
-
-
-    /*public void placeWalls()
+    public void PlaceArea(Area area)
     {
-<<<<<<< Updated upstream
-        for (int z = 0; z < office.getLength(); z++)
-=======
-        if (!Application.isPlaying) return;
-        /*for (int y = 0; y < size; y++)
->>>>>>> Stashed changes
+        GameObject roomPrefab = getGoodRoom(area);
+        GameObject room = Instantiate(roomPrefab, transform);
+        BoxCollider collider = room.GetComponent<BoxCollider>();
+        collider.size = new Vector3((float)area.GetWidth(), Height, (float)area.GetHeight());
+        room.transform.position = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetHeight() / 2));
+        Rooms.Add(room); 
+    }
+
+    public void OnDestroy()
+    {
+        foreach (GameObject room in this.Rooms)
         {
-            placeWall(0, z + 0.5, 0);
-        }
-        for (int x = 0; x < office.getWidth(); x++)
-        {
-            placeWall(x + 0.5, 0, 90);
-            for (int z = 0; z < office.getLength(); z++)
-            {
-                if (office.getCell(x, z) != office.getCell(x+1, z))
-                {
-                    placeWall(x + 1, z + 0.5, 0);
-                }
-                if (office.getCell(x, z) != office.getCell(x, z + 1))
-                {
-                    placeWall(x + 0.5, z + 1, 90);
-                }
-            }
+            Destroy(room);
         }
     }
-    public void placeWall(double x, double z, double rotation)
+
+    public GameObject getGoodRoom(Area area)
     {
-        Vector3 position = new Vector3((float)(x), 0, (float) (z));
-        Quaternion quaternion = Quaternion.AngleAxis((float) rotation, Vector3.up);
-        GameObject wallObject = Instantiate(wall, position, quaternion, building.transform);
-    }*/
+        RoomType item = RoomTypes.OrderBy(x => x.getScore(area)).FirstOrDefault(); ;
+        return item.getRandomRoom();
+    }
+}
+
+[System.Serializable]
+public class RoomType
+{
+    public string Name;
+    public float AvarageSize;
+    public GameObject[] Prefabs;
+
+    public GameObject getRandomRoom()
+    {
+        return Prefabs[Random.Range(0, Prefabs.Length)];
+    }
+
+    public float getScore(Area area)
+    {
+        return Mathf.Abs((float)(area.GetArea() - AvarageSize));
+    }
 }

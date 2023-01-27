@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 381772285}
   - component: {fileID: 381772284}
   m_Layer: 0
-  m_Name: OfficeGenerator
+  m_Name: Office
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,10 +152,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a565567f479317742af08361a75b2bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinSplittableArea: 3
+  Width: 20
+  Length: 40
+  Height: 2
+  MinArea: 3
   MaxHallRate: 0.15
-  width: 10
-  height: 30
+  MinHallSize: 1
+  RoomTypes:
+  - Name: Working
+    AvarageSize: 0
+    Prefabs:
+    - {fileID: 3930007208169666870, guid: 9d06b0b87fedbc94d99f2c6c9d6d184f, type: 3}
 --- !u!4 &381772285
 Transform:
   m_ObjectHideFlags: 0
