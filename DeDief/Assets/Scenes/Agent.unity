@@ -1982,7 +1982,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4422859137822778}
-  - component: {fileID: 4422859137822779}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -2661,29 +2660,6 @@ Transform:
   m_Father: {fileID: 4855129064704514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4422859137822779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1642691630380900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 637eea39bf9705042bf0ce9707ef2e04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 20
-  angle: 80
-  playerRef: {fileID: 0}
-  eyes: {fileID: 0}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 128
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 64
-  canSeePlayer: 0
 --- !u!4 &4450589599217990
 Transform:
   m_ObjectHideFlags: 0
