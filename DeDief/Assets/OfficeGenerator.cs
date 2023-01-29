@@ -120,10 +120,8 @@ public class OfficeGenerator : MonoBehaviour
 
     public void AddDoors()
     {
-        int i = 0;
-        while (UnreachableAreas.Count > 0 && i < 1000)
+        while (UnreachableAreas.Count > 0)
         {
-            i++;
             Area area = UnreachableAreas[0];
             UnreachableAreas.Remove(area);
             bool connected = false;
@@ -172,6 +170,12 @@ public class OfficeGenerator : MonoBehaviour
         if (size == null)
         {
             size = room.AddComponent<Size>();
+        }
+        if (area.Door != null)
+        {
+            Vector2 offset = new Vector2((float)(area.Left + area.GetWidth() / 2), (float)(area.Top + area.GetLength() / 2));
+            Door door = room.AddComponent<Door>();
+            door.placeBetween(new Vector2(area.Door.Left, area.Door.Top) - offset, new Vector2(area.Door.Right, area.Door.Bottom) - offset);
         }
         size.size = new Vector3((float)area.GetWidth(), Size.size.y, (float)area.GetLength());
         room.transform.position = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetLength() / 2));

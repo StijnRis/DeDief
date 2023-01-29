@@ -6,7 +6,7 @@ public class Area : System.IComparable<Area>
     public float Top { get; }
     public float Right { get; }
     public float Bottom { get; }
-    private Area door;
+    public Area Door;
 
     public Area(float left, float top, float right, float bottom)
     {
@@ -48,13 +48,13 @@ public class Area : System.IComparable<Area>
 
     private float getSplitX()
     {
-        float x = Random.Range((float)(GetWidth() / 4), (float)((GetWidth() - 1) / 4 * 3));
+        float x = Random.Range((float)(GetWidth() / 5), (float)((GetWidth() - 1) / 5 * 4));
         return x;
     }
 
     private float getSplitZ()
     {
-        float y = Random.Range((float)(GetLength() / 4), (float)((GetLength() - 1) / 4 * 3));
+        float y = Random.Range((float)(GetLength() / 5), (float)((GetLength() - 1) / 5 * 4));
         return y;
     }
 
@@ -131,7 +131,7 @@ public class Area : System.IComparable<Area>
         float y1 = Mathf.Max(Top, area.Top);
         float x2 = Mathf.Min(Right, area.Right);
         float y2 = Mathf.Min(Bottom, area.Bottom);
-        door = new Area(x1, y1, x2, y2);
+        Door = new Area(x1, y1, x2, y2);
     }
 
     public int CompareTo(Area other)
