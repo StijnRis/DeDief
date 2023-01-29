@@ -7,6 +7,6 @@ public class CorridorGenerator : RoomGenerator
     public override void Generate()
     {
         OnDestroy();
-        placeFloor();
+        PlaceFloor();
     }
 }

@@ -7,6 +7,7 @@ public class OfficeRoomGenerator : RoomGenerator
     public override void Generate()
     {
         OnDestroy();
-        SurroundWithWall();
+        PlaceWalls();
+        PlaceFloor();
     }
 }
