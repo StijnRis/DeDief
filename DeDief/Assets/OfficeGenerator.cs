@@ -4,22 +4,22 @@ using System.Linq;
 
 public class OfficeGenerator : MonoBehaviour
 {
-    public float Width = 20;
-    public float Length = 40;
-    public float Height = 2;
     public float MinArea = 3;
+    [Range(0.0f, 1.0f)]
     public float MaxHallRate = 0.15F;
-    public float MinHallSize = 1;
+    public float HallSize = 1;
+    public GameObject Corridor;
+    public List<RoomType> RoomTypes;
 
+    private Size Size;
     private Area House;
     private double TotalHallArea;
-    private List<Area> Chunks, Halls, Blocks, Areas;
-
-    public List<RoomType> RoomTypes;
-    List<GameObject> Rooms;
+    private List<Area> Chunks, Halls, Blocks, UnreachableAreas, Areas;
+    private List<GameObject> Rooms;
 
     private void Start()
     {
+        Size = GetComponent<Size>();
         Generate();
     }
 
@@ -31,56 +31,39 @@ public class OfficeGenerator : MonoBehaviour
         }
         Rooms = new List<GameObject>();
         TotalHallArea = 0;
-        House = new Area(0, 0, Width, Length);
+        House = new Area(0, 0, Size.size.x, Size.size.z);
         Chunks = new List<Area>();
         Halls = new List<Area>();
         Blocks = new List<Area>();
+        UnreachableAreas = new List<Area>();
         Areas = new List<Area>();
 
         // Generate office
         ChunksToBlocks();
         BlocksToAreas();
+        AddDoors();
 
         foreach (Area area in Areas)
         {
-            PlaceArea(area);
+            PlaceRoom(area);
         }
-
-        //// TODO:
-
-        // carve halls;
-        // where hall faces much older hall:
-        // place wall;
-
-        // carve rooms, leaving walls;
-
-        // put every room in queue of unreachable rooms;
-        // while this queue is not empty:
-        // get next room from queue;
-        // if room is touching any number of halls:
-        // make door, facing any avaliable hall;
-        // put this room in queue of reachable rooms;
-        // `continue`;
-        // if room is touching any other reachable room:
-        // connect this with other;
-        // place door, if Random wants so;
-        // `continue`;
-        // put this room in queue of unreachable rooms;
-
-        // place windows;
+        foreach (Area hall in Halls)
+        {
+            PlaceArea(hall, Corridor);
+        }
     }
 
     private void ChunksToBlocks()
     {
         Chunks.Add(House);
-        while ((Chunks.Count > 0) && (TotalHallArea / (double)House.GetArea() < MaxHallRate))
+        while ((Chunks.Count > 0) && (TotalHallArea / (double) House.GetArea() < MaxHallRate))
         {
             Area chunk = Chunks.Max();
             Chunks.Remove(chunk);
 
             if (chunk.GetArea() > MinArea)
             {
-                (Area chunk_a, Area hall, Area chunk_b) = chunk.SplitThree();
+                (Area chunk_a, Area hall, Area chunk_b) = chunk.SplitThree(HallSize);
                 Chunks.Add(chunk_a);
                 Chunks.Add(chunk_b);
                 Halls.Add(hall);
@@ -110,21 +93,21 @@ public class OfficeGenerator : MonoBehaviour
             }
             else
             {
-                Areas.Add(block);
+                UnreachableAreas.Add(block);
             }
         }
     }
 
     private bool WantSplitBlock(Area block)
     {
-        if (block.GetArea() < 4)
+        if (block.GetArea() < MinArea)
         {
             return false;
         }
         else
         {
-            double chance = Random.Range(0, (float)block.GetArea());
-            if (chance < 5)
+            double chance = Random.Range(0, (float) block.GetArea());
+            if (chance < MinArea)
             {
                 return false;
             }
@@ -135,13 +118,63 @@ public class OfficeGenerator : MonoBehaviour
         }
     }
 
-    public void PlaceArea(Area area)
+    public void AddDoors()
+    {
+        int i = 0;
+        while (UnreachableAreas.Count > 0 && i < 1000)
+        {
+            i++;
+            Area area = UnreachableAreas[0];
+            UnreachableAreas.Remove(area);
+            bool connected = false;
+            foreach (Area hall in Halls)
+            {
+                if (hall.IsTouching(area))
+                {
+                    area.AddDoorTo(hall);
+                    connected = true;
+                    break;
+                }
+            }
+            if (!connected)
+            {
+                foreach (Area areaCheck in Areas)
+                {
+                    if (areaCheck.IsTouching(area))
+                    {
+                        area.AddDoorTo(areaCheck);
+                        connected = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (!connected)
+            {
+                UnreachableAreas.Add(area);
+            } else
+            {
+                Areas.Add(area);
+            }
+        }
+    }
+
+    public void PlaceRoom(Area area)
     {
         GameObject roomPrefab = getGoodRoom(area);
+        PlaceArea(area, roomPrefab);
+    }
+
+    public void PlaceArea(Area area, GameObject roomPrefab)
+    {
         GameObject room = Instantiate(roomPrefab, transform);
-        BoxCollider collider = room.GetComponent<BoxCollider>();
-        collider.size = new Vector3((float)area.GetWidth(), Height, (float)area.GetHeight());
-        room.transform.position = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetHeight() / 2));
+        Size size = room.GetComponent<Size>();
+        if (size == null)
+        {
+            size = room.AddComponent<Size>();
+        }
+        size.size = new Vector3((float)area.GetWidth(), Size.size.y, (float)area.GetLength());
+        room.transform.position = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetLength() / 2));
         Rooms.Add(room); 
     }
 
@@ -156,7 +189,7 @@ public class OfficeGenerator : MonoBehaviour
     public GameObject getGoodRoom(Area area)
     {
         RoomType item = RoomTypes.OrderBy(x => x.getScore(area)).FirstOrDefault(); ;
-        return item.getRandomRoom();
+        return item.RoomPrefab;
     }
 }
 
@@ -165,12 +198,8 @@ public class RoomType
 {
     public string Name;
     public float AvarageSize;
-    public GameObject[] Prefabs;
+    public GameObject RoomPrefab;
 
-    public GameObject getRandomRoom()
-    {
-        return Prefabs[Random.Range(0, Prefabs.Length)];
-    }
 
     public float getScore(Area area)
     {

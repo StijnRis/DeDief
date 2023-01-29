@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Area : System.IComparable<Area>
 {
-    public double Left { get; }
-    public double Top { get; }
-    public double Right { get; }
-    public double Bottom { get; }
+    public float Left { get; }
+    public float Top { get; }
+    public float Right { get; }
+    public float Bottom { get; }
+    private Area door;
 
-    public Area(double left, double top, double right, double bottom)
+    public Area(float left, float top, float right, float bottom)
     {
         if (right >= left)
         {
@@ -31,7 +32,7 @@ public class Area : System.IComparable<Area>
 
     public double GetArea()
     {
-        double area = GetWidth() * GetHeight();
+        double area = GetWidth() * GetLength();
         return area;
     }
 
@@ -40,69 +41,97 @@ public class Area : System.IComparable<Area>
         return this.Right - this.Left;
     }
 
-    public double GetHeight()
+    public double GetLength()
     {
         return this.Bottom - this.Top;
     }
 
+    private float getSplitX()
+    {
+        float x = Random.Range((float)(GetWidth() / 4), (float)((GetWidth() - 1) / 4 * 3));
+        return x;
+    }
+
+    private float getSplitZ()
+    {
+        float y = Random.Range((float)(GetLength() / 4), (float)((GetLength() - 1) / 4 * 3));
+        return y;
+    }
+
     public (Area, Area) SplitTwo()
     {
-        if (GetWidth() > GetHeight())
+        if (GetWidth() > GetLength())
         {
             return SplitTwoX();
         }
         else
         {
-            return SplitTwoY();
+            return SplitTwoZ();
         }
     }
 
     public (Area, Area) SplitTwoX()
     {
-        float x = Random.Range(1, (float)(GetWidth() - 1));
+        float x = getSplitX();
         Area a = new Area(this.Left, this.Top, this.Left + x, this.Bottom);
         Area b = new Area(this.Left + x, this.Top, this.Right, this.Bottom);
         return (a, b);
     }
 
-    public (Area, Area) SplitTwoY()
+    public (Area, Area) SplitTwoZ()
     {
-        float y = Random.Range(1, (float)(GetHeight() - 1));
+        float y = getSplitZ();
         Area a = new Area(this.Left, this.Top, this.Right, this.Top + y);
         Area b = new Area(this.Left, this.Top + y, this.Right, this.Bottom);
         return (a, b);
     }
 
-    public (Area, Area, Area) SplitThree()
+    public (Area, Area, Area) SplitThree(float size)
     {
-        if (GetWidth() > GetHeight())
+        if (GetWidth() > GetLength())
         {
-            return SplitThreeX();
+            return SplitThreeX(size);
         }
         else
         {
-            return SplitThreeY();
+            return SplitThreeZ(size);
         }
     }
 
-    public (Area, Area, Area) SplitThreeX()
+    public (Area, Area, Area) SplitThreeX(float size)
     {
-        float x = Random.Range(1, (float)(GetWidth() - 1));
-        Area a = new Area(this.Left, this.Top, this.Left + x - 0.5, this.Bottom);
-        Area b = new Area(this.Left + x - 0.5, this.Top, this.Left + x + 0.5, this.Bottom);
-        Area c = new Area(this.Left + x + 0.5, this.Top, this.Right, this.Bottom);
+        float x = getSplitX();
+        float halfSize = size / 2;
+        Area a = new Area(this.Left, this.Top, this.Left + x - halfSize, this.Bottom);
+        Area b = new Area(this.Left + x - halfSize, this.Top, this.Left + x + halfSize, this.Bottom);
+        Area c = new Area(this.Left + x + halfSize, this.Top, this.Right, this.Bottom);
         return (a, b, c);
     }
 
-    
-
-    public (Area, Area, Area) SplitThreeY()
+    public (Area, Area, Area) SplitThreeZ(float size)
     {
-        float y = Random.Range(1, (float)(GetHeight() - 1));
-        Area a = new Area(this.Left, this.Top, this.Right, this.Top + y - 0.5);
-        Area b = new Area(this.Left, this.Top + y - 0.5, this.Right, this.Top + y - 0.5);
-        Area c = new Area(this.Left, this.Top + y + 0.5, this.Right, this.Bottom);
+        float y = getSplitZ();
+        float halfSize = size / 2;
+        Area a = new Area(this.Left, this.Top, this.Right, this.Top + y - halfSize);
+        Area b = new Area(this.Left, this.Top + y - halfSize, this.Right, this.Top + y + halfSize);
+        Area c = new Area(this.Left, this.Top + y + halfSize, this.Right, this.Bottom);
         return (a, b, c);
+    }
+
+    public bool IsTouching(Area area)
+    {
+        bool widthIsPositive = Mathf.Min(Right, area.Right) >= Mathf.Max(Left, area.Left);
+        bool heightIsPositive = Mathf.Min(Bottom, area.Bottom) >= Mathf.Max(Top, area.Top);
+        return (widthIsPositive && heightIsPositive);
+    }
+
+    public void AddDoorTo(Area area)
+    {
+        float x1 = Mathf.Max(Left, area.Left);
+        float y1 = Mathf.Max(Top, area.Top);
+        float x2 = Mathf.Min(Right, area.Right);
+        float y2 = Mathf.Min(Bottom, area.Bottom);
+        door = new Area(x1, y1, x2, y2);
     }
 
     public int CompareTo(Area other)

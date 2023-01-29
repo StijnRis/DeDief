@@ -2,39 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomGenerator : MonoBehaviour
+public abstract class RoomGenerator : MonoBehaviour
 {
+    public Size Size;
+
     public void Start()
     {
+        Size = GetComponent<Size>();
         Generate();
     }
 
+    public abstract void Generate();
 
-    public void Generate()
+ 
+    protected void SurroundWithWall()
     {
-        OnDestroy();
-        SurroundWithWall();
-    }
-
-    private void SurroundWithWall()
-    {
-        BoxCollider collider = GetComponent<BoxCollider>();
-        Vector2 one = new Vector2((float)(0.5 * collider.size.x), (float)(0.5 * collider.size.z));
-        Vector2 two = new Vector2((float)(0.5 * collider.size.x), (float)(-0.5 * collider.size.z));
-        Vector2 three = new Vector2((float)(-0.5 * collider.size.x), (float)(-0.5 * collider.size.z));
-        Vector2 four = new Vector2((float)(-0.5 * collider.size.x), (float)(0.5 * collider.size.z));
+        Vector2 one = new Vector2((float)(0.5 * Size.size.x), (float)(0.5 * Size.size.z));
+        Vector2 two = new Vector2((float)(0.5 * Size.size.x), (float)(-0.5 * Size.size.z));
+        Vector2 three = new Vector2((float)(-0.5 * Size.size.x), (float)(-0.5 * Size.size.z));
+        Vector2 four = new Vector2((float)(-0.5 * Size.size.x), (float)(0.5 * Size.size.z));
         CreateWall(one, two);
         CreateWall(two, three);
         CreateWall(three, four);
         CreateWall(four, one);
     }
 
-    private void CreateWall(Vector2 startCorner, Vector2 endCorner)
+    protected void placeFloor()
+    {
+        GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        floor.transform.SetParent(transform);
+        floor.transform.localScale = new Vector3(Size.size.x, 0.1f, Size.size.z);
+        floor.transform.position = new Vector3(transform.position.x, transform.position.y - Size.size.y / 2, transform.position.z);
+    }
+
+    protected void CreateWall(Vector2 startCorner, Vector2 endCorner)
     {
         Vector3 start = new Vector3(startCorner.x, 0, startCorner.y);
         GameObject startObj = new GameObject();
         startObj.transform.SetParent(transform);
-        Debug.Log(start);
         startObj.transform.localPosition = start;
         startObj.name = "Pillar";
 
@@ -51,7 +56,7 @@ public class RoomGenerator : MonoBehaviour
         wall.transform.SetParent(transform);
         float distance = Vector3.Distance(start, end);
         wall.name = "Wall";
-        wall.transform.localScale = new Vector3(0.1f, 3f, distance);
+        wall.transform.localScale = new Vector3(0.1f, Size.size.y, distance);
         wall.transform.position = startObj.transform.position + distance / 2 * startObj.transform.forward;
         wall.transform.rotation = startObj.transform.rotation;
     }
