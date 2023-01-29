@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerController : MonoBehaviour
+public class AgentController : MonoBehaviour
 {
-    public NavMeshAgent agent;
+    private NavMeshAgent agent;
+    private FieldOfView fov;
+    private Animator animator;
+
     public GameObject target;
-    public Animator animator;
     public GameObject weapon;
-    public FieldOfView fov;
+    
     bool aggregated;
 	
     // Start is called before the first frame update
@@ -17,7 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
         fov = gameObject.GetComponent<FieldOfView>();
-
+        animator = gameObject.GetComponent<Animator>();
 
         agent.SetDestination(target.transform.position);
         weapon.SetActive(false);
