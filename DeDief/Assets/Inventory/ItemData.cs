@@ -9,4 +9,6 @@ public class ItemData : ScriptableObject
 	public int height = 1;
 
 	public Sprite itemIcon;
+
+	public bool canBeRotated;
 }

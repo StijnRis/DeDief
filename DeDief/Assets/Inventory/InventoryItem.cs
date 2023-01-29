@@ -49,9 +49,12 @@ public class InventoryItem : MonoBehaviour
 
 	internal void Rotate()
 	{
-		rotated = !rotated;
+		if (itemData.canBeRotated == true) 
+		{
+			rotated = !rotated;
 
-		RectTransform rectTransform = GetComponent<RectTransform>();
-		rectTransform.rotation = Quaternion.Euler(0,0, rotated == true ? 90f : 0f);
+			RectTransform rectTransform = GetComponent<RectTransform>();
+			rectTransform.rotation = Quaternion.Euler(0,0, rotated == true ? 90f : 0f);
+		} 	
 	}
 }

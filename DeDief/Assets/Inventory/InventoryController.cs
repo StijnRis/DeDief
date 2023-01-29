@@ -41,7 +41,13 @@ public class InventoryController : MonoBehaviour
 			if (selectedItem == null) 
             {
                 CreateRandomItem();
-            } 
+            }
+            else
+            {
+                selectedItem.itemData.itemIcon = null;
+                Destroy(selectedItem);
+                selectedItem = null;
+            }
 		}
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -125,8 +131,20 @@ public class InventoryController : MonoBehaviour
                 selectedItem.WIDTH, 
                 selectedItem.HEIGHT
                 ));
-            inventoryHighlight.SetSize(selectedItem);
-            inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
+            
+            itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
+
+            if (itemToHighlight != null && (itemToHighlight.WIDTH > selectedItem.WIDTH || itemToHighlight.HEIGHT > selectedItem.HEIGHT))
+            {
+                inventoryHighlight.Show(true);
+                inventoryHighlight.SetSize(itemToHighlight);
+                inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);
+            }
+            else
+            {
+                inventoryHighlight.SetSize(selectedItem);
+                inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
+            }
         }
     }
 

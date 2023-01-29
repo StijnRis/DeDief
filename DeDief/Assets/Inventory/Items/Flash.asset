@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a50b6d770c13ce48b5f52010db2bdc5, type: 3}
-  m_Name: Pistol
+  m_Script: {fileID: 11500000, guid: 470f238a8f8dfd74791dbc4b4312e8dc, type: 3}
+  m_Name: Flash
   m_EditorClassIdentifier: 
-  itemName: Pistol
-  itemIcon: {fileID: 21300000, guid: 4873e68bc60cecc409e9e2dd360731ea, type: 3}
-  weaponType: 1
+  width: 1
+  height: 2
+  itemIcon: {fileID: 21300000, guid: 4997777af2a89d2488393a8a98608586, type: 3}
+  canBeRotated: 1
