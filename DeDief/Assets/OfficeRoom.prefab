@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6781813507230086301}
   - component: {fileID: 2137976811070838871}
   - component: {fileID: 6957449143888732876}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: OfficeRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,4 +58,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee1c5a229c80ba4b9966c7e21b33395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: {fileID: 0}

@@ -11,12 +11,21 @@ public class NavController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        meshSurface = building.GetComponent<NavMeshSurface>(); 
+        meshSurface = building.GetComponent<NavMeshSurface>();
+
+        StartCoroutine(UpdateNavMesh());
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    IEnumerator UpdateNavMesh()
+    {
+        yield return new WaitForSeconds(0.2f);
+
         meshSurface.BuildNavMesh();
     }
 }

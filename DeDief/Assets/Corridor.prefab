@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 233720874910486912}
   - component: {fileID: 8094816585341687409}
   - component: {fileID: -6722938387565702103}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Corridor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,4 +58,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503a2e48e6aaafe4b97b609b1bf84514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: {fileID: 0}

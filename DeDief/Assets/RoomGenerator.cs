@@ -53,6 +53,8 @@ public abstract class RoomGenerator : MonoBehaviour
         floor.transform.SetParent(transform);
         floor.transform.localScale = new Vector3(Size.size.x, 0.1f, Size.size.z);
         floor.transform.position = new Vector3(transform.position.x, transform.position.y - Size.size.y / 2, transform.position.z);
+        floor.layer = LayerMask.NameToLayer("Floor");
+        floor.tag = "Floor";
     }
 
     protected void CreateWall(Vector3 startCorner, Vector3 endCorner)
@@ -77,6 +79,8 @@ public abstract class RoomGenerator : MonoBehaviour
         wall.transform.localScale = new Vector3(0.1f, Size.size.y, distance);
         wall.transform.position = startObj.transform.position + distance / 2 * startObj.transform.forward;
         wall.transform.rotation = startObj.transform.rotation;
+        wall.layer = LayerMask.NameToLayer("Walls");
+        wall.tag = "Wall";
     }
 
     public void OnDestroy()
