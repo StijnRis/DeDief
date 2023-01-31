@@ -156,8 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a565567f479317742af08361a75b2bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinArea: 8
-  MaxHallRate: 0.25
+  MinArea: 5
+  MaxHallRate: 0.325
   HallSize: 1
   Corridor: {fileID: 1977530078531694865, guid: cd88545f42136044d85aad68429d8bd8, type: 3}
   RoomTypes:
