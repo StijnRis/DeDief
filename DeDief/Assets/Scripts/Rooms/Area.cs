@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Area : System.IComparable<Area>
@@ -6,10 +7,11 @@ public class Area : System.IComparable<Area>
     public float Top { get; }
     public float Right { get; }
     public float Bottom { get; }
-    public Area Door;
+    public List<Area> Doors;
 
     public Area(float left, float top, float right, float bottom)
     {
+        this.Doors = new List<Area>();
         if (right >= left)
         {
             this.Left = left;
@@ -125,13 +127,20 @@ public class Area : System.IComparable<Area>
         return (widthIsPositive && heightIsPositive);
     }
 
-    public void AddDoorTo(Area area)
+    public void addDoor(Area door)
     {
-        float x1 = Mathf.Max(Left, area.Left);
-        float y1 = Mathf.Max(Top, area.Top);
-        float x2 = Mathf.Min(Right, area.Right);
-        float y2 = Mathf.Min(Bottom, area.Bottom);
-        Door = new Area(x1, y1, x2, y2);
+        Doors.Add(door);
+    }
+
+    public static void createDoorBetween(Area area1, Area area2)
+    {
+        float x1 = Mathf.Max(area1.Left, area2.Left);
+        float y1 = Mathf.Max(area1.Top, area2.Top);
+        float x2 = Mathf.Min(area1.Right, area2.Right);
+        float y2 = Mathf.Min(area1.Bottom, area2.Bottom);
+        Area door = new Area(x1, y1, x2, y2);
+        area1.addDoor(door);
+        area2.addDoor(door);
     }
 
     public int CompareTo(Area other)

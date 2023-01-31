@@ -6,12 +6,12 @@ using System.Linq;
 public abstract class RoomGenerator : MonoBehaviour
 {
     private Size Size;
-    private Door Door;
+    private Door[] Doors;
 
     public void Start()
     {
         Size = GetComponent<Size>();
-        Door = GetComponent<Door>();
+        Doors = GetComponents<Door>();
         Generate();
     }
 
@@ -21,25 +21,27 @@ public abstract class RoomGenerator : MonoBehaviour
     protected void PlaceWalls()
     {
         List<Vector3> points = new List<Vector3>();
+        List<Vector3> noConnectPoints = new List<Vector3>();
         points.Add(new Vector3((float)(0.5 * Size.size.x), 0, (float)(0.5 * Size.size.z)));
         points.Add(new Vector3((float)(0.5 * Size.size.x), 0, (float)(-0.5 * Size.size.z)));
         points.Add(new Vector3((float)(-0.5 * Size.size.x), 0, (float)(-0.5 * Size.size.z)));
         points.Add(new Vector3((float)(-0.5 * Size.size.x), 0, (float)(0.5 * Size.size.z)));
-        Vector3? door1 = null;
-        Vector3? door2 = null;
-        if (Door != null)
+        foreach (Door door in Doors)
         {
-            door1 = new Vector3(Door.Start.x, 0, Door.Start.y);
-            points.Add((Vector3)door1);
-            door2 = new Vector3(Door.End.x, 0, Door.End.y);
-            points.Add((Vector3)door2);
+            Vector3 door1 = new Vector3(door.Start.x, 0, door.Start.y);
+            points.Add(door1);
+            noConnectPoints.Add(door1);
+            Vector3 door2 = new Vector3(door.End.x, 0, door.End.y);
+            points.Add(door2);
+            noConnectPoints.Add(door2);
         }
+
         List<Vector3> sortedPoints = points.OrderBy(o => Vector3.SignedAngle(o, Vector3.forward, Vector3.up)).ToList();
 
         Vector3 previous = sortedPoints.Last();
         for (int i = 0; i < sortedPoints.Count; i++)
         {
-            if (!((previous == door1 || previous == door2) && (sortedPoints[i] == door1 || sortedPoints[i] == door2)))
+            if (!(noConnectPoints.Contains(previous) && noConnectPoints.Contains(sortedPoints[i])))
             {
                 CreateWall(previous, sortedPoints[i]);
             }
@@ -59,28 +61,21 @@ public abstract class RoomGenerator : MonoBehaviour
 
     protected void CreateWall(Vector3 startCorner, Vector3 endCorner)
     {
-        GameObject startObj = new GameObject();
-        startObj.transform.SetParent(transform);
-        startObj.transform.localPosition = startCorner;
-        startObj.name = "Pillar";
+        float thickness = 0.1f;
 
-        GameObject endObj = new GameObject();
-        endObj.transform.SetParent(transform);
-        endObj.transform.localPosition = endCorner;
-        endObj.name = "Pillar";
-
-        endObj.transform.LookAt(startObj.transform.position);
-        startObj.transform.LookAt(endObj.transform.position);
+        Vector3 rotation = (endCorner - startCorner).normalized;
 
         GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
         wall.transform.SetParent(transform);
         float distance = Vector3.Distance(startCorner, endCorner);
         wall.name = "Wall";
-        wall.transform.localScale = new Vector3(0.1f, Size.size.y, distance);
-        wall.transform.position = startObj.transform.position + distance / 2 * startObj.transform.forward;
-        wall.transform.rotation = startObj.transform.rotation;
+        wall.transform.localScale = new Vector3(thickness, Size.size.y, distance + thickness);
+        wall.transform.localPosition = startCorner + distance / 2 * rotation;
+        Quaternion quaternion = Quaternion.LookRotation(rotation, Vector3.up);
+        wall.transform.localRotation = quaternion;
         wall.layer = LayerMask.NameToLayer("Walls");
         wall.tag = "Wall";
+
     }
 
     public void OnDestroy()
