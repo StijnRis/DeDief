@@ -5,8 +5,8 @@ using System.Linq;
 
 public abstract class RoomGenerator : MonoBehaviour
 {
-    private Size Size;
-    private Door[] Doors;
+    protected Size Size;
+    protected Door[] Doors;
 
     public void Start()
     {
@@ -80,7 +80,7 @@ public abstract class RoomGenerator : MonoBehaviour
 
     public void OnDestroy()
     {
-        foreach (Transform c in this.transform)
+        foreach (Transform c in transform)
         {
             Destroy(c.gameObject);
         }
