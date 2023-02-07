@@ -16,6 +16,15 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    private ItemPickUpSlot selectedItemSlot;
+
+    public ItemPickUpSlot SelectedItemSlot {
+        get => selectedItemSlot;
+        set {
+            selectedItemSlot = value;
+        }
+    }
+
     InventoryItem selectedItem;
     InventoryItem overlapItem;
     RectTransform rectTransform;
