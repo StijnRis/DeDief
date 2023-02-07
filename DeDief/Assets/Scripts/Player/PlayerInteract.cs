@@ -11,6 +11,8 @@ public class PlayerInteract : MonoBehaviour
     private LayerMask mask;
     private PlayerUI playerUI;
     private InputManager inputManager;
+    public GameObject inventory;
+    public bool inventoryOpen = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,5 +40,11 @@ public class PlayerInteract : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void openInventory()
+    {
+        inventoryOpen = !inventoryOpen;
+        inventory.SetActive(inventoryOpen);
     }
 }
