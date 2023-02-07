@@ -16,6 +16,15 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    private ItemPickUpSlot selectedItemSlot;
+
+    public ItemPickUpSlot SelectedItemSlot {
+        get => selectedItemSlot;
+        set {
+            selectedItemSlot = value;
+        }
+    }
+
     InventoryItem selectedItem;
     InventoryItem overlapItem;
     RectTransform rectTransform;
@@ -34,46 +43,25 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerInteract.inventoryOpen)
+        ItemIconDrag();
+
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			if (selectedItem == null) 
+            {
+                CreateRandomItem();
+            }
+            else
+            {
+                selectedItem.itemData.itemIcon = null;
+                Destroy(selectedItem);
+                selectedItem = null;
+            }
+		}
+
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            ItemIconDrag();
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                if (selectedItem == null) 
-                {
-                    CreateRandomItem();
-                }
-                else
-                {
-                    selectedItem.itemData.itemIcon = null;
-                    Destroy(selectedItem);
-                    selectedItem = null;
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                InsertRandomItem();
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                RotateItem();
-            }
-
-            if (selectedItemGrid == null) 
-            { 
-                inventoryHighlight.Show(false);
-                return; 
-            }
-
-            HandleHighlight();
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                LeftMouseButtonPress();
-            }
+            InsertRandomItem();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
