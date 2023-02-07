@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -814,7 +814,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c769a6256d9814991ac313235f480a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - {fileID: 11400000, guid: ae70769560a126c49af7ca7c966d936f, type: 2}
+  - {fileID: 11400000, guid: 70d6193d5a25126419277b6ee7847f15, type: 2}
+  - {fileID: 11400000, guid: 3ea7652302cd2d14fac0454d5a3fb324, type: 2}
+  - {fileID: 11400000, guid: c2817ad659455d545b86308cc8843ab7, type: 2}
+  - {fileID: 11400000, guid: 1154138c8522e644b98f63f1ff833529, type: 2}
   itemPrefab: {fileID: 2140518712648297017, guid: 66f7ee7e41a8e194aa463bb71f9b05d0, type: 3}
   canvasTransform: {fileID: 1435262138}
 --- !u!1 &865657176 stripped
@@ -888,6 +893,8 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 64
+  inventory: {fileID: 1435262134}
+  inventoryOpen: 0
 --- !u!114 &865657189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1477,12 +1484,12 @@ GameObject:
   - component: {fileID: 1435262136}
   - component: {fileID: 1435262135}
   m_Layer: 5
-  m_Name: Canvas (1)
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1435262135
 MonoBehaviour:
   m_ObjectHideFlags: 0

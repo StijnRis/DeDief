@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
 
     private PlayerMotor motor;
     private PlayerLook look;
+    private PlayerInteract inv;
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,6 +20,7 @@ public class InputManager : MonoBehaviour
 
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
+        inv = GetComponent<PlayerInteract>();
 
         onFoot.Jump.performed += ctx => motor.Jump();
         onFoot.Crouch.performed += ctx => motor.Crouch();
@@ -27,6 +29,7 @@ public class InputManager : MonoBehaviour
         onFoot.Sprint.canceled += ctx => motor.Sprint();
         onFoot.Crawl.performed += ctx => motor.Crawl();
         onFoot.Crawl.canceled += ctx => motor.Crawl();
+        onFoot.Inventory.performed += vtx => inv.openInventory();
     }
 
     // Update is called once per frame
