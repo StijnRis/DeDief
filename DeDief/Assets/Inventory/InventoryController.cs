@@ -34,44 +34,47 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
-        ItemIconDrag();
+        if (PlayerInteract.inventoryOpen)
+        {
+            ItemIconDrag();
 
-		if (Input.GetKeyDown(KeyCode.Q))
-		{
-			if (selectedItem == null) 
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                CreateRandomItem();
+                if (selectedItem == null) 
+                {
+                    CreateRandomItem();
+                }
+                else
+                {
+                    selectedItem.itemData.itemIcon = null;
+                    Destroy(selectedItem);
+                    selectedItem = null;
+                }
             }
-            else
+
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                selectedItem.itemData.itemIcon = null;
-                Destroy(selectedItem);
-                selectedItem = null;
+                InsertRandomItem();
             }
-		}
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            InsertRandomItem();
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                RotateItem();
+            }
+
+            if (selectedItemGrid == null) 
+            { 
+                inventoryHighlight.Show(false);
+                return; 
+            }
+
+            HandleHighlight();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                LeftMouseButtonPress();
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RotateItem();
-        }
-
-        if (selectedItemGrid == null) 
-        { 
-            inventoryHighlight.Show(false);
-            return; 
-        }
-
-        HandleHighlight();
-
-        if (Input.GetMouseButtonDown(0))
-        {
-			LeftMouseButtonPress();
-		}
     }
 
     private void RotateItem()

@@ -35,3 +35,19 @@ public class CustomInspectorRoomGenerator : Editor
     }
 }
 
+[CustomEditor(typeof(WallGenerator))]
+public class CustomInspectorWallGenerator : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+
+        WallGenerator wall = (WallGenerator)target;
+        if (GUILayout.Button("Generate"))
+        {
+            wall.Generate();
+        }
+    }
+}
+
