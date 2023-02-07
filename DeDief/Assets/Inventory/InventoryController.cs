@@ -69,7 +69,7 @@ public class InventoryController : MonoBehaviour
             RotateItem();
         }
 
-        if (selectedItemGrid == null) 
+        if (selectedItemGrid == null && selectedItemSlot == null) 
         { 
             inventoryHighlight.Show(false);
             return; 
@@ -79,7 +79,10 @@ public class InventoryController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-			LeftMouseButtonPress();
+            if (selectedItemGrid != null)
+			    LeftMouseButtonPress(selectedItemGrid);
+            else if (selectedItemSlot != null)
+                LeftMouseButtonPress(selectedItemSlot);
 		}
     }
 
@@ -170,7 +173,7 @@ public class InventoryController : MonoBehaviour
 		inventoryItem.Set(items[selectedItemID]);
     }
 
-    private void LeftMouseButtonPress()
+    private void LeftMouseButtonPress(ItemGrid itemGrid)
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
 
@@ -220,6 +223,28 @@ public class InventoryController : MonoBehaviour
         {
             rectTransform = selectedItem.GetComponent<RectTransform>();
         }
+    }
+
+    private void LeftMouseButtonPress(ItemPickUpSlot itemPickUpSlot)
+    {
+        if (selectedItem == null)
+        {
+            PickUpItemFromSlot();
+        }
+        else
+        {
+            PlaceItemInSlot();
+        }
+    }
+
+    private void PickUpItemFromSlot()
+    {
+        
+    }
+
+    private void PlaceItemInSlot()
+    {
+
     }
 
     private void ItemIconDrag()
