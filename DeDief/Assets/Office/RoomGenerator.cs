@@ -7,6 +7,7 @@ public abstract class RoomGenerator : MonoBehaviour
 {
     public Size Size;
     public GameObject Wall;
+    public GameObject Floor;
     protected Door[] Doors;
 
     public void Start()
@@ -51,20 +52,19 @@ public abstract class RoomGenerator : MonoBehaviour
 
     protected void PlaceFloor()
     {
-        GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        floor.transform.SetParent(transform);
+        GameObject floor = Instantiate(Floor, transform);
         floor.transform.localScale = new Vector3(Size.size.x, 0.1f, Size.size.z);
         floor.transform.position = new Vector3(transform.position.x, transform.position.y - Size.size.y / 2, transform.position.z);
         floor.layer = LayerMask.NameToLayer("Floor");
-        floor.tag = "Floor";
     }
 
     protected void PlaceCeiling()
     {
-        GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        floor.transform.SetParent(transform);
-        floor.transform.localScale = new Vector3(Size.size.x, 0.1f, Size.size.z);
-        floor.transform.position = new Vector3(transform.position.x, transform.position.y + Size.size.y / 2, transform.position.z);
+        GameObject ceiling = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        ceiling.transform.SetParent(transform);
+        ceiling.transform.localScale = new Vector3(Size.size.x, 0.1f, Size.size.z);
+        ceiling.transform.position = new Vector3(transform.position.x, transform.position.y + Size.size.y / 2, transform.position.z);
+        ceiling.name = "Ceiling";
     }
 
     protected void CreateWall(Vector3 startCorner, Vector3 endCorner)

@@ -59,3 +59,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Painting: {fileID: 8430321062467765457, guid: 651b5e1e969286d4cacd98bb6cc5d6f2, type: 3}
+  Materials:
+  - {fileID: 2100000, guid: 70268ac3fadbdf84fb973b0a7268dbd7, type: 2}

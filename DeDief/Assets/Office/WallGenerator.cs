@@ -5,7 +5,9 @@ using UnityEngine;
 public class WallGenerator : MonoBehaviour
 {
     public GameObject Painting;
+    public Material[] Materials;
     protected Size Size;
+
     void Start()
     {
         Size = GetComponent<Size>();
@@ -21,6 +23,7 @@ public class WallGenerator : MonoBehaviour
     private void placeWall()
     {
         GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        wall.GetComponent<MeshRenderer>().material = Materials[Random.Range(0, Materials.Length)];
         wall.transform.SetParent(transform);
 
         wall.transform.localScale = Size.size;

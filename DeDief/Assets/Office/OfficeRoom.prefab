@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee1c5a229c80ba4b9966c7e21b33395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Size: {fileID: 0}
   Wall: {fileID: 4427668551479185814, guid: f3d1858a8d8d66949bb60c7dda66ed80, type: 3}
+  Floor: {fileID: 3660091792651605634, guid: 4c4562c261d099e4ca85f0a7f29a6dd7, type: 3}
   Desk: {fileID: 8985730869084367143, guid: c0c02012f5c90eb418e161a17da89fc1, type: 3}
   Chair: {fileID: 8669365534871835233, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
