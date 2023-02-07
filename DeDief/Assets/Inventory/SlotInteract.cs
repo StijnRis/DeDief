@@ -6,25 +6,22 @@ using UnityEngine.EventSystems;
 public class SlotInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     InventoryController inventoryController;
-
-    ItemPickUpSlot itemPickUpSlot;
+    ItemGrid itemGrid;
 
     private void Awake()
     {
         inventoryController = FindObjectOfType(typeof(InventoryController)) as InventoryController;
-        itemPickUpSlot = GetComponent<ItemPickUpSlot>();
+        itemGrid = GetComponent<ItemGrid>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("enter slot");
-        inventoryController.SelectedItemSlot = itemPickUpSlot;
-        itemPickUpSlot.GetComponent<RectTransform>().SetAsFirstSibling();
+        inventoryController.SelectedItemGrid = itemGrid;
+        itemGrid.GetComponent<RectTransform>().SetAsFirstSibling();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("leave slot");
-        inventoryController.SelectedItemSlot = null;
+        inventoryController.SelectedItemGrid = null;
     }
 }

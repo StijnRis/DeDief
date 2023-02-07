@@ -22,7 +22,6 @@ public class InventoryController : MonoBehaviour
         get => selectedItemSlot;
         set {
             selectedItemSlot = value;
-            inventoryHighlight.SetParent(SelectedItemSlot);
         }
     }
 
@@ -48,7 +47,6 @@ public class InventoryController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
-            Debug.Log("work");
 			if (selectedItem == null) 
             {
                 CreateRandomItem();
@@ -71,7 +69,7 @@ public class InventoryController : MonoBehaviour
             RotateItem();
         }
 
-        if (selectedItemGrid == null) 
+        if (selectedItemGrid == null && selectedItemSlot == null) 
         { 
             inventoryHighlight.Show(false);
             return; 
@@ -82,15 +80,9 @@ public class InventoryController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (selectedItemGrid != null)
-            {
-                Debug.Log("i decided to fucking kill myself");
 			    LeftMouseButtonPress(selectedItemGrid);
-            }
             else if (selectedItemSlot != null)
-            {
-                Debug.Log("yo");
-                LeftMouseButtonPressSlot(selectedItemSlot);
-            }
+                LeftMouseButtonPress(selectedItemSlot);
 		}
     }
 
@@ -233,9 +225,8 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void LeftMouseButtonPressSlot(ItemPickUpSlot itemPickUpSlot)
+    private void LeftMouseButtonPress(ItemPickUpSlot itemPickUpSlot)
     {
-        Debug.Log("oy");
         if (selectedItem == null)
         {
             PickUpItemFromSlot();
@@ -248,24 +239,12 @@ public class InventoryController : MonoBehaviour
 
     private void PickUpItemFromSlot()
     {
-        selectedItem = selectedItemSlot.PickUpItem();
-        if (selectedItem != null)
-        {
-            rectTransform = selectedItem.GetComponent<RectTransform>();
-        }
+        
     }
 
     private void PlaceItemInSlot()
     {
-        selectedItemSlot.PlaceItem(selectedItem, ref overlapItem);
-        selectedItem = null;
-        if (overlapItem != null)
-        {
-            selectedItem = overlapItem;
-            overlapItem = null;
-            rectTransform = selectedItem.GetComponent<RectTransform>();
-            rectTransform.SetAsLastSibling();
-        }
+
     }
 
     private void ItemIconDrag()

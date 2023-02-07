@@ -39,12 +39,6 @@ public class InventoryHighlight : MonoBehaviour
         highlighter.SetParent(targetGrid.GetComponent<RectTransform>());
     }
 
-    public void SetParent(ItemPickUpSlot targetSlot)
-    {
-        if (targetSlot == null) { return; }
-        highlighter.SetParent(targetSlot.GetComponent<RectTransform>());
-    }
-
     public void SetPosition(ItemGrid targetGrid, InventoryItem targetItem, int posX, int posY)
     {
         Vector2 pos = targetGrid.CalculatePositionOnGrid(
