@@ -12,7 +12,7 @@ public class PlayerInteract : MonoBehaviour
     private PlayerUI playerUI;
     private InputManager inputManager;
     public GameObject inventory;
-    public bool inventoryOpen = false;
+    public static bool inventoryOpen = false;
     // Start is called before the first frame update
     void Start()
     {
