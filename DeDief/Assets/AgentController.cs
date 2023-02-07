@@ -8,8 +8,7 @@ public class AgentController : MonoBehaviour
     private NavMeshAgent agent;
     private FieldOfView fov;
     private Animator animator;
-
-    public GameObject target;
+    private GameObject target;
     public GameObject weapon;
     
     bool aggregated;
@@ -21,7 +20,7 @@ public class AgentController : MonoBehaviour
         fov = gameObject.GetComponent<FieldOfView>();
         animator = gameObject.GetComponent<Animator>();
 
-        agent.SetDestination(target.transform.position);
+        setTarget(target);
         weapon.SetActive(false);
         aggregated = false;
 
@@ -46,5 +45,10 @@ public class AgentController : MonoBehaviour
         }
         animator.SetBool("aggregated", aggregated);
         animator.SetFloat("Move", agent.velocity.magnitude);
+    }
+
+    public void setTarget(GameObject target)
+    {
+        agent.SetDestination(target.transform.position);
     }
 }
