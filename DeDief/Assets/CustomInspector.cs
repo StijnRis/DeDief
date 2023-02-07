@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(OfficeGenerator))]
-public class CustomInspector : Editor
+public class CustomInspectorOfficeGenerator : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -18,3 +18,20 @@ public class CustomInspector : Editor
         }
     }
 }
+
+[CustomEditor(typeof(RoomGenerator), true)]
+public class CustomInspectorRoomGenerator : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+
+        RoomGenerator room = (RoomGenerator)target;
+        if (GUILayout.Button("Generate"))
+        {
+            room.Generate();
+        }
+    }
+}
+
