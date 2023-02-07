@@ -5,7 +5,8 @@ using System.Linq;
 
 public abstract class RoomGenerator : MonoBehaviour
 {
-    protected Size Size;
+    public Size Size;
+    public GameObject Wall;
     protected Door[] Doors;
 
     public void Start()
@@ -16,7 +17,6 @@ public abstract class RoomGenerator : MonoBehaviour
     }
 
     public abstract void Generate();
-
 
     protected void PlaceWalls()
     {
@@ -59,23 +59,27 @@ public abstract class RoomGenerator : MonoBehaviour
         floor.tag = "Floor";
     }
 
+    protected void PlaceCeiling()
+    {
+        GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        floor.transform.SetParent(transform);
+        floor.transform.localScale = new Vector3(Size.size.x, 0.1f, Size.size.z);
+        floor.transform.position = new Vector3(transform.position.x, transform.position.y + Size.size.y / 2, transform.position.z);
+    }
+
     protected void CreateWall(Vector3 startCorner, Vector3 endCorner)
     {
         float thickness = 0.1f;
+        GameObject wall = Instantiate(Wall, transform);
+        wall.transform.SetParent(transform);
 
         Vector3 rotation = (endCorner - startCorner).normalized;
-
-        GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        wall.transform.SetParent(transform);
         float distance = Vector3.Distance(startCorner, endCorner);
-        wall.name = "Wall";
-        wall.transform.localScale = new Vector3(thickness, Size.size.y, distance + thickness);
+        Size WallSize = wall.GetComponent<Size>();
+        WallSize.size = new Vector3(thickness, Size.size.y, distance + thickness);
         wall.transform.localPosition = startCorner + distance / 2 * rotation;
         Quaternion quaternion = Quaternion.LookRotation(rotation, Vector3.up);
         wall.transform.localRotation = quaternion;
-        wall.layer = LayerMask.NameToLayer("Walls");
-        wall.tag = "Wall";
-
     }
 
     public void OnDestroy()
