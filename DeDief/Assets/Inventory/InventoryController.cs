@@ -17,19 +17,24 @@ public class InventoryController : MonoBehaviour
     }
 
     InventoryItem selectedItem;
+    public InventoryItem SelectedItem {
+        get => selectedItem;
+    }
     InventoryItem overlapItem;
     RectTransform rectTransform;
 
 	[SerializeField] List<ItemData> items;
 	[SerializeField] GameObject itemPrefab;
-	[SerializeField] Transform canvasTransform;
+	public GameObject canvas;
+    private Transform canvasTransform;
 
     Vector2Int oldPosition;
-    InventoryHighlight inventoryHighlight;
+    public InventoryHighlight inventoryHighlight;
 
     private void Awake()
     {
         inventoryHighlight = GetComponent<InventoryHighlight>();
+        canvasTransform = canvas.GetComponent<RectTransform>();
     }
 
     private void Update()
@@ -38,32 +43,41 @@ public class InventoryController : MonoBehaviour
         {
             ItemIconDrag();
 
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                if (selectedItem == null) 
-                {
-                    CreateRandomItem();
-                }
-                else
-                {
-                    selectedItem.itemData.itemIcon = null;
-                    Destroy(selectedItem);
-                    selectedItem = null;
-                }
-            }
+            // // Debug.Log("Open");
+            
+            // if (Input.GetKeyDown(KeyCode.Q))
+            // {
+            //     // Debug.Log("yeet");
+            //     if (selectedItem == null) 
+            //     {
+            //         CreateRandomItem();
+            //     }
+            //     // else
+            //     // {
+            //     //     selectedItem.itemData.itemIcon = null;
+            //     //     Destroy(selectedItem);
+            //     //     selectedItem = null;
+            //     // }
+            // }
 
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                InsertRandomItem();
-            }
+            // if (Input.GetKeyDown(KeyCode.W))
+            // {
+            //     InsertRandomItem();
+            // }
 
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                RotateItem();
-            }
+            // if (Input.GetKeyDown(KeyCode.R))
+            // {
+            //     RotateItem();
+            // }
 
             if (selectedItemGrid == null) 
-            { 
+            {
+                if (Input.GetMouseButtonDown(0) && selectedItem == null)
+                {
+                    // CloseInventory();
+                    PlayerInteract.inventoryOpen = false;
+                    SetInventoryActive(PlayerInteract.inventoryOpen);
+                }
                 inventoryHighlight.Show(false);
                 return; 
             }
@@ -77,14 +91,35 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void RotateItem()
+    private void CloseInventory()
+    {
+        inventoryHighlight.SetObjectAsParent(canvasTransform);
+        inventoryHighlight.Show(false);
+        PlayerInteract.inventoryOpen = false;
+        PickUpInteract[] pickUpGrids = canvas.GetComponentsInChildren<PickUpInteract>();
+        foreach (PickUpInteract pickUpInteract in pickUpGrids)
+        {
+            Destroy(pickUpInteract.gameObject);
+        }
+        // SetInventoryActive(PlayerInteract.inventoryOpen);
+    }
+
+    public void GenerateRandomItem()
+    {
+        if (selectedItem == null) 
+        {
+            CreateRandomItem();
+        }
+    }
+
+    public void RotateItem()
     {
         if (selectedItem == null) { return; }
 
         selectedItem.Rotate();
     }
 
-    private void InsertRandomItem()
+    public void InsertRandomItem()
     {
         if (selectedItemGrid == null) { return; }
         
@@ -101,6 +136,15 @@ public class InventoryController : MonoBehaviour
         if (posOnGrid == null) { return; }
 
         selectedItemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
+    }
+
+    public void InsertItem(InventoryItem itemToInsert, ItemGrid itemGrid)
+    {
+        Vector2Int? posOnGrid = itemGrid.FindSpaceForObject(itemToInsert);
+
+        if (posOnGrid == null) { return; }
+
+        itemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
     }
 
     InventoryItem itemToHighlight;
@@ -151,6 +195,16 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public InventoryItem CreateItem(ItemData itemData)
+    {
+        InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<InventoryItem>();
+        rectTransform = inventoryItem.GetComponent<RectTransform>();
+		rectTransform.SetParent(canvasTransform);
+        rectTransform.SetAsLastSibling();
+		inventoryItem.Set(itemData);
+        return inventoryItem;
+    }
+
     private void CreateRandomItem()
     {
         InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<InventoryItem>();
@@ -164,7 +218,7 @@ public class InventoryController : MonoBehaviour
 		inventoryItem.Set(items[selectedItemID]);
     }
 
-    private void LeftMouseButtonPress()
+    public void LeftMouseButtonPress()
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
 
@@ -222,5 +276,15 @@ public class InventoryController : MonoBehaviour
         {
             rectTransform.position = Input.mousePosition;
         }
+    }
+
+    public void SetInventoryActive(bool inventoryOpen)
+    {
+        if (!inventoryOpen)
+        {
+            CloseInventory();
+        }
+        canvas.SetActive(inventoryOpen);
+        Cursor.lockState = inventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }

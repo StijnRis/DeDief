@@ -9,6 +9,7 @@ public class InventoryHighlight : MonoBehaviour
     public void Show(bool b)
     {
         highlighter.gameObject.SetActive(b);
+        highlighter.SetAsFirstSibling();
     }
 
     public void SetSize(InventoryItem targetItem)
@@ -37,6 +38,12 @@ public class InventoryHighlight : MonoBehaviour
     {
         if (targetGrid == null) { return; }
         highlighter.SetParent(targetGrid.GetComponent<RectTransform>());
+        highlighter.SetAsFirstSibling();
+    }
+
+    public void SetObjectAsParent(Transform parent)
+    {
+        highlighter.SetParent(parent);
     }
 
     public void SetPosition(ItemGrid targetGrid, InventoryItem targetItem, int posX, int posY)

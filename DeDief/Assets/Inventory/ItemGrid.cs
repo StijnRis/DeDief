@@ -12,10 +12,10 @@ public class ItemGrid : MonoBehaviour
 
 	RectTransform rectTransform;
 
-	[SerializeField] int gridSizeWidth = 20;
-	[SerializeField] int gridSizeHeight = 10;
+	public int gridSizeWidth = 20;
+	public int gridSizeHeight = 10;
 
-	private void Start()
+	private void Awake()
 	{
 		rectTransform = GetComponent<RectTransform>();
 		Init(gridSizeWidth, gridSizeHeight);
@@ -43,7 +43,7 @@ public class ItemGrid : MonoBehaviour
         }
     }
 
-    private void Init(int width, int height)
+    public void Init(int width, int height)
 	{
 		inventoryItemSlot = new InventoryItem[width, height];
 		Vector2 size = new Vector2(width * tileSizeWidth, height * tileSizeHeight);
@@ -59,6 +59,12 @@ public class ItemGrid : MonoBehaviour
 
 		tileGridPosition.x = (int)(positionOnGrid.x / tileSizeWidth);
 		tileGridPosition.y = (int)(positionOnGrid.y / tileSizeHeight);
+
+		if (tileGridPosition.x < 0)
+			tileGridPosition.x = 0;
+
+		if (tileGridPosition.y < 0)
+			tileGridPosition.y = 0;
 
 		return tileGridPosition;
 	}
@@ -90,6 +96,7 @@ public class ItemGrid : MonoBehaviour
     {
         RectTransform rectTransform = inventoryItem.GetComponent<RectTransform>();
         rectTransform.SetParent(this.rectTransform);
+		rectTransform.SetAsLastSibling();
 
         for (int x = 0; x < inventoryItem.WIDTH; x++)
         {

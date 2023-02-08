@@ -98,6 +98,33 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RandomItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""50ccd354-7c3b-4371-baf0-15bf35f4d832"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InsertItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d541d58-c4cc-41f9-94c3-f90f38322868"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""f8288ae0-4615-464b-9717-5494ffd50839"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -230,6 +257,39 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d04af080-6f2f-4008-a664-4eb2fd90cbcc"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RandomItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9dc6328f-fb98-4b5d-86ff-d2aed26828d5"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InsertItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b402b4fc-0ac9-4a9d-9a43-8ad07cdd6a1a"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -764,6 +824,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_Crawl = m_OnFoot.FindAction("Crawl", throwIfNotFound: true);
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_Inventory = m_OnFoot.FindAction("Inventory", throwIfNotFound: true);
+        m_OnFoot_RandomItem = m_OnFoot.FindAction("RandomItem", throwIfNotFound: true);
+        m_OnFoot_InsertItem = m_OnFoot.FindAction("InsertItem", throwIfNotFound: true);
+        m_OnFoot_RotateItem = m_OnFoot.FindAction("RotateItem", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -843,6 +906,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Crawl;
     private readonly InputAction m_OnFoot_Interact;
     private readonly InputAction m_OnFoot_Inventory;
+    private readonly InputAction m_OnFoot_RandomItem;
+    private readonly InputAction m_OnFoot_InsertItem;
+    private readonly InputAction m_OnFoot_RotateItem;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -855,6 +921,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Crawl => m_Wrapper.m_OnFoot_Crawl;
         public InputAction @Interact => m_Wrapper.m_OnFoot_Interact;
         public InputAction @Inventory => m_Wrapper.m_OnFoot_Inventory;
+        public InputAction @RandomItem => m_Wrapper.m_OnFoot_RandomItem;
+        public InputAction @InsertItem => m_Wrapper.m_OnFoot_InsertItem;
+        public InputAction @RotateItem => m_Wrapper.m_OnFoot_RotateItem;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -888,6 +957,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Inventory.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInventory;
+                @RandomItem.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRandomItem;
+                @RandomItem.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRandomItem;
+                @RandomItem.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRandomItem;
+                @InsertItem.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInsertItem;
+                @InsertItem.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInsertItem;
+                @InsertItem.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInsertItem;
+                @RotateItem.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRotateItem;
+                @RotateItem.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRotateItem;
+                @RotateItem.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRotateItem;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -916,6 +994,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @RandomItem.started += instance.OnRandomItem;
+                @RandomItem.performed += instance.OnRandomItem;
+                @RandomItem.canceled += instance.OnRandomItem;
+                @InsertItem.started += instance.OnInsertItem;
+                @InsertItem.performed += instance.OnInsertItem;
+                @InsertItem.canceled += instance.OnInsertItem;
+                @RotateItem.started += instance.OnRotateItem;
+                @RotateItem.performed += instance.OnRotateItem;
+                @RotateItem.canceled += instance.OnRotateItem;
             }
         }
     }
@@ -1035,6 +1122,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnCrawl(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnRandomItem(InputAction.CallbackContext context);
+        void OnInsertItem(InputAction.CallbackContext context);
+        void OnRotateItem(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

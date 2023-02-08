@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class PickUpInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     InventoryController inventoryController;
     ItemGrid itemGrid;
+    public GameObject itemObject;
 
     private void Awake()
     {
@@ -26,5 +27,18 @@ public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         Debug.Log("leave");
         inventoryController.SelectedItemGrid = null;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log(transform.hierarchyCount);
+            if (itemGrid.GetItem(0,0) == null && transform.childCount == 0 && inventoryController.SelectedItem == null)
+            {
+                Destroy(gameObject);
+                Destroy(itemObject);
+            }
+        }
     }
 }
