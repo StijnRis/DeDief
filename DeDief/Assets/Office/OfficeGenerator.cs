@@ -32,7 +32,7 @@ public class OfficeGenerator : MonoBehaviour
         }
         Rooms = new List<GameObject>();
         TotalHallArea = 0;
-        House = new Area(0, 0, Box.size.x, Box.size.z);
+        House = new Area(-Box.size.x / 2, -Box.size.z / 2, Box.size.x / 2, Box.size.z / 2);
         Chunks = new List<Area>();
         Halls = new List<Area>();
         Blocks = new List<Area>();
@@ -174,7 +174,8 @@ public class OfficeGenerator : MonoBehaviour
             doorObject.setPosition(new Vector2(doorArea.Left, doorArea.Top) - offset, new Vector2(doorArea.Right, doorArea.Bottom) - offset);
         }
         box.size = new Vector3((float)area.GetWidth(), Box.size.y, (float)area.GetLength());
-        room.transform.position = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetLength() / 2));
+        room.transform.SetParent(transform);
+        room.transform.localPosition = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetLength() / 2));
         Rooms.Add(room); 
     }
 

@@ -76,7 +76,7 @@ public abstract class RoomGenerator : MonoBehaviour
         Vector3 rotation = (endCorner - startCorner).normalized;
         float distance = Vector3.Distance(startCorner, endCorner);
         BoxCollider WallBox = wall.GetComponent<BoxCollider>();
-        WallBox.size = new Vector3(thickness, WallBox.size.y, distance + thickness);
+        WallBox.size = new Vector3(thickness, Box.size.y, distance + thickness);
         wall.transform.localPosition = startCorner + distance / 2 * rotation;
         Quaternion quaternion = Quaternion.LookRotation(rotation, Vector3.up);
         wall.transform.localRotation = quaternion;
