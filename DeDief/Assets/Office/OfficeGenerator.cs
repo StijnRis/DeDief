@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 
 public class OfficeGenerator : MonoBehaviour
 {
+    public BoxCollider Box;
     public float MinArea = 3;
     [Range(0.0f, 1.0f)]
     public float MaxHallRate = 0.15F;
@@ -12,7 +13,6 @@ public class OfficeGenerator : MonoBehaviour
     public GameObject Corridor;
     public List<RoomType> RoomTypes;
 
-    private BoxCollider Box;
     private Area House;
     private double TotalHallArea;
     private List<Area> Chunks, Halls, Blocks, UnreachableAreas, Areas;
@@ -20,7 +20,6 @@ public class OfficeGenerator : MonoBehaviour
 
     private void Start()
     {
-        Box = GetComponent<BoxCollider>();
         Generate();
     }
 
@@ -189,7 +188,8 @@ public class OfficeGenerator : MonoBehaviour
 
     public GameObject getGoodRoom(Area area)
     {
-        RoomType item = RoomTypes.OrderBy(x => x.getScore(area)).FirstOrDefault(); ;
+        RoomType item = RoomTypes.OrderBy(x => x.getScore(area)).FirstOrDefault();
+        Debug.Log(item.Name);
         return item.RoomPrefab;
     }
 }
@@ -206,8 +206,10 @@ public class RoomType
     {
         if (MinSize > area.GetArea())
         {
+            Debug.Log("To big" + area.GetArea());
             return float.MaxValue;
         }
+        Debug.Log("ood" + area.GetArea());
         return Mathf.Abs((float)(area.GetArea() - AverageSize));
     }
 }

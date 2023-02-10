@@ -26,13 +26,18 @@ public class ConferrenceRoomGenerator : RoomGenerator
         {
             rotation.SetLookRotation(new Vector3(0, 0, 1));
         }
+        Vector3 maxSize = rotation * Box.size;
+        maxSize = new Vector3(Mathf.Abs(maxSize.x), Mathf.Abs(maxSize.y), Mathf.Abs(maxSize.z));
 
         GameObject desk = Instantiate(Desk, transform);
         desk.transform.localRotation = rotation;
-        desk.transform.localScale = Vector3.one;
         desk.transform.localPosition = new Vector3(0, -Box.size.y / 2, 0);
+
         BoxCollider DeskSize = desk.GetComponent<BoxCollider>();
-        DeskSize.size = new Vector3(Mathf.Min(2, Box.size.x - 0.5f), Mathf.Min(1, Box.size.y - 0.5f), Mathf.Min(0.7f, Box.size.z - 0.5f));
+        Vector3 objectMaxSize = new Vector3(Mathf.Min(DeskSize.size.x, maxSize.x - 1f), Mathf.Min(DeskSize.size.y, maxSize.y - 1f), Mathf.Min(DeskSize.size.z, maxSize.z - 1f));
+        Vector3 scale = new Vector3(objectMaxSize.x / DeskSize.size.x, objectMaxSize.y / DeskSize.size.y, objectMaxSize.z / DeskSize.size.z);
+        desk.transform.localScale = scale;
+        DeskSize.size = objectMaxSize;
 
         /*Vector2 positionChair = middle.normalized * (middle.magnitude - 0.5f);
         GameObject chair = Instantiate(Chair, transform);
