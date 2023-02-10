@@ -7,14 +7,15 @@ public class PaintingGenerator : MonoBehaviour
 {
     private GameObject paintingFrame;
     private string paintingPath = "/Office/Decoration/paintings/";
+    private float paintingDepth = 0.1f;
 
-    private BoxCollider size;
+    private Vector3 size;
 
     // Start is called before the first frame update
     void Start()
     {
-        size = GetComponent<BoxCollider>();
-        transform.localPosition = Vector3.zero + new Vector3(-size.size.x * 2, 0, 0);
+        size = GetComponent<BoxCollider>().size;
+        transform.localPosition = Vector3.zero + new Vector3(-size.x * 2, 0, 0);
         transform.localRotation = Quaternion.identity;
 
         Generate();
@@ -31,17 +32,14 @@ public class PaintingGenerator : MonoBehaviour
         GameObject paintingFrame = GameObject.CreatePrimitive(PrimitiveType.Cube);
         paintingFrame.transform.SetParent(transform);
         paintingFrame.transform.localPosition = Vector3.zero;
-        paintingFrame.transform.localScale = size.size;
+        paintingFrame.transform.localScale = size;
         paintingFrame.transform.localRotation = Quaternion.identity;
 
-        GameObject paintingCanvas = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        paintingCanvas.transform.SetParent(transform);
-        paintingCanvas.transform.localPosition = Vector3.forward;
-        paintingCanvas.transform.localScale = size.size;
+        GameObject paintingCanvas = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        paintingCanvas.transform.SetParent(paintingFrame.transform);
+        paintingCanvas.transform.localPosition = Vector3.zero + new Vector3(-0.5f - paintingDepth, 0, 0);
+        paintingCanvas.transform.localScale = new Vector3(paintingDepth, 0.9f, 0.9f);
         paintingCanvas.transform.localRotation = Quaternion.identity;
-
-        Vector3 scaled_size = new Vector3(size.size.x, size.size.y, size.size.z);
-        paintingCanvas.transform.localScale = Vector3.Scale(scaled_size, new Vector3(0.9f, 0.9f, 0.9f));
 
         var texture = getRandomPaintingTexture();
         paintingCanvas.GetComponent<Renderer>().material.mainTexture = texture;
