@@ -8,12 +8,12 @@ public class PaintingGenerator : MonoBehaviour
     private GameObject paintingFrame;
     private string paintingPath = "/Office/Decoration/paintings/";
 
-    private Size size;
+    private BoxCollider size;
 
     // Start is called before the first frame update
     void Start()
     {
-        size = GetComponent<Size>();
+        size = GetComponent<BoxCollider>();
         transform.localPosition = Vector3.zero + new Vector3(-size.size.x * 2, 0, 0);
         transform.localRotation = Quaternion.identity;
 

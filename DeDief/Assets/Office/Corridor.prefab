@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 233720874910486912}
-  - component: {fileID: 8094816585341687409}
   - component: {fileID: -6722938387565702103}
+  - component: {fileID: 6393608439853122227}
   m_Layer: 0
   m_Name: Corridor
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8094816585341687409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977530078531694865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8ce5ad8080a8cb408d92b693bb71d75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: {x: 0, y: 0, z: 0}
 --- !u!114 &-6722938387565702103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,6 +45,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503a2e48e6aaafe4b97b609b1bf84514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: {fileID: 0}
   Wall: {fileID: 4427668551479185814, guid: f3d1858a8d8d66949bb60c7dda66ed80, type: 3}
   Floor: {fileID: 3660091792651605634, guid: d13cab2a5b78e7343a09561ec3f067b9, type: 3}
+--- !u!65 &6393608439853122227
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977530078531694865}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

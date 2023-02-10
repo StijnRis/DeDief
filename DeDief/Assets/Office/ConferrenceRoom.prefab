@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 340756927311293638}
   - component: {fileID: 6461758253043030379}
-  - component: {fileID: 4784087856712355891}
+  - component: {fileID: 939397398576598667}
   m_Layer: 0
   m_Name: ConferrenceRoom
   m_TagString: Untagged
@@ -49,16 +49,16 @@ MonoBehaviour:
   Floor: {fileID: 3660091792651605634, guid: 4c4562c261d099e4ca85f0a7f29a6dd7, type: 3}
   Desk: {fileID: 1289936835854364, guid: 2e14b1c602571994f82e0f629cc6312f, type: 3}
   Chair: {fileID: 8669365534871835233, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
---- !u!114 &4784087856712355891
-MonoBehaviour:
+--- !u!65 &939397398576598667
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4326216356944668239}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8ce5ad8080a8cb408d92b693bb71d75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

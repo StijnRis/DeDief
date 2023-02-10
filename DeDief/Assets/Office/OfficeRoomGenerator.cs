@@ -30,16 +30,16 @@ public class OfficeRoomGenerator : RoomGenerator
         GameObject desk = Instantiate(Desk, transform);
         desk.transform.localRotation = backwardsRotation;
         desk.transform.localScale = Vector3.one;
-        desk.transform.localPosition = new Vector3(positionDesk.x, -Size.size.y / 2, positionDesk.y);
-        Size DeskSize = desk.GetComponent<Size>();
-        DeskSize.size = new Vector3(Mathf.Min(2, Size.size.x - 0.5f), Mathf.Min(1, Size.size.y - 0.5f), Mathf.Min(0.7f, Size.size.z - 0.5f));
+        desk.transform.localPosition = new Vector3(positionDesk.x, -Box.size.y / 2, positionDesk.y);
+        BoxCollider DeskBox = desk.GetComponent<BoxCollider>();
+        DeskBox.size = new Vector3(Mathf.Min(2, Box.size.x - 0.5f), Mathf.Min(1, Box.size.y - 0.5f), Mathf.Min(0.7f, Box.size.z - 0.5f));
 
         Vector2 positionChair = middle.normalized * (middle.magnitude - 0.5f);
         GameObject chair = Instantiate(Chair, transform);
         chair.transform.localRotation = forwardsRotation;
         chair.transform.localScale = Vector3.one;
-        chair.transform.localPosition = new Vector3(positionChair.x, -Size.size.y / 2, positionChair.y);
-        Size ChairSize = desk.GetComponent<Size>();
-        ChairSize.size = new Vector3(Mathf.Min(0.5f, Size.size.x), Mathf.Min(0.5f, Size.size.y), Mathf.Min(0.5f, Size.size.z));
+        chair.transform.localPosition = new Vector3(positionChair.x, -Box.size.y / 2, positionChair.y);
+        BoxCollider ChairBox = desk.GetComponent<BoxCollider>();
+        ChairBox.size = new Vector3(Mathf.Min(0.5f, Box.size.x), Mathf.Min(0.5f, Box.size.y), Mathf.Min(0.5f, Box.size.z));
     }
 }
