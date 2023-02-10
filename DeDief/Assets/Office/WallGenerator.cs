@@ -6,18 +6,18 @@ public class WallGenerator : MonoBehaviour
 {
     public GameObject Painting;
     public Material[] Materials;
-    protected Size Size;
+    protected BoxCollider Box;
 
     void Start()
     {
-        Size = GetComponent<Size>();
+        Box = GetComponent<BoxCollider>();
         Generate();
     }
 
     public void Generate()
     {
         placeWall();
-        placePainting();
+        /*placePainting();*/
     }
 
     private void placeWall()
@@ -26,7 +26,7 @@ public class WallGenerator : MonoBehaviour
         wall.GetComponent<MeshRenderer>().material = Materials[Random.Range(0, Materials.Length)];
         wall.transform.SetParent(transform);
 
-        wall.transform.localScale = Size.size;
+        wall.transform.localScale = Box.size;
         wall.transform.localPosition = Vector3.zero;
         wall.transform.localRotation = Quaternion.identity;
 
@@ -42,8 +42,8 @@ public class WallGenerator : MonoBehaviour
         painting.transform.localPosition = Vector3.zero;
         painting.transform.localRotation = Quaternion.identity;
 
-        Size PaintingSize = painting.GetComponent<Size>();
-        Vector3 size = new Vector3(Mathf.Min(0.03f, Size.size.x), Mathf.Min(0.5f, Size.size.y), Mathf.Min(0.5f, Size.size.z));
+        BoxCollider PaintingSize = painting.GetComponent<BoxCollider>();
+        Vector3 size = new Vector3(Mathf.Min(0.03f, Box.size.x), Mathf.Min(0.5f, Box.size.y), Mathf.Min(0.5f, Box.size.z));
         PaintingSize.size = size;
     }
 }

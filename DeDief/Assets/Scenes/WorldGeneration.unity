@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f5ae6c07b62104c93acee9db68cc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   AgentCount: 50
   agentPrefab: {fileID: 7085054231635045054, guid: aab5d19b74103cd4d96bce6d6b6aed4b, type: 3}
 --- !u!1 &705507993

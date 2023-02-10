@@ -12,7 +12,7 @@ public class OfficeGenerator : MonoBehaviour
     public GameObject Corridor;
     public List<RoomType> RoomTypes;
 
-    private Size Size;
+    private BoxCollider Box;
     private Area House;
     private double TotalHallArea;
     private List<Area> Chunks, Halls, Blocks, UnreachableAreas, Areas;
@@ -20,7 +20,7 @@ public class OfficeGenerator : MonoBehaviour
 
     private void Start()
     {
-        Size = GetComponent<Size>();
+        Box = GetComponent<BoxCollider>();
         Generate();
     }
 
@@ -32,7 +32,7 @@ public class OfficeGenerator : MonoBehaviour
         }
         Rooms = new List<GameObject>();
         TotalHallArea = 0;
-        House = new Area(0, 0, Size.size.x, Size.size.z);
+        House = new Area(0, 0, Box.size.x, Box.size.z);
         Chunks = new List<Area>();
         Halls = new List<Area>();
         Blocks = new List<Area>();
@@ -167,17 +167,13 @@ public class OfficeGenerator : MonoBehaviour
     public void PlaceArea(Area area, GameObject roomPrefab)
     {
         GameObject room = Instantiate(roomPrefab, transform);
-        Size size = room.GetComponent<Size>();
-        if (size == null)
-        {
-            size = room.AddComponent<Size>();
-        }
+        BoxCollider box = room.GetComponent<BoxCollider>();
         Vector2 offset = new Vector2((float)(area.Left + area.GetWidth() / 2), (float)(area.Top + area.GetLength() / 2));
         foreach (Area doorArea in area.Doors) { 
             Door doorObject = room.AddComponent<Door>();
             doorObject.setPosition(new Vector2(doorArea.Left, doorArea.Top) - offset, new Vector2(doorArea.Right, doorArea.Bottom) - offset);
         }
-        size.size = new Vector3((float)area.GetWidth(), Size.size.y, (float)area.GetLength());
+        box.size = new Vector3((float)area.GetWidth(), Box.size.y, (float)area.GetLength());
         room.transform.position = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetLength() / 2));
         Rooms.Add(room); 
     }
@@ -201,12 +197,16 @@ public class OfficeGenerator : MonoBehaviour
 public class RoomType
 {
     public string Name;
-    public float AvarageSize;
+    public float MinSize;
+    public float AverageSize;
     public GameObject RoomPrefab;
-
 
     public float getScore(Area area)
     {
-        return Mathf.Abs((float)(area.GetArea() - AvarageSize));
+        if (MinSize > area.GetArea())
+        {
+            return float.MaxValue;
+        }
+        return Mathf.Abs((float)(area.GetArea() - AverageSize));
     }
 }

@@ -5,14 +5,14 @@ using System.Linq;
 
 public abstract class RoomGenerator : MonoBehaviour
 {
-    public Size Size;
+    protected BoxCollider Box;
     public GameObject Wall;
     public GameObject Floor;
     protected Door[] Doors;
 
     public void Start()
     {
-        Size = GetComponent<Size>();
+        Box = GetComponent<BoxCollider>();
         Doors = GetComponents<Door>();
         Generate();
     }
@@ -23,10 +23,10 @@ public abstract class RoomGenerator : MonoBehaviour
     {
         List<Vector3> points = new List<Vector3>();
         List<Vector3> noConnectPoints = new List<Vector3>();
-        points.Add(new Vector3((float)(0.5 * Size.size.x), 0, (float)(0.5 * Size.size.z)));
-        points.Add(new Vector3((float)(0.5 * Size.size.x), 0, (float)(-0.5 * Size.size.z)));
-        points.Add(new Vector3((float)(-0.5 * Size.size.x), 0, (float)(-0.5 * Size.size.z)));
-        points.Add(new Vector3((float)(-0.5 * Size.size.x), 0, (float)(0.5 * Size.size.z)));
+        points.Add(new Vector3((float)(0.5 * Box.size.x), 0, (float)(0.5 * Box.size.z)));
+        points.Add(new Vector3((float)(0.5 * Box.size.x), 0, (float)(-0.5 * Box.size.z)));
+        points.Add(new Vector3((float)(-0.5 * Box.size.x), 0, (float)(-0.5 * Box.size.z)));
+        points.Add(new Vector3((float)(-0.5 * Box.size.x), 0, (float)(0.5 * Box.size.z)));
         foreach (Door door in Doors)
         {
             Vector3 door1 = new Vector3(door.Start.x, 0, door.Start.y);
@@ -53,8 +53,8 @@ public abstract class RoomGenerator : MonoBehaviour
     protected void PlaceFloor()
     {
         GameObject floor = Instantiate(Floor, transform);
-        floor.transform.localScale = new Vector3(Size.size.x, 0.1f, Size.size.z);
-        floor.transform.position = new Vector3(transform.position.x, transform.position.y - Size.size.y / 2, transform.position.z);
+        floor.transform.localScale = new Vector3(Box.size.x, 0.1f, Box.size.z);
+        floor.transform.position = new Vector3(transform.position.x, transform.position.y - Box.size.y / 2, transform.position.z);
         floor.layer = LayerMask.NameToLayer("Floor");
     }
 
@@ -62,8 +62,8 @@ public abstract class RoomGenerator : MonoBehaviour
     {
         GameObject ceiling = GameObject.CreatePrimitive(PrimitiveType.Cube);
         ceiling.transform.SetParent(transform);
-        ceiling.transform.localScale = new Vector3(Size.size.x, 0.1f, Size.size.z);
-        ceiling.transform.position = new Vector3(transform.position.x, transform.position.y + Size.size.y / 2, transform.position.z);
+        ceiling.transform.localScale = new Vector3(Box.size.x, 0.1f, Box.size.z);
+        ceiling.transform.position = new Vector3(transform.position.x, transform.position.y + Box.size.y / 2, transform.position.z);
         ceiling.name = "Ceiling";
     }
 
@@ -75,8 +75,8 @@ public abstract class RoomGenerator : MonoBehaviour
 
         Vector3 rotation = (endCorner - startCorner).normalized;
         float distance = Vector3.Distance(startCorner, endCorner);
-        Size WallSize = wall.GetComponent<Size>();
-        WallSize.size = new Vector3(thickness, Size.size.y, distance + thickness);
+        BoxCollider WallBox = wall.GetComponent<BoxCollider>();
+        WallBox.size = new Vector3(thickness, WallBox.size.y, distance + thickness);
         wall.transform.localPosition = startCorner + distance / 2 * rotation;
         Quaternion quaternion = Quaternion.LookRotation(rotation, Vector3.up);
         wall.transform.localRotation = quaternion;

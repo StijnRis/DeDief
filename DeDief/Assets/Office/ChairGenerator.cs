@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ChairGenerator : MonoBehaviour
 {
-    public GameObject Chair;
+    public GameObject[] Chairs;
 
     void Start()
     {
-        Instantiate(Chair, transform);
+        GameObject chair = Chairs[Random.Range(0, Chairs.Length)];
+        Instantiate(chair, transform);
     }
 }
