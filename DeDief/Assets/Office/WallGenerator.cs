@@ -17,7 +17,11 @@ public class WallGenerator : MonoBehaviour
     public void Generate()
     {
         placeWall();
-        placePainting();
+
+        if (Random.Range(0, 5) == 1)
+        {
+            placePainting();
+        }
     }
 
     private void placeWall()

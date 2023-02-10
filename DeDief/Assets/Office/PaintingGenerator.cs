@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class PaintingGenerator : MonoBehaviour
 {
-    private GameObject painting;
+    private GameObject paintingFrame;
     private string paintingPath = "/Office/Decoration/paintings/";
 
-    protected Size size;
+    private Size size;
 
     // Start is called before the first frame update
     void Start()
     {
         size = GetComponent<Size>();
+        transform.localPosition = Vector3.zero + new Vector3(-size.size.x * 2, 0, 0);
+        transform.localRotation = Quaternion.identity;
 
         Generate();
     }
@@ -26,17 +28,23 @@ public class PaintingGenerator : MonoBehaviour
 
     void Generate()
     {
-        painting = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        painting.transform.SetParent(transform);
+        GameObject paintingFrame = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        paintingFrame.transform.SetParent(transform);
+        paintingFrame.transform.localPosition = Vector3.zero;
+        paintingFrame.transform.localScale = size.size;
+        paintingFrame.transform.localRotation = Quaternion.identity;
 
-        painting.transform.localScale = size.size;
+        GameObject paintingCanvas = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        paintingCanvas.transform.SetParent(transform);
+        paintingCanvas.transform.localPosition = Vector3.forward;
+        paintingCanvas.transform.localScale = size.size;
+        paintingCanvas.transform.localRotation = Quaternion.identity;
 
-        float size_x = size.size.x;
-        painting.transform.localPosition = Vector3.zero + new Vector3(-size_x * 2, 0, 0);
-        painting.transform.localRotation = Quaternion.identity;
+        Vector3 scaled_size = new Vector3(size.size.x, size.size.y, size.size.z);
+        paintingCanvas.transform.localScale = Vector3.Scale(scaled_size, new Vector3(0.9f, 0.9f, 0.9f));
 
         var texture = getRandomPaintingTexture();
-        painting.GetComponent<Renderer>().material.mainTexture = texture;
+        paintingCanvas.GetComponent<Renderer>().material.mainTexture = texture;
     }
 
     Texture2D getRandomPaintingTexture()
