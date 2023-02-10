@@ -43,7 +43,7 @@ public class WallGenerator : MonoBehaviour
         painting.transform.localRotation = Quaternion.identity;
 
         Size PaintingSize = painting.GetComponent<Size>();
-        Vector3 size = new Vector3(Mathf.Min(0.5f, Size.size.x), Mathf.Min(0.5f, Size.size.y), Mathf.Min(0.5f, Size.size.z));
+        Vector3 size = new Vector3(Mathf.Min(0.03f, Size.size.x), Mathf.Min(0.5f, Size.size.y), Mathf.Min(0.5f, Size.size.z));
         PaintingSize.size = size;
     }
 }
