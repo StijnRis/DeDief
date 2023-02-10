@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &374405784 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4926617815897709897, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+  m_PrefabInstance: {fileID: 1887264908}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,12 +315,32 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4926617815897709897, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: m_Size.x
-      value: 20
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926617815897709897, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+      propertyPath: m_Size.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4926617815897709897, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: m_Size.z
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+      propertyPath: Box
+      value: 
+      objectReference: {fileID: 374405784}
+    - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+      propertyPath: HallSize
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+      propertyPath: MaxHallRate
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+      propertyPath: RoomTypes.Array.data[1].RoomPrefab
+      value: 
+      objectReference: {fileID: 4326216356944668239, guid: 0a78134b93f7cbf42a01afd4d7ecd2d2, type: 3}
     - target: {fileID: 6791950901422500601, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: m_RootOrder
       value: 2
