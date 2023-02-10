@@ -35,14 +35,27 @@ public class PlayerInteract : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, distance, mask))
         {
             // Debug.Log("detected object");
-            if (hitInfo.collider.GetComponent<Interactable>() != null)
+            if (hitInfo.collider.GetComponent<Interactable>() != null && !inventoryOpen)
             {
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
                 playerUI.UpdateText(interactable.promptMessage);
-                if (inputManager.onFoot.Interact.triggered)
+            }
+        }
+        if (inputManager.onFoot.Interact.triggered)
+        {
+            // OpenInventory();
+            if (Physics.Raycast(ray, out hitInfo, distance, mask))
+            {
+                // Debug.Log("detected object");
+                if (hitInfo.collider.GetComponent<Interactable>() != null && !inventoryOpen)
                 {
+                    Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
                     interactable.BaseInteract();
                 }
+            }
+            else
+            {
+                OpenInventory();
             }
         }
     }
@@ -55,7 +68,8 @@ public class PlayerInteract : MonoBehaviour
 
     public void GenerateRandomItem()
     {
-        inventoryController.GenerateRandomItem();
+        Debug.Log("for your sanity I disabled this function");
+        // inventoryController.GenerateRandomItem();
     }
 
     public void InsertRandomItem()
@@ -67,5 +81,10 @@ public class PlayerInteract : MonoBehaviour
     public void RotateItem()
     {
         inventoryController.RotateItem();
+    }
+
+    public void DropItem(GameObject itemPrefab)
+    {
+        GameObject itemObject = Instantiate(itemPrefab);
     }
 }

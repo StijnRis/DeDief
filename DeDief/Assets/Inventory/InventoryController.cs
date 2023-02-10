@@ -31,10 +31,13 @@ public class InventoryController : MonoBehaviour
     Vector2Int oldPosition;
     public InventoryHighlight inventoryHighlight;
 
+    public GameObject player;
+
     private void Awake()
     {
         inventoryHighlight = GetComponent<InventoryHighlight>();
         canvasTransform = canvas.GetComponent<RectTransform>();
+        player = gameObject.transform.parent.gameObject;
     }
 
     private void Update()
@@ -43,40 +46,21 @@ public class InventoryController : MonoBehaviour
         {
             ItemIconDrag();
 
-            // // Debug.Log("Open");
-            
-            // if (Input.GetKeyDown(KeyCode.Q))
-            // {
-            //     // Debug.Log("yeet");
-            //     if (selectedItem == null) 
-            //     {
-            //         CreateRandomItem();
-            //     }
-            //     // else
-            //     // {
-            //     //     selectedItem.itemData.itemIcon = null;
-            //     //     Destroy(selectedItem);
-            //     //     selectedItem = null;
-            //     // }
-            // }
-
-            // if (Input.GetKeyDown(KeyCode.W))
-            // {
-            //     InsertRandomItem();
-            // }
-
-            // if (Input.GetKeyDown(KeyCode.R))
-            // {
-            //     RotateItem();
-            // }
-
             if (selectedItemGrid == null) 
             {
-                if (Input.GetMouseButtonDown(0) && selectedItem == null)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    // CloseInventory();
-                    PlayerInteract.inventoryOpen = false;
-                    SetInventoryActive(PlayerInteract.inventoryOpen);
+                    // CloseInventory();'
+                    if (selectedItem != null)
+                    {
+                        if (!selectedItem.pickedUp)
+                            DropItem(selectedItem);
+                    } 
+                    else 
+                    {
+                        PlayerInteract.inventoryOpen = false;
+                        SetInventoryActive(PlayerInteract.inventoryOpen);
+                    }
                 }
                 inventoryHighlight.Show(false);
                 return; 
@@ -89,6 +73,13 @@ public class InventoryController : MonoBehaviour
                 LeftMouseButtonPress();
             }
         }
+    }
+
+    private void DropItem(InventoryItem item)
+    {
+        GameObject item3dPrefab = item.itemData.itemPrefab;
+        GameObject item3d = Instantiate(item3dPrefab, player.transform.position + (transform.forward), player.transform.rotation);
+        Destroy(item.gameObject);
     }
 
     private void CloseInventory()
@@ -202,6 +193,7 @@ public class InventoryController : MonoBehaviour
 		rectTransform.SetParent(canvasTransform);
         rectTransform.SetAsLastSibling();
 		inventoryItem.Set(itemData);
+        inventoryItem.pickedUp = true;
         return inventoryItem;
     }
 
@@ -280,7 +272,7 @@ public class InventoryController : MonoBehaviour
 
     public void SetInventoryActive(bool inventoryOpen)
     {
-        if (!inventoryOpen)
+        if (inventoryOpen == false)
         {
             CloseInventory();
         }

@@ -8,6 +8,7 @@ public class PickUpInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     InventoryController inventoryController;
     ItemGrid itemGrid;
     public GameObject itemObject;
+    public InventoryItem item;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class PickUpInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             Debug.Log(transform.hierarchyCount);
             if (itemGrid.GetItem(0,0) == null && transform.childCount == 0 && inventoryController.SelectedItem == null)
             {
+                item.pickedUp = false;
                 Destroy(gameObject);
                 Destroy(itemObject);
             }

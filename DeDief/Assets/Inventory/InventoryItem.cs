@@ -34,6 +34,7 @@ public class InventoryItem : MonoBehaviour
 	public int onGridPositionY;
 
 	public bool rotated = false;
+	public bool pickedUp = false;
 
 	internal void Set(ItemData itemData)
 	{

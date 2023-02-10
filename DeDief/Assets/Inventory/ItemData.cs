@@ -11,4 +11,8 @@ public class ItemData : ScriptableObject
 	public Sprite itemIcon;
 
 	public bool canBeRotated;
+
+	public int moneyValue;
+
+	public GameObject itemPrefab;
 }

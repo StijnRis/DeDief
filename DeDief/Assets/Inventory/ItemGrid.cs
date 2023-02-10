@@ -15,9 +15,17 @@ public class ItemGrid : MonoBehaviour
 	public int gridSizeWidth = 20;
 	public int gridSizeHeight = 10;
 
+	ValueCounter valueCounter;
+	bool hasValueCounter = false;
+
 	private void Awake()
 	{
 		rectTransform = GetComponent<RectTransform>();
+		if (GetComponent<ValueCounter>() != null)
+		{
+			valueCounter = GetComponent<ValueCounter>();
+			hasValueCounter = true;
+		}
 		Init(gridSizeWidth, gridSizeHeight);
 	}
 
@@ -41,6 +49,11 @@ public class ItemGrid : MonoBehaviour
                 inventoryItemSlot[item.onGridPositionX + ix, item.onGridPositionY + iy] = null;
             }
         }
+		
+		if (hasValueCounter)
+		{
+			valueCounter.SubtractValue(item.itemData.moneyValue);
+		}
     }
 
     public void Init(int width, int height)
@@ -112,6 +125,11 @@ public class ItemGrid : MonoBehaviour
         Vector2 position = CalculatePositionOnGrid(inventoryItem, posX, posY);
 
         rectTransform.localPosition = position;
+
+		if (hasValueCounter)
+		{
+			valueCounter.AddValue(inventoryItem.itemData.moneyValue);
+		}
     }
 
     public Vector2 CalculatePositionOnGrid(InventoryItem inventoryItem, int posX, int posY)

@@ -16,3 +16,5 @@ MonoBehaviour:
   height: 2
   itemIcon: {fileID: 21300000, guid: 4997777af2a89d2488393a8a98608586, type: 3}
   canBeRotated: 1
+  moneyValue: 5
+  itemPrefab: {fileID: 0}
