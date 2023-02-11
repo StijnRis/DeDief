@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OfficeFloorGenerator : MonoBehaviour
+public class FloorGenerator : MonoBehaviour
 {
     public Material[] Materials;
     void Start()

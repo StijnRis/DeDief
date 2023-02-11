@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6791950901422500607}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61,19 +61,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a565567f479317742af08361a75b2bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Box: {fileID: 0}
   MinArea: 5
   MaxHallRate: 0.325
   HallSize: 1
   Corridor: {fileID: 1977530078531694865, guid: cd88545f42136044d85aad68429d8bd8, type: 3}
   RoomTypes:
   - Name: Working
-    MinSize: 0
+    MinLength: 2
     AverageSize: 4
     RoomPrefab: {fileID: 3930007208169666870, guid: 9d06b0b87fedbc94d99f2c6c9d6d184f, type: 3}
   - Name: Talking
-    MinSize: 12
+    MinLength: 4
     AverageSize: 15
     RoomPrefab: {fileID: 3930007208169666870, guid: 9d06b0b87fedbc94d99f2c6c9d6d184f, type: 3}
+  - Name: Nothing
+    MinLength: 0
+    AverageSize: 0
+    RoomPrefab: {fileID: 9217691532615191220, guid: c733de966c340574aa46888be12a7b87, type: 3}
 --- !u!114 &6791950901422500100
 MonoBehaviour:
   m_ObjectHideFlags: 0

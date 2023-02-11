@@ -26,7 +26,8 @@ public class OfficeGenerator : MonoBehaviour
     public void Generate()
     {
         // Remove and reset everyting
-        foreach (Transform c in transform) {
+        foreach (Transform c in transform)
+        {
             Destroy(c.gameObject);
         }
         Rooms = new List<GameObject>();
@@ -189,7 +190,6 @@ public class OfficeGenerator : MonoBehaviour
     public GameObject getGoodRoom(Area area)
     {
         RoomType item = RoomTypes.OrderBy(x => x.getScore(area)).FirstOrDefault();
-        Debug.Log(item.Name);
         return item.RoomPrefab;
     }
 }
@@ -198,18 +198,16 @@ public class OfficeGenerator : MonoBehaviour
 public class RoomType
 {
     public string Name;
-    public float MinSize;
+    public float MinLength;
     public float AverageSize;
     public GameObject RoomPrefab;
 
     public float getScore(Area area)
     {
-        if (MinSize > area.GetArea())
+        if (MinLength > area.GetWidth() || MinLength > area.GetLength())
         {
-            Debug.Log("To big" + area.GetArea());
             return float.MaxValue;
         }
-        Debug.Log("ood" + area.GetArea());
         return Mathf.Abs((float)(area.GetArea() - AverageSize));
     }
 }

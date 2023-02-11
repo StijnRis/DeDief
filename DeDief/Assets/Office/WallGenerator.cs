@@ -20,7 +20,7 @@ public class WallGenerator : MonoBehaviour
 
         if (Random.Range(0,5) == 1 )
         {
-            placePainting();
+            /*placePainting(); LAG*/
         }
     }
 

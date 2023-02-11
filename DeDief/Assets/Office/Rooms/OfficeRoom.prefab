@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6781813507230086301}
-  - component: {fileID: 6957449143888732876}
   - component: {fileID: 396935765403839269}
+  - component: {fileID: 6957449143888732876}
   m_Layer: 0
   m_Name: OfficeRoom
   m_TagString: Untagged
@@ -26,13 +26,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3930007208169666870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.2569675, y: -2.3875961, z: 12.346089}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &396935765403839269
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3930007208169666870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6957449143888732876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,18 +60,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wall: {fileID: 4427668551479185814, guid: f3d1858a8d8d66949bb60c7dda66ed80, type: 3}
   Floor: {fileID: 3660091792651605634, guid: 4c4562c261d099e4ca85f0a7f29a6dd7, type: 3}
-  Desk: {fileID: 8985730869084367143, guid: c0c02012f5c90eb418e161a17da89fc1, type: 3}
-  Chair: {fileID: 8669365534871835233, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
---- !u!65 &396935765403839269
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3930007208169666870}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  WorkStation: {fileID: 110388551026490932, guid: c968838f34baadc42ba9b2365bf71ce4, type: 3}
