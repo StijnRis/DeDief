@@ -35,7 +35,7 @@ public class PickUpInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log(transform.hierarchyCount);
-            if (itemGrid.GetItem(0,0) == null && transform.childCount == 0 && inventoryController.SelectedItem == null)
+            if (itemGrid.GetItem(0,0) == null && transform.childCount == 0)
             {
                 item.pickedUp = false;
                 Destroy(gameObject);

@@ -130,21 +130,57 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1223082376538629269, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+      propertyPath: Chairs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1223082376538629269, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+      propertyPath: Chairs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2daa2f35435e32a44a05e89e77e65a14, type: 2}
+    - target: {fileID: 1223082376538629269, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+      propertyPath: Chairs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0107213266b334840a56ff09fdc5157b, type: 2}
+    - target: {fileID: 1223082376538629269, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+      propertyPath: Chairs.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2a582b321b4d49c498fcd6386adbe75a, type: 2}
+    - target: {fileID: 1223082376538629269, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+      propertyPath: Chairs.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0060bf149d32c2046b49ca71c775a137, type: 2}
+    - target: {fileID: 1223082376538629269, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+      propertyPath: Chairs.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: f873374e1af7ba342ad23ea3456f54bb, type: 2}
+    - target: {fileID: 1223082376538629269, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+      propertyPath: Chairs.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3936ec1e04ff89b4290616b3986977d6, type: 2}
+    - target: {fileID: 1223082376538629269, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+      propertyPath: Chairs.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: b642f8ed525b9664bb273628eedf2e27, type: 2}
+    - target: {fileID: 1223082376538629269, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+      propertyPath: Chairs.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: cd415c979342e51429f884dcce469e23, type: 2}
     - target: {fileID: 3183139390163319997, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3183139390163319997, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3183139390163319997, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3183139390163319997, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3183139390163319997, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
       propertyPath: m_LocalPosition.x
@@ -152,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3183139390163319997, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 3183139390163319997, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
       propertyPath: m_LocalPosition.z

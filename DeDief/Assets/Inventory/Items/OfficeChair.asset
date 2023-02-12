@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470f238a8f8dfd74791dbc4b4312e8dc, type: 3}
+  m_Name: OfficeChair
+  m_EditorClassIdentifier: 
+  width: 8
+  height: 8
+  itemIcon: {fileID: 21300000, guid: 492c384833352db4c9e699cdc5a7b077, type: 3}
+  canBeRotated: 1
+  moneyValue: 0
+  itemPrefab: {fileID: 1160537708517250, guid: 2ff7704997af3ca468ea39420cfd35ec, type: 3}

@@ -58,12 +58,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6630601bba728429d6922c36824d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChairPrefabs:
-  - {fileID: 1160537708517250, guid: 2ff7704997af3ca468ea39420cfd35ec, type: 3}
-  - {fileID: 1128770351800014, guid: 3c4892661a827e04a97474743a73c0b8, type: 3}
-  - {fileID: 1109140894383182, guid: 584445047de52fb4ab7f6b25554eb174, type: 3}
-  - {fileID: 1239490199446044, guid: 2ba61ae89b603e04384293242684b09e, type: 3}
-  - {fileID: 1438418636395350, guid: f459aae84ece7154f8d0ee90f554eeb4, type: 3}
-  - {fileID: 1055603530103732, guid: 4e57406919c506c42a59b989fd5d8c4d, type: 3}
-  - {fileID: 1290026134015930, guid: 74da286b950020745b667e6d613b1b8e, type: 3}
-  - {fileID: 1608635005967820, guid: f14cbdd8ee1424e469bf00996f0eeaf1, type: 3}
+  Chairs:
+  - {fileID: 11400000, guid: 2daa2f35435e32a44a05e89e77e65a14, type: 2}
+  - {fileID: 11400000, guid: 0107213266b334840a56ff09fdc5157b, type: 2}
+  - {fileID: 11400000, guid: 2a582b321b4d49c498fcd6386adbe75a, type: 2}
+  - {fileID: 11400000, guid: 0060bf149d32c2046b49ca71c775a137, type: 2}
+  - {fileID: 11400000, guid: f873374e1af7ba342ad23ea3456f54bb, type: 2}
+  - {fileID: 11400000, guid: 3936ec1e04ff89b4290616b3986977d6, type: 2}
+  - {fileID: 11400000, guid: b642f8ed525b9664bb273628eedf2e27, type: 2}
+  - {fileID: 11400000, guid: cd415c979342e51429f884dcce469e23, type: 2}
