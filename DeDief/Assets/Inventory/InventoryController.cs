@@ -50,7 +50,7 @@ public class InventoryController : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    // CloseInventory();'
+                    // CloseInventory();
                     if (selectedItem != null)
                     {
                         if (!selectedItem.pickedUp)
@@ -84,7 +84,7 @@ public class InventoryController : MonoBehaviour
 
     private void CloseInventory()
     {
-        inventoryHighlight.SetObjectAsParent(canvasTransform);
+        inventoryHighlight.SetObjectAsParent(canvasTransform);    
         inventoryHighlight.Show(false);
         PlayerInteract.inventoryOpen = false;
         PickUpInteract[] pickUpGrids = canvas.GetComponentsInChildren<PickUpInteract>();
@@ -142,6 +142,7 @@ public class InventoryController : MonoBehaviour
 
     private void HandleHighlight()
     {
+        // Debug.Log("Highlight Handled");
         Vector2Int positionOnGrid = GetTileGridPosition();
         if (oldPosition == positionOnGrid) { return; }
 
@@ -152,6 +153,7 @@ public class InventoryController : MonoBehaviour
 
             if (itemToHighlight != null)
             {
+                Debug.Log("Highlight may show");
                 inventoryHighlight.Show(true);
                 inventoryHighlight.SetSize(itemToHighlight);
                 inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);
