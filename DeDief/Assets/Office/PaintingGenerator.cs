@@ -6,7 +6,6 @@ using UnityEngine;
 public class PaintingGenerator : MonoBehaviour
 {
     private GameObject paintingFrame;
-    private string paintingPath = "/Office/Decoration/paintings/";
     private float paintingDepth = 0.1f;
 
     private Vector3 size;
@@ -41,22 +40,9 @@ public class PaintingGenerator : MonoBehaviour
         paintingCanvas.transform.localScale = new Vector3(paintingDepth, 0.9f, 0.9f);
         paintingCanvas.transform.localRotation = Quaternion.identity;
 
-        var texture = getRandomPaintingTexture();
+        PaintingManager paintingManager = GetComponentInParent<PaintingManager>();
+        Texture2D texture = paintingManager.getRandomPaintingTexture();
         paintingCanvas.GetComponent<Renderer>().material.mainTexture = texture;
     }
 
-    Texture2D getRandomPaintingTexture()
-    {
-        DirectoryInfo dir = new DirectoryInfo(Application.dataPath + paintingPath);
-        var files = dir.GetFiles("painting_*.jpg");
-        int randomIndex = Random.Range(0, files.Length);
-        var randomFile = files[randomIndex];
-        string path = randomFile.FullName;
-
-        var bytes = System.IO.File.ReadAllBytes(path);
-        var tex = new Texture2D(1, 1);
-        tex.LoadImage(bytes);
-
-        return tex;
-    }
 }

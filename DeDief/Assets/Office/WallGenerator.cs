@@ -18,9 +18,11 @@ public class WallGenerator : MonoBehaviour
     {
         placeWall();
 
-        if (Random.Range(0,5) == 1 )
+        PaintingManager paintingManager = GetComponentInParent<PaintingManager>();
+        float wallWidth = Box.size.z;
+        if (Random.Range(0, 100) < paintingManager.amount && wallWidth > 1.5f)
         {
-            /*placePainting(); LAG*/
+            placePainting();
         }
     }
 
@@ -47,7 +49,9 @@ public class WallGenerator : MonoBehaviour
         painting.transform.localRotation = Quaternion.identity;
 
         BoxCollider PaintingSize = painting.GetComponent<BoxCollider>();
-        Vector3 size = new Vector3(Mathf.Min(0.03f, Box.size.x), Mathf.Min(0.5f, Box.size.y), Mathf.Min(0.5f, Box.size.z));
+
+        float randomWidth = Random.Range(0.5f, 1.2f);
+        Vector3 size = new Vector3(Mathf.Min(0.03f, Box.size.x), Mathf.Min(randomWidth, Box.size.y * 0.7f), Mathf.Min(randomWidth, Box.size.z * 0.7f));
         PaintingSize.size = size;
     }
 }
