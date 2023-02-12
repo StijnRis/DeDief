@@ -6,18 +6,24 @@ public class WallGenerator : MonoBehaviour
 {
     public GameObject Painting;
     public Material[] Materials;
-    protected Size Size;
+    protected BoxCollider Box;
 
     void Start()
     {
-        Size = GetComponent<Size>();
+        Box = GetComponent<BoxCollider>();
         Generate();
     }
 
     public void Generate()
     {
         placeWall();
-        placePainting();
+
+        PaintingManager paintingManager = GetComponentInParent<PaintingManager>();
+        float wallWidth = Box.size.z;
+        if (Random.Range(0, 100) < paintingManager.amount && wallWidth > 1.5f)
+        {
+            placePainting();
+        }
     }
 
     private void placeWall()
@@ -26,7 +32,7 @@ public class WallGenerator : MonoBehaviour
         wall.GetComponent<MeshRenderer>().material = Materials[Random.Range(0, Materials.Length)];
         wall.transform.SetParent(transform);
 
-        wall.transform.localScale = Size.size;
+        wall.transform.localScale = Box.size;
         wall.transform.localPosition = Vector3.zero;
         wall.transform.localRotation = Quaternion.identity;
 
@@ -42,8 +48,10 @@ public class WallGenerator : MonoBehaviour
         painting.transform.localPosition = Vector3.zero;
         painting.transform.localRotation = Quaternion.identity;
 
-        Size PaintingSize = painting.GetComponent<Size>();
-        Vector3 size = new Vector3(Mathf.Min(0.5f, Size.size.x), Mathf.Min(0.5f, Size.size.y), Mathf.Min(0.5f, Size.size.z));
+        BoxCollider PaintingSize = painting.GetComponent<BoxCollider>();
+
+        float randomWidth = Random.Range(0.5f, 1.2f);
+        Vector3 size = new Vector3(Mathf.Min(0.03f, Box.size.x), Mathf.Min(randomWidth, Box.size.y * 0.7f), Mathf.Min(randomWidth, Box.size.z * 0.7f));
         PaintingSize.size = size;
     }
 }
