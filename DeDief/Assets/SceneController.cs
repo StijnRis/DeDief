@@ -21,13 +21,18 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Backspace))
         {
             Debug.Log("Spawned");
             SpawnAgents();
 
             PlacePlayer();
 
+            
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Debug.Log("Target locked");
             SetTargetAgents(player);
         }
     }
@@ -48,7 +53,7 @@ public class SceneController : MonoBehaviour
     {
         GameObject randomFloor = getRandomFloor();
 
-        player.transform.position = randomFloor.transform.position;
+        player.transform.position = randomFloor.transform.position + new Vector3(0,5,0);
     }
 
     void SetTargetAgents(GameObject target)
