@@ -34,7 +34,6 @@ public class PlayerInteract : MonoBehaviour
         RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo, distance, mask))
         {
-            // Debug.Log("detected object");
             if (hitInfo.collider.GetComponent<Interactable>() != null && !inventoryOpen)
             {
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();

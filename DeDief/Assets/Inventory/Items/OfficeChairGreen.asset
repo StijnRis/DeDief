@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470f238a8f8dfd74791dbc4b4312e8dc, type: 3}
   m_Name: OfficeChairGreen
   m_EditorClassIdentifier: 
-  width: 8
+  width: 7
   height: 8
   itemIcon: {fileID: 21300000, guid: 62f09b03d2147294f92d3776360fbf67, type: 3}
   canBeRotated: 1
-  moneyValue: 0
+  moneyValue: 10
   itemPrefab: {fileID: 1128770351800014, guid: 3c4892661a827e04a97474743a73c0b8, type: 3}

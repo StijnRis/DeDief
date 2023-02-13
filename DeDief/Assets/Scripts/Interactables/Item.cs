@@ -1,13 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class Item : Interactable
 {
-    [SerializeField] ItemData itemData;
+    public ItemData itemData;
     [SerializeField] GameObject itemGrid;
     InventoryController inventoryController;
     RectTransform inventoryRectTransform;
+
+    public void Awake()
+    {
+        promptMessage = "Pick up " + Regex.Replace( 
+            Regex.Replace( 
+                itemData.name, 
+                @"(\P{Ll})(\P{Ll}\p{Ll})", 
+                "$1 $2" 
+            ), 
+            @"(\p{Ll})(\P{Ll})", 
+            "$1 $2" 
+        );
+    }
 
     protected override void Interact()
     {
@@ -29,7 +43,7 @@ public class Item : Interactable
             pickUpGrid.GetComponent<RectTransform>().SetParent(inventoryRectTransform);
             pickUpGrid.GetComponent<RectTransform>().localPosition = new Vector2(-900,300);
             pickUpGrid.GetComponent<PickUpInteract>().itemObject = gameObject;
-            
+
             ItemGrid gridScript = pickUpGrid.GetComponent<ItemGrid>();
             gridScript.gridSizeWidth = itemData.width;
             gridScript.gridSizeHeight = itemData.height;
