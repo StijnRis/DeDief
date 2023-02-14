@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public Vector2 Start;
-    public Vector2 End;
+    public Vector3 Start;
+    public Vector3 End;
 
-    public void setPosition(Vector2 start, Vector2 end)
+    public void setPosition(Vector3 start, Vector3 end)
     {
-        float middle = Vector2.Distance(start, end) / 2;
-        float size = Mathf.Min(1.0f, Vector2.Distance(start, end) - 0.1f);
+        float middle = Vector3.Distance(start, end) / 2;
+        float size = Mathf.Min(1.0f, Vector3.Distance(start, end) - 0.1f);
         Start = start + (end - start).normalized * (middle - size / 2);
         End = start + (end - start).normalized * (middle + size / 2);
     }

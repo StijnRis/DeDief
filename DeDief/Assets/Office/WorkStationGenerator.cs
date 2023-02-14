@@ -19,9 +19,9 @@ public class WorkStationGenerator : MonoBehaviour
         deskBox.center = new Vector3(0, box.size.y / 2, 0);
 
         GameObject chair = Instantiate(Chair, transform);
-        chair.transform.localPosition = new Vector3(0, -box.size.y / 2, -box.size.z / 4);
+        chair.transform.localPosition = new Vector3(0, 0, -box.size.z / 4);
         BoxCollider chairBox = chair.GetComponent<BoxCollider>();
         chairBox.size = new Vector3(box.size.x, box.size.y, box.size.z / 2);
-        chairBox.center = new Vector3(0, box.size.y / 2, 0);
+        /*chairBox.center = new Vector3(0, box.size.y / 2, 0);*/
     }
 }

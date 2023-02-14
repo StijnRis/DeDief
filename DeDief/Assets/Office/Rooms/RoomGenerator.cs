@@ -29,12 +29,10 @@ public abstract class RoomGenerator : MonoBehaviour
         points.Add(new Vector3((float)(-0.5 * Box.size.x), 0, (float)(0.5 * Box.size.z)));
         foreach (Door door in Doors)
         {
-            Vector3 door1 = new Vector3(door.Start.x, 0, door.Start.y);
-            points.Add(door1);
-            noConnectPoints.Add(door1);
-            Vector3 door2 = new Vector3(door.End.x, 0, door.End.y);
-            points.Add(door2);
-            noConnectPoints.Add(door2);
+            points.Add(door.Start);
+            noConnectPoints.Add(door.Start);
+            points.Add(door.End);
+            noConnectPoints.Add(door.End);
         }
 
         List<Vector3> sortedPoints = points.OrderBy(o => Vector3.SignedAngle(o, Vector3.forward, Vector3.up)).ToList();
@@ -52,9 +50,10 @@ public abstract class RoomGenerator : MonoBehaviour
 
     protected void PlaceFloor()
     {
+        float floorDepth = 0.1f;
         GameObject floor = Instantiate(Floor, transform);
-        floor.transform.localScale = new Vector3(Box.size.x, 0.1f, Box.size.z);
-        floor.transform.position = new Vector3(transform.position.x, transform.position.y - Box.size.y / 2, transform.position.z);
+        floor.transform.localScale = new Vector3(Box.size.x, floorDepth, Box.size.z);
+        floor.transform.position = new Vector3(transform.position.x, transform.position.y - Box.size.y / 2 - floorDepth / 2, transform.position.z);
         floor.layer = LayerMask.NameToLayer("Floor");
     }
 

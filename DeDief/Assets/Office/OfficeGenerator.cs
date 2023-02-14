@@ -167,15 +167,32 @@ public class OfficeGenerator : MonoBehaviour
     public void PlaceArea(Area area, GameObject roomPrefab)
     {
         GameObject room = Instantiate(roomPrefab, transform);
+        Vector3 offset = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetLength() / 2));
+
+        Quaternion rotation = new Quaternion();
+        Quaternion rotationDoor = new Quaternion();
+        if (area.Doors.Count > 0)
+        {
+            Area bestDoor = area.Doors[0];
+            Vector3 middleDoor = ((new Vector3(bestDoor.Left, 0, bestDoor.Top) - offset) + (new Vector3(bestDoor.Right, 0, bestDoor.Bottom) - offset)) / 2;
+            rotation.SetLookRotation(middleDoor);
+            rotation = Quaternion.Euler(rotation.x, Mathf.Round(rotation.eulerAngles.y / 90) * 90f, rotation.z);
+            rotationDoor = Quaternion.Euler(-rotation.eulerAngles);
+        }
+        
+
         BoxCollider box = room.GetComponent<BoxCollider>();
-        Vector2 offset = new Vector2((float)(area.Left + area.GetWidth() / 2), (float)(area.Top + area.GetLength() / 2));
         foreach (Area doorArea in area.Doors) { 
             Door doorObject = room.AddComponent<Door>();
-            doorObject.setPosition(new Vector2(doorArea.Left, doorArea.Top) - offset, new Vector2(doorArea.Right, doorArea.Bottom) - offset);
+            doorObject.setPosition(rotationDoor * (new Vector3(doorArea.Left, 0, doorArea.Top) - offset), rotationDoor * (new Vector3(doorArea.Right, 0, doorArea.Bottom) - offset));
         }
-        box.size = new Vector3((float)area.GetWidth(), Box.size.y, (float)area.GetLength());
+        
+        Vector3 size = rotation * new Vector3((float) area.GetWidth(), Box.size.y, (float) area.GetLength());
+        size = new Vector3(Mathf.Abs(size.x), Mathf.Abs(size.y), Mathf.Abs(size.z));
+        box.size = size;
         room.transform.SetParent(transform);
         room.transform.localPosition = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetLength() / 2));
+        room.transform.localRotation = rotation;
         Rooms.Add(room); 
     }
 
