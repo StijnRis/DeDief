@@ -13,6 +13,8 @@ public class SceneController : MonoBehaviour
 
     private List<GameObject> allAgents = new List<GameObject>();
 
+    bool followPlayer = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,10 @@ public class SceneController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             Debug.Log("Target locked");
+            followPlayer = !followPlayer;
+        }
+        if (followPlayer)
+        {
             SetTargetAgents(player);
         }
     }

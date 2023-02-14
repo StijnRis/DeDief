@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class ChairGenerator : MonoBehaviour
 {
-    public ItemData[] Chairs;
+    public GameObject[] ChairPrefabs;
 
     void Start()
     {
-        ItemData chairData = Chairs[Random.Range(0, Chairs.Length)];
-        GameObject Chair = chairData.itemPrefab;
+        GameObject Chair = ChairPrefabs[Random.Range(0, ChairPrefabs.Length)];
         GameObject chair = Instantiate(Chair, transform);
 
         BoxCollider box = chair.GetComponent<BoxCollider>();

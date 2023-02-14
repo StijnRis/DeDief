@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -5,22 +6,39 @@ using UnityEngine;
 
 public class Item : Interactable
 {
-    public ItemData itemData;
+    [Header("Item settings")]
+    public new string name = "Item";
+    public int moneyValue;
+    
+    [Header("In grid settings")]
     [SerializeField] GameObject itemGrid;
+    public int width = 1;
+	public int height = 1;
+	public Sprite itemIcon;
+	public bool canBeRotated;
+
     InventoryController inventoryController;
     RectTransform inventoryRectTransform;
+    private ItemData data;
+    // data.InitItem(width, height, itemIcon, canBeRotated, moneyValue, gameObject);
+    System.Random random = new System.Random();
 
     public void Awake()
     {
-        promptMessage = "Pick up " + Regex.Replace( 
-            Regex.Replace( 
-                itemData.name, 
-                @"(\P{Ll})(\P{Ll}\p{Ll})", 
-                "$1 $2" 
-            ), 
-            @"(\p{Ll})(\P{Ll})", 
-            "$1 $2" 
-        );
+        data = (ItemData) ScriptableObject.CreateInstance(typeof(ItemData));
+        int randomizer = UnityEngine.Random.Range(0,3);
+		Debug.Log(randomizer);
+		double variance = moneyValue * 0.2;
+		if (variance < 1)
+			variance = 1;
+		if (randomizer == 1)
+			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) + random.NextDouble() * variance);
+		else if (randomizer == 2)
+			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) - random.NextDouble() * variance);
+        Debug.Log(moneyValue);
+        data.InitItem(width, height, itemIcon, canBeRotated, moneyValue, gameObject);
+        promptMessage = "Pick up " + name;
+        
     }
 
     protected override void Interact()
@@ -45,13 +63,13 @@ public class Item : Interactable
             pickUpGrid.GetComponent<PickUpInteract>().itemObject = gameObject;
 
             ItemGrid gridScript = pickUpGrid.GetComponent<ItemGrid>();
-            gridScript.gridSizeWidth = itemData.width;
-            gridScript.gridSizeHeight = itemData.height;
-            gridScript.Init(itemData.width, itemData.height);
+            gridScript.gridSizeWidth = width;
+            gridScript.gridSizeHeight = height;
+            gridScript.Init(width, height);
             Debug.Log("inventory rendered");
 
             // insert item into grid
-            InventoryItem item = inventoryController.CreateItem(itemData);
+            InventoryItem item = inventoryController.CreateItem(data);
             pickUpGrid.GetComponent<PickUpInteract>().item = item;
             inventoryController.InsertItem(item, gridScript);
             Debug.Log("item inserted");

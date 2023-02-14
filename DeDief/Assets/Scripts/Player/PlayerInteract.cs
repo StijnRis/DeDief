@@ -15,6 +15,7 @@ public class PlayerInteract : MonoBehaviour
     // public GameObject inventory;
     private InventoryController inventoryController;
     public static bool inventoryOpen = false;
+    public int interactableLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class PlayerInteract : MonoBehaviour
         playerUI = GetComponent<PlayerUI>();
         inputManager = GetComponent<InputManager>();
         inventoryController = Camera.main.GetComponent<InventoryController>();
+        interactableLayer = LayerMask.NameToLayer("Interactables");
     }
 
     // Update is called once per frame
@@ -32,8 +34,13 @@ public class PlayerInteract : MonoBehaviour
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * distance);
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, distance, mask))
+        if (Physics.Raycast(ray, out hitInfo, distance, mask) && hitInfo.collider.gameObject.layer == interactableLayer)
         {
+            if (hitInfo.collider.GetComponent<Interactable>() != null && !inventoryOpen)
+            {
+                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+                playerUI.UpdateText(interactable.promptMessage);
+            }
             if (hitInfo.collider.GetComponent<Interactable>() != null && !inventoryOpen)
             {
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
@@ -43,19 +50,29 @@ public class PlayerInteract : MonoBehaviour
         if (inputManager.onFoot.Interact.triggered)
         {
             // OpenInventory();
+            Debug.Log("I am checking if you can open your inventory");
             if (Physics.Raycast(ray, out hitInfo, distance, mask))
             {
                 // Debug.Log("detected object");
+                if (hitInfo.collider.gameObject.layer != interactableLayer)
+                {
+                    Debug.Log("You can open your inventory");
+                    OpenInventory();
+                    return;
+                }
                 if (hitInfo.collider.GetComponent<Interactable>() != null && !inventoryOpen)
                 {
+                    Debug.Log("You can't open your inventory");
                     Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
                     interactable.BaseInteract();
                 }
             }
             else
             {
+                Debug.Log("You can open your inventory");
                 OpenInventory();
             }
+            Debug.Log("I should have done something by now");
         }
     }
 

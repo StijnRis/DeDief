@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     InventoryController inventoryController;
-    ItemGrid itemGrid;
+    public ItemGrid itemGrid;
 
     private void Awake()
     {
@@ -16,15 +16,22 @@ public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("enter");
+        // Debug.Log("enter");
+        inventoryController.placeItemMode = false;
         inventoryController.SelectedItemGrid = itemGrid;
         itemGrid.GetComponent<RectTransform>().SetAsFirstSibling();
+        if (inventoryController.SelectedItem != null)
+            inventoryController.SelectedItem.gameObject.SetActive(true);
         // inventoryController.inventoryHighlight.transform.SetAsFirstSibling();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("leave");
+        // Debug.Log("leave");
         inventoryController.SelectedItemGrid = null;
+        inventoryController.placeItemMode = true;
+        // Debug.Log(inventoryController.placeItemMode);
+        if (inventoryController.SelectedItem != null)
+            inventoryController.SelectedItem.gameObject.SetActive(false);
     }
 }

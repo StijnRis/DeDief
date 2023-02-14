@@ -3,32 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PickUpInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class PickUpInteract : GridInteract
 {
-    InventoryController inventoryController;
-    ItemGrid itemGrid;
     public GameObject itemObject;
     public InventoryItem item;
-
-    private void Awake()
-    {
-        inventoryController = FindObjectOfType(typeof(InventoryController)) as InventoryController;
-        itemGrid = GetComponent<ItemGrid>();
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("enter");
-        inventoryController.SelectedItemGrid = itemGrid;
-        itemGrid.GetComponent<RectTransform>().SetAsFirstSibling();
-        // inventoryController.inventoryHighlight.transform.SetAsFirstSibling();
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("leave");
-        inventoryController.SelectedItemGrid = null;
-    }
 
     private void Update()
     {
@@ -39,7 +17,7 @@ public class PickUpInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             {
                 item.pickedUp = false;
                 Destroy(gameObject);
-                Destroy(itemObject);
+                // itemObject.SetActive(false);
             }
         }
     }
