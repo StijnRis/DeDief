@@ -25,8 +25,7 @@ public class ConsultationStationGenerator : MonoBehaviour
         float x2 = -x1;
         for (int i = 0; i < amount_of_chairs; i++)
         {
-            float z = -amount_of_chairs / 2 + chairSize.z * i;
-            
+            float z = -0.5f * (amount_of_chairs - 1) + chairSize.z * i;
 
             GameObject chair1 = Instantiate(Chair, transform);
             chair1.transform.localPosition = new Vector3(x1, -box.size.y / 2 + chairSize.y / 2, z);
