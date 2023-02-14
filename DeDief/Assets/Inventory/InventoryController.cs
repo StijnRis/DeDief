@@ -33,6 +33,10 @@ public class InventoryController : MonoBehaviour
 
     public GameObject player;
 
+    public bool placeItemMode = false;
+    Vector3 point;
+    Color originalItemColor;
+
     private void Awake()
     {
         inventoryHighlight = GetComponent<InventoryHighlight>();
@@ -46,6 +50,24 @@ public class InventoryController : MonoBehaviour
         {
             ItemIconDrag();
 
+            if (placeItemMode && selectedItem != null)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                point = ray.origin + ray.direction;
+                Debug.DrawRay(ray.origin, ray.direction);
+                // Debug.Log(point);
+                selectedItem.itemData.itemPrefab.transform.position = point;
+                Destroy(selectedItem.itemData.itemPrefab.GetComponent<Rigidbody>());
+                selectedItem.itemData.itemPrefab.transform.rotation = player.transform.rotation;
+                originalItemColor = selectedItem.itemData.itemPrefab.GetComponent<MeshRenderer>().material.color;
+                selectedItem.itemData.itemPrefab.GetComponent<MeshRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                selectedItem.itemData.itemPrefab.SetActive(true);
+            } 
+            else if (selectedItem != null)
+            {
+                selectedItem.itemData.itemPrefab.SetActive(false);
+            }
+
             if (selectedItemGrid == null) 
             {
                 if (Input.GetMouseButtonDown(0))
@@ -53,8 +75,8 @@ public class InventoryController : MonoBehaviour
                     // CloseInventory();
                     if (selectedItem != null)
                     {
-                        if (!selectedItem.pickedUp)
-                            DropItem(selectedItem);
+                        // if (!selectedItem.pickedUp)
+                        DropItem(selectedItem);
                     } 
                     else 
                     {
@@ -77,9 +99,14 @@ public class InventoryController : MonoBehaviour
 
     private void DropItem(InventoryItem item)
     {
-        GameObject item3dPrefab = item.itemData.itemPrefab;
-        GameObject item3d = Instantiate(item3dPrefab, player.transform.position + (transform.forward), player.transform.rotation);
+        // GameObject item3dPrefab = item.itemData.itemPrefab;
+        // GameObject item3d = Instantiate(item3dPrefab, player.transform.position + (transform.forward), player.transform.rotation);
+        GameObject item3d = item.itemData.itemPrefab;
+        item3d.transform.position = point;
+        item3d.transform.rotation = player.transform.rotation;
         item3d.AddComponent(typeof(Rigidbody));
+        selectedItem.itemData.itemPrefab.GetComponent<MeshRenderer>().material.color = originalItemColor;
+        // item3d.SetActive(true);
         Destroy(item.gameObject);
     }
 

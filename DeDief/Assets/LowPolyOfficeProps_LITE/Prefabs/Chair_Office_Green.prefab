@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33563638379788432}
   - component: {fileID: 23751746166399876}
   - component: {fileID: 65055059356026982}
-  - component: {fileID: 6746323002349655685}
+  - component: {fileID: 5669447782872534987}
   m_Layer: 9
   m_Name: Chair_Office_Green
   m_TagString: Untagged
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6971016, y: 1.1243395, z: 0.66731036}
   m_Center: {x: 0, y: 0.56216973, z: -0.026215106}
---- !u!114 &6746323002349655685
+--- !u!114 &5669447782872534987
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,6 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b31d458bee939b4b90fcdb9295f49ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: Pick Up Chair
-  itemData: {fileID: 11400000, guid: 0107213266b334840a56ff09fdc5157b, type: 2}
+  promptMessage: 
+  name: Office Chair
+  moneyValue: 10
   itemGrid: {fileID: 8903500935582915608, guid: 0e4c092012d38f64b88541ac77c5a825, type: 3}
+  width: 7
+  height: 8
+  itemIcon: {fileID: 21300000, guid: 62f09b03d2147294f92d3776360fbf67, type: 3}
+  canBeRotated: 1
