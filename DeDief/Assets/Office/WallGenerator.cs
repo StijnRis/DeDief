@@ -37,7 +37,6 @@ public class WallGenerator : MonoBehaviour
         wall.transform.localRotation = Quaternion.identity;
 
         wall.layer = LayerMask.NameToLayer("Walls");
-        wall.tag = "Wall";
     }
 
     private void placePainting()

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 939397398576598667}
   - component: {fileID: -3444857519945674014}
   m_Layer: 0
-  m_Name: StorageRoom
+  m_Name: PantryRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,6 +10,8 @@ public abstract class RoomGenerator : MonoBehaviour
     public GameObject Floor;
     protected Door[] Doors;
 
+    private int wallIndex = 0;
+
     public void Start()
     {
         Box = GetComponent<BoxCollider>();
@@ -38,11 +40,14 @@ public abstract class RoomGenerator : MonoBehaviour
         List<Vector3> sortedPoints = points.OrderBy(o => Vector3.SignedAngle(o, Vector3.forward, Vector3.up)).ToList();
 
         Vector3 previous = sortedPoints.Last();
+
+        wallIndex = 0;
         for (int i = 0; i < sortedPoints.Count; i++)
         {
             if (!(noConnectPoints.Contains(previous) && noConnectPoints.Contains(sortedPoints[i])))
             {
                 CreateWall(previous, sortedPoints[i]);
+                wallIndex += 1;
             }
             previous = sortedPoints[i];
         }
@@ -70,6 +75,7 @@ public abstract class RoomGenerator : MonoBehaviour
     {
         float thickness = 0.1f;
         GameObject wall = Instantiate(Wall, transform);
+        wall.name = "Wall" + wallIndex.ToString();
         wall.transform.SetParent(transform);
 
         Vector3 rotation = (endCorner - startCorner).normalized;
