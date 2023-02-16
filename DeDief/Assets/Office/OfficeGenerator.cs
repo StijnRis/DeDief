@@ -28,6 +28,7 @@ public class OfficeGenerator : MonoBehaviour
 
     public void Generate()
     {
+        RoomTypes = RoomTypes.OrderBy(x => -x.MinLength).ToList();
         // Remove and reset everyting
         foreach (Transform c in transform)
         {
@@ -78,18 +79,21 @@ public class OfficeGenerator : MonoBehaviour
 
     private void BlocksToAreas()
     {
-        TotalRoomArea = Box.size.x * Box.size.y - TotalHallArea;
+        TotalRoomArea = Box.size.x * Box.size.z - TotalHallArea;
         Coverage = new Dictionary<RoomType, float>();
         foreach (RoomType roomType in RoomTypes)
         {
             Coverage.Add(roomType, 0);
         }
+
+
         while (Blocks.Count > 0)
         {
             Area block = Blocks.Max();
             Blocks.Remove(block);
+            (bool split, RoomType roomType) = WantSplitBlock(block);
 
-            if (WantSplitBlock(block))
+            if (split)
             {
                 (Area block_a, Area block_b) = block.SplitTwo();
                 Blocks.Add(block_a);
@@ -97,42 +101,39 @@ public class OfficeGenerator : MonoBehaviour
             }
             else
             {
-                RoomType roomType = getGoodRoomType(block);
                 Coverage[roomType] += (float) block.GetArea();
                 UnreachableAreas.Add(block);
+                block.roomType = roomType;
             }
         }
     }
 
-    private bool WantSplitBlock(Area block)
+    private (bool, RoomType) WantSplitBlock(Area block)
     {
         foreach (var coverage in Coverage)
         {
-            Debug.Log("A: " + coverage.Key.MinLength);
             float size = coverage.Value;
             float percentage = size / TotalRoomArea;
-            Debug.Log(percentage);
             if (percentage < coverage.Key.MinPercentageOccurrences)
             {
-                if (block.GetWidth() / 2 > coverage.Key.MinLength || block.GetLength() / 2 < coverage.Key.MinLength)
+                if (block.GetWidth() / 2 > coverage.Key.MinLength || block.GetLength() / 2 > coverage.Key.MinLength)
                 {
                     float change = Random.Range(0, (float)block.GetArea());
                     if (change < coverage.Key.MinLength * coverage.Key.MinLength)
                     {
-                        return false;
+                        return (false, coverage.Key);
                     }
                     else
                     {
-                        return true;
+                        return (true, null);
                     }
                 }
                 else
                 {
-                    return false;
+                    return (false, coverage.Key);
                 }
             }
         }
-        return false;
         List<RoomType> keys = new List<RoomType>(Coverage.Keys);
         foreach (var key in keys)
         {
@@ -145,7 +146,7 @@ public class OfficeGenerator : MonoBehaviour
     {
         while (UnreachableAreas.Count > 0)
         {
-            Area area = UnreachableAreas[0];
+            Area area = UnreachableAreas.First();
             UnreachableAreas.Remove(area);
             bool connected = false;
             foreach (Area hall in Halls)
@@ -159,11 +160,11 @@ public class OfficeGenerator : MonoBehaviour
             }
             if (!connected)
             {
-                foreach (Area areaCheck in Areas)
+                foreach (Area areaTest in Areas)
                 {
-                    if (areaCheck.IsTouching(area))
+                    if (areaTest.IsTouching(area))
                     {
-                        Area.createDoorBetween(area, areaCheck);
+                        Area.createDoorBetween(area, areaTest);
                         connected = true;
                         break;
                     }
@@ -182,7 +183,7 @@ public class OfficeGenerator : MonoBehaviour
 
     public void PlaceRoom(Area area)
     {
-        GameObject roomPrefab = getGoodRoomType(area).RoomPrefab;
+        GameObject roomPrefab = area.roomType.RoomPrefab;
         PlaceArea(area, roomPrefab);
     }
 
@@ -228,28 +229,45 @@ public class OfficeGenerator : MonoBehaviour
         }
     }
 
-    public RoomType getGoodRoomType(Area area)
+    /*public RoomType getGoodRoomType(Area area)
     {
-        RoomType item = RoomTypes.OrderBy(x => x.getScore(area)).FirstOrDefault();
-        return item;
-    }
+        foreach (RoomType roomType in RoomTypes)
+        {
+            if (roomType.isPossible(area))
+            {
+                return roomType;
+            }
+        }
+        throw new System.Exception("No valid room found for "+area.GetLength() +"x"+area.GetWidth());
+        *//*RoomType item = RoomTypes.OrderBy(x => x.getScore(area)).FirstOrDefault();
+        return item;*//*
+    }*/
 }
 
 [System.Serializable]
 public class RoomType
 {
     public float MinLength;
-    public float AverageSize;
+    public float MaxLength;
     [Range(0.0f, 1.0f)]
     public float MinPercentageOccurrences;
     public GameObject RoomPrefab;
 
-    public float getScore(Area area)
+    public bool isPossible(Area area)
+    {
+        if ((MinLength <= area.GetWidth() && area.GetWidth() <= MaxLength) && (MinLength <= area.GetLength() && area.GetLength() <= MaxLength))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /*public float getScore(Area area)
     {
         if (MinLength > area.GetWidth() || MinLength > area.GetLength())
         {
             return float.MaxValue;
         }
-        return Mathf.Abs((float)(area.GetArea() - AverageSize));
-    }
+        return Mathf.Abs((float)(area.GetArea() - AverageSize)) - MinLength;
+    }*/
 }
