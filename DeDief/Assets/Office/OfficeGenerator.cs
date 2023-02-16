@@ -6,18 +6,20 @@ using Unity.VisualScripting;
 public class OfficeGenerator : MonoBehaviour
 {
     public BoxCollider Box;
-    public float MinArea = 3;
     [Range(0.0f, 1.0f)]
-    public float MaxHallRate = 0.15F;
-    public float HallSize = 1;
+    public float MaxHallRate = 0.15f;
+    public float HallSize = 1.2f;
     public GameObject Corridor;
     public GameObject Light;
     public List<RoomType> RoomTypes;
 
     private Area House;
-    private double TotalHallArea;
+    private float TotalHallArea;
+    private float TotalRoomArea;
     private List<Area> Chunks, Halls, Blocks, UnreachableAreas, Areas;
     private List<GameObject> Rooms;
+
+    private IDictionary<RoomType, float> Coverage;
 
     private void Start()
     {
@@ -63,18 +65,12 @@ public class OfficeGenerator : MonoBehaviour
             Area chunk = Chunks.Max();
             Chunks.Remove(chunk);
 
-            if (chunk.GetArea() > MinArea)
-            {
-                (Area chunk_a, Area hall, Area chunk_b) = chunk.SplitThree(HallSize);
-                Chunks.Add(chunk_a);
-                Chunks.Add(chunk_b);
-                Halls.Add(hall);
-                TotalHallArea += hall.GetArea();
-            }
-            else
-            {
-                Blocks.Add(chunk);
-            }
+
+            (Area chunk_a, Area hall, Area chunk_b) = chunk.SplitThree(HallSize);
+            Chunks.Add(chunk_a);
+            Chunks.Add(chunk_b);
+            Halls.Add(hall);
+            TotalHallArea += (float) hall.GetArea();
         }
         Blocks.AddRange(Chunks);
         Chunks.Clear();
@@ -82,6 +78,12 @@ public class OfficeGenerator : MonoBehaviour
 
     private void BlocksToAreas()
     {
+        TotalRoomArea = Box.size.x * Box.size.y - TotalHallArea;
+        Coverage = new Dictionary<RoomType, float>();
+        foreach (RoomType roomType in RoomTypes)
+        {
+            Coverage.Add(roomType, 0);
+        }
         while (Blocks.Count > 0)
         {
             Area block = Blocks.Max();
@@ -95,6 +97,8 @@ public class OfficeGenerator : MonoBehaviour
             }
             else
             {
+                RoomType roomType = getGoodRoomType(block);
+                Coverage[roomType] += (float) block.GetArea();
                 UnreachableAreas.Add(block);
             }
         }
@@ -102,22 +106,39 @@ public class OfficeGenerator : MonoBehaviour
 
     private bool WantSplitBlock(Area block)
     {
-        if (block.GetArea() < MinArea)
+        foreach (var coverage in Coverage)
         {
-            return false;
+            Debug.Log("A: " + coverage.Key.MinLength);
+            float size = coverage.Value;
+            float percentage = size / TotalRoomArea;
+            Debug.Log(percentage);
+            if (percentage < coverage.Key.MinPercentageOccurrences)
+            {
+                if (block.GetWidth() / 2 > coverage.Key.MinLength || block.GetLength() / 2 < coverage.Key.MinLength)
+                {
+                    float change = Random.Range(0, (float)block.GetArea());
+                    if (change < coverage.Key.MinLength * coverage.Key.MinLength)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
-        else
+        return false;
+        List<RoomType> keys = new List<RoomType>(Coverage.Keys);
+        foreach (var key in keys)
         {
-            double chance = Random.Range(0, (float) block.GetArea());
-            if (chance < MinArea)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            Coverage[key] *= 0.5f;
         }
+        return WantSplitBlock(block);
     }
 
     public void AddDoors()
@@ -161,7 +182,7 @@ public class OfficeGenerator : MonoBehaviour
 
     public void PlaceRoom(Area area)
     {
-        GameObject roomPrefab = getGoodRoom(area);
+        GameObject roomPrefab = getGoodRoomType(area).RoomPrefab;
         PlaceArea(area, roomPrefab);
     }
 
@@ -207,19 +228,20 @@ public class OfficeGenerator : MonoBehaviour
         }
     }
 
-    public GameObject getGoodRoom(Area area)
+    public RoomType getGoodRoomType(Area area)
     {
         RoomType item = RoomTypes.OrderBy(x => x.getScore(area)).FirstOrDefault();
-        return item.RoomPrefab;
+        return item;
     }
 }
 
 [System.Serializable]
 public class RoomType
 {
-    public string Name;
     public float MinLength;
     public float AverageSize;
+    [Range(0.0f, 1.0f)]
+    public float MinPercentageOccurrences;
     public GameObject RoomPrefab;
 
     public float getScore(Area area)

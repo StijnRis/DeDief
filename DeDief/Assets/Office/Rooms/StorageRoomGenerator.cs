@@ -74,13 +74,13 @@ public class StorageRoomGenerator : RoomGenerator
 
             if (i > endlessLoopLimit)
             {
-                Debug.Log("nothing found");
+                /*Debug.Log("nothing found");*/
                 break;
             }
             i += 1;
         }
 
-        Debug.Log("using: " + randomPosition);
+        /*Debug.Log("using: " + randomPosition);*/
 
         return randomPosition;
     }

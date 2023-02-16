@@ -66,6 +66,7 @@ MonoBehaviour:
   MaxHallRate: 0.325
   HallSize: 1
   Corridor: {fileID: 1977530078531694865, guid: cd88545f42136044d85aad68429d8bd8, type: 3}
+  Light: {fileID: 0}
   RoomTypes:
   - Name: Working
     MinLength: 2
@@ -79,6 +80,10 @@ MonoBehaviour:
     MinLength: 0
     AverageSize: 0
     RoomPrefab: {fileID: 9217691532615191220, guid: c733de966c340574aa46888be12a7b87, type: 3}
+  - Name: Nothing
+    MinLength: 8
+    AverageSize: 0
+    RoomPrefab: {fileID: 2908014259231293948, guid: ab72fff6b55b73e4497b4eaa724d71ec, type: 3}
 --- !u!114 &6791950901422500100
 MonoBehaviour:
   m_ObjectHideFlags: 0
