@@ -56,7 +56,7 @@ public class StorageRoomGenerator : RoomGenerator
                 foreach (float position in positions)
                 {
                     float margin = Mathf.Abs(position - randomPosition);
-                    Debug.Log("margin: " + margin);
+                    /*Debug.Log("margin: " + margin);*/
                     if (margin >= boxSize * 2)
                     {
                         positionFound = positionFound && true;

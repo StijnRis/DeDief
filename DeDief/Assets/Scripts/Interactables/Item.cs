@@ -27,7 +27,7 @@ public class Item : Interactable
     {
         data = (ItemData) ScriptableObject.CreateInstance(typeof(ItemData));
         int randomizer = UnityEngine.Random.Range(0,3);
-		Debug.Log(randomizer);
+		/*Debug.Log(randomizer);*/
 		double variance = moneyValue * 0.2;
 		if (variance < 1)
 			variance = 1;
@@ -35,8 +35,8 @@ public class Item : Interactable
 			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) + random.NextDouble() * variance);
 		else if (randomizer == 2)
 			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) - random.NextDouble() * variance);
-        Debug.Log(moneyValue);
-        data.InitItem(width, height, itemIcon, canBeRotated, moneyValue, gameObject);
+/*        Debug.Log(moneyValue);
+*/        data.InitItem(width, height, itemIcon, canBeRotated, moneyValue, gameObject);
         promptMessage = "Pick up " + name;
         
     }
