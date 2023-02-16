@@ -415,6 +415,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+      propertyPath: RoomTypes.Array.data[2].Name
+      value: Storage
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[3].Name
       value: Pantry
       objectReference: {fileID: 0}
@@ -426,6 +430,10 @@ PrefabInstance:
       propertyPath: RoomTypes.Array.data[1].RoomPrefab
       value: 
       objectReference: {fileID: 4326216356944668239, guid: 0a78134b93f7cbf42a01afd4d7ecd2d2, type: 3}
+    - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+      propertyPath: RoomTypes.Array.data[2].RoomPrefab
+      value: 
+      objectReference: {fileID: 4326216356944668239, guid: 45d50e6eb7b549b499d52dacc5772063, type: 3}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[3].RoomPrefab
       value: 

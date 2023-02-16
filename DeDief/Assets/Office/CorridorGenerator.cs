@@ -8,6 +8,6 @@ public class CorridorGenerator : RoomGenerator
     {
         OnDestroy();
         PlaceFloor();
-        /*PlaceCeiling();*/
+        PlaceCeiling();
     }
 }

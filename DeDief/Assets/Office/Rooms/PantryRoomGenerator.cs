@@ -25,8 +25,6 @@ public class PantryRoomGenerator : RoomGenerator
         foreach(GameObject wall in walls)
         {
             Vector3 wallRotation = wall.transform.localRotation.eulerAngles;
-            BoxCollider wallSize = wall.GetComponent<BoxCollider>();
-
 
             if (wallRotation.y == 90) //Back wall
             {

@@ -8,6 +8,7 @@ public abstract class RoomGenerator : MonoBehaviour
     protected BoxCollider Box;
     public GameObject Wall;
     public GameObject Floor;
+    public GameObject Light;
     protected Door[] Doors;
 
     private int wallIndex = 0;
@@ -68,7 +69,12 @@ public abstract class RoomGenerator : MonoBehaviour
         ceiling.transform.SetParent(transform);
         ceiling.transform.localScale = new Vector3(Box.size.x, 0.1f, Box.size.z);
         ceiling.transform.position = new Vector3(transform.position.x, transform.position.y + Box.size.y / 2, transform.position.z);
+        ceiling.transform.rotation = transform.rotation;
         ceiling.name = "Ceiling";
+
+        GameObject light = Instantiate(Light, transform);
+        light.transform.localPosition = new Vector3(0, 1 + 0.25f, 0);
+        light.transform.rotation = Quaternion.Euler(0, 0, 180);
     }
 
     protected void CreateWall(Vector3 startCorner, Vector3 endCorner)

@@ -11,6 +11,7 @@ public class OfficeGenerator : MonoBehaviour
     public float MaxHallRate = 0.15F;
     public float HallSize = 1;
     public GameObject Corridor;
+    public GameObject Light;
     public List<RoomType> RoomTypes;
 
     private Area House;
@@ -193,6 +194,8 @@ public class OfficeGenerator : MonoBehaviour
         room.transform.SetParent(transform);
         room.transform.localPosition = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetLength() / 2));
         room.transform.localRotation = rotation;
+        room.GetComponent<RoomGenerator>().Light = Light;
+
         Rooms.Add(room); 
     }
 
