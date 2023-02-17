@@ -20,7 +20,7 @@ public class Area : System.IComparable<Area>
         }
         else
         {
-            throw new System.Exception();
+            throw new System.Exception(right+ " should be bigger then "+left);
         }
         if (bottom >= top)
         {
@@ -29,22 +29,27 @@ public class Area : System.IComparable<Area>
         }
         else
         {
-            throw new System.Exception();
+            throw new System.Exception(bottom + " should be bigger then " + top);
         }
     }
 
-    public double GetArea()
+    public string getSizeString()
     {
-        double area = GetWidth() * GetLength();
+        return Mathf.Round(GetLength() * 100f) / 100f + "x" + Mathf.Round(GetWidth() * 100f) / 100f;
+    }
+
+    public float GetArea()
+    {
+        float area = GetWidth() * GetLength();
         return area;
     }
 
-    public double GetWidth()
+    public float GetWidth()
     {
         return this.Right - this.Left;
     }
 
-    public double GetLength()
+    public float GetLength()
     {
         return this.Bottom - this.Top;
     }

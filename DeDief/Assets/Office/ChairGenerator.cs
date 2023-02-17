@@ -15,6 +15,12 @@ public class ChairGenerator : MonoBehaviour
         BoxCollider maxSize = GetComponent<BoxCollider>();
         Vector3 scale = new Vector3(Mathf.Min(1, maxSize.size.x / box.size.x), Mathf.Min(1, maxSize.size.y / box.size.y), Mathf.Min(1, maxSize.size.z / box.size.z));
         chair.transform.localScale = scale;
-        chair.transform.localPosition = new Vector3(0, -GetComponent<BoxCollider>().size.y / 2, 0);
+
+        float xOffset = (Random.Range(0, 2) * 2 - 1) * Random.Range(0, (maxSize.size.x - box.size.x) / 2);
+        float zOffset = (Random.Range(0, 2) * 2 - 1) * Random.Range(0, (maxSize.size.z - box.size.z) / 2);
+        chair.transform.localPosition = new Vector3(xOffset, -GetComponent<BoxCollider>().size.y / 2, zOffset);
+
+        Quaternion rotation = Quaternion.Euler(0, Random.Range(-10f, 10f), 0);
+        chair.transform.localRotation = rotation;
     }
 }

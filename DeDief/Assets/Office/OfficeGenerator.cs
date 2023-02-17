@@ -101,6 +101,7 @@ public class OfficeGenerator : MonoBehaviour
             }
             else
             {
+                Debug.Log("Place "+block.getSizeString() + " for "+roomType.RoomPrefab.name);
                 Coverage[roomType] += (float) block.GetArea();
                 UnreachableAreas.Add(block);
                 block.roomType = roomType;
@@ -110,18 +111,43 @@ public class OfficeGenerator : MonoBehaviour
 
     private (bool, RoomType) WantSplitBlock(Area block)
     {
+        List<RoomType> options = new List<RoomType>();
+        bool toBig = false;
         foreach (var coverage in Coverage)
         {
-            float size = coverage.Value;
-            float percentage = size / TotalRoomArea;
-            if (percentage < coverage.Key.MinPercentageOccurrences)
+            bool minFits = block.GetWidth() >= coverage.Key.MinLength && block.GetLength() >= coverage.Key.MinLength;
+            bool maxFits = block.GetWidth() <= coverage.Key.MaxLength && block.GetLength() <= coverage.Key.MaxLength;
+            if (minFits && maxFits)
             {
-                if (block.GetWidth() / 2 > coverage.Key.MinLength || block.GetLength() / 2 > coverage.Key.MinLength)
+                options.Add(coverage.Key);
+            } else if (minFits)
+            {
+                toBig = true;
+            }
+        }
+
+        if (options.Count == 0)
+        {
+            if (toBig)
+            {
+                return (true, null);
+            }
+            return (false, null);
+        }
+
+        foreach (RoomType roomType in options) { 
+            float percentage = Coverage[roomType] / TotalRoomArea;
+            
+            if (percentage < roomType.MinPercentageOccurrences)
+            {
+                float minLength = Mathf.Max(1, roomType.MinLength);
+                float maxLength = Mathf.Max((float) block.GetWidth(), (float) block.GetLength());
+                if (maxLength > minLength * 2)
                 {
-                    float change = Random.Range(0, (float)block.GetArea());
-                    if (change < coverage.Key.MinLength * coverage.Key.MinLength)
+                    float change = Random.Range(0, maxLength);
+                    if (change <= minLength)
                     {
-                        return (false, coverage.Key);
+                        return (false, roomType);
                     }
                     else
                     {
@@ -130,16 +156,26 @@ public class OfficeGenerator : MonoBehaviour
                 }
                 else
                 {
-                    return (false, coverage.Key);
+                    return (false, roomType);
                 }
             }
         }
-        List<RoomType> keys = new List<RoomType>(Coverage.Keys);
-        foreach (var key in keys)
+
+        Debug.Log(block.getSizeString());
+        if (toBig)
         {
-            Coverage[key] *= 0.5f;
+            return (true, null);
+        } else
+        {
+            return (false, options[0]);
         }
-        return WantSplitBlock(block);
+
+        /*foreach (RoomType roomType in options)
+        {
+            Coverage[roomType] *= 0.5f;
+        }*/
+
+        /*return (false, options[0]);*/
     }
 
     public void AddDoors()

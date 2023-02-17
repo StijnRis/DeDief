@@ -412,7 +412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[2].Name
@@ -432,7 +432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[2].MaxLength
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[2].MinLength
@@ -440,11 +440,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[3].MaxLength
-      value: 999
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[3].MinLength
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[4].MaxLength
@@ -452,7 +452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[4].MinLength
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[1].RoomPrefab
@@ -480,23 +480,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[0].MinPercentageOccurrences
-      value: 0.43
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[1].MinPercentageOccurrences
-      value: 0.061
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[2].MinPercentageOccurrences
-      value: 0.077
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[3].MinPercentageOccurrences
-      value: 0.044
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: RoomTypes.Array.data[4].MinPercentageOccurrences
-      value: 0.071
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6791950901422500601, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: m_RootOrder
