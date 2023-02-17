@@ -24,64 +24,75 @@ public class StorageRoomGenerator : RoomGenerator
         float boxSurface = box.size.x * roomSize.z;
         float boxAmount = Mathf.Round(roomSurface / boxSurface * 0.5f);
 
-        List<float> positions = new List<float>();
-        for (int i = 0; i < boxAmount; i++) {
-            GameObject storageBox = Instantiate(StorageBox, transform);
+        List<GameObject> walls = GetWalls();
+        Debug.Log(walls.Count);
 
-            float randomPosition = getPossiblePosition(positions, roomSize.x, box.size.x);
-            positions.Add(randomPosition);
+        foreach (GameObject wall in walls)
+        {
+            Vector3 wallRotation = wall.transform.localRotation.eulerAngles;
 
-            storageBox.transform.localPosition = new Vector3(randomPosition, 0, 0);
-
-            float randomRotation = Random.Range(0, 360);
-            storageBox.transform.rotation = Quaternion.Euler(new Vector3(0, randomRotation, 0));
+            if (wallRotation.y == 90) //Back wall
+            {
+                PlaceBoxesAtWall(wall.transform, 3);
+            }
+            if (wallRotation.y == -90) //Front wall
+            {
+                PlaceBoxesAtWall(wall.transform, 3);
+            }
         }
     }
 
-    public float getPossiblePosition(List<float> positions, float roomSize, float boxSize)
+    private void PlaceBoxesAtWall(Transform wall, int amount)
     {
-        int endlessLoopLimit = 200;
-        int i = 0;
+        Vector3 wallSize = wall.GetComponentInParent<BoxCollider>().size;
+        float wallLeftPosition = wallSize.z / 2 - wallSize.x / 2;
 
-        float randomPosition = 0;
-
-        bool positionFound = false;
-        while (!positionFound)
+        for (int i = 0; i < amount; i++)
         {
-            randomPosition = Random.Range(-roomSize / 2, roomSize / 2);
-            /*Debug.Log("new random position: " + randomPosition);*/
+            GameObject storageBox = Instantiate(StorageBox, transform);
+            float storageBoxSize = storageBox.GetComponent<BoxCollider>().size.x;
 
-            if (positions.Count > 0)
+            float padding = 0.1f;
+            float leftPosition = (padding + storageBoxSize) * (i % 2 + 1);
+            float topPosition = padding + storageBoxSize;
+
+            Vector3 boxPosition = Vector3.zero;
+            if (i == 0)
             {
-                foreach (float position in positions)
-                {
-                    float margin = Mathf.Abs(position - randomPosition);
-                    /*Debug.Log("margin: " + margin);*/
-                    if (margin >= boxSize * 2)
-                    {
-                        positionFound = positionFound && true;
-                    }
-                    else
-                    {
-                        positionFound = false;
-                    }
-                }
-            }
-            else
+                boxPosition = new Vector3(leftPosition, 0, topPosition);
+            } else if (i == 1)
             {
-                break;
+                boxPosition = new Vector3(leftPosition, 0, topPosition);
+            } else if (i == 2)
+            {
+                boxPosition = new Vector3(leftPosition, 0, topPosition * 2);
             }
 
-            if (i > endlessLoopLimit)
+            float bottomPosition = -wallSize.y / 2 + storageBoxSize / 2;
+
+            storageBox.transform.localPosition = new Vector3(wallLeftPosition, bottomPosition, wall.localPosition.z);
+            storageBox.transform.Translate(-boxPosition, wall);
+
+            float randomRotation = Random.Range(-20, 20); //Degrees
+            storageBox.transform.rotation = Quaternion.Euler(0, randomRotation, 0);
+        }
+    }
+
+    private List<GameObject> GetWalls()
+    {
+        List<GameObject> walls = new List<GameObject>();
+
+        foreach (Transform child in transform)
+        {
+            GameObject obj = child.gameObject;
+
+            if (obj.tag == "Wall")
             {
-                /*Debug.Log("nothing found");*/
-                break;
+                Debug.Log("yee");
+                walls.Add(obj);
             }
-            i += 1;
         }
 
-        /*Debug.Log("using: " + randomPosition);*/
-
-        return randomPosition;
+        return walls;
     }
 }

@@ -72,7 +72,7 @@ public class PantryRoomGenerator : RoomGenerator
             float rackHeight = 2f;
             float rackDepth = 0.3f;
             float rackWidth = wallInnerLength / rackAmount;
-            float bottomPosition = wallSize.size.y / 2 - rackHeight / 2;
+            float bottomPosition = -wallSize.size.y / 2 + rackHeight / 2;
 
             BoxCollider rackSize = rack.GetComponent<BoxCollider>();
             Vector3 newSize = new Vector3(rackDepth, rackHeight, rackWidth);
@@ -80,7 +80,7 @@ public class PantryRoomGenerator : RoomGenerator
 
             float mostLeftPosition = -wallInnerLength / 2 + rackWidth * 0.5f;
             rack.transform.localPosition = wallPosition;
-            rack.transform.Translate(new Vector3(-rackDepth * 0.5f, -bottomPosition, mostLeftPosition + rackWidth * i), wall.transform);
+            rack.transform.Translate(new Vector3(-rackDepth * 0.5f, bottomPosition, mostLeftPosition + rackWidth * i), wall.transform);
 
             rack.transform.rotation = wall.transform.rotation;
         }
