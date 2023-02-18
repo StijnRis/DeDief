@@ -102,6 +102,7 @@ public class InventoryController : MonoBehaviour
         // GameObject item3dPrefab = item.itemData.itemPrefab;
         // GameObject item3d = Instantiate(item3dPrefab, player.transform.position + (transform.forward), player.transform.rotation);
         GameObject item3d = item.itemData.itemPrefab;
+        // item3d.transform.SetParent(GameObject.FindGameObjectWithTag("Office").transform);
         item3d.transform.position = point;
         item3d.transform.rotation = player.transform.rotation;
         item3d.AddComponent(typeof(Rigidbody));
@@ -223,7 +224,7 @@ public class InventoryController : MonoBehaviour
 		rectTransform.SetParent(canvasTransform);
         rectTransform.SetAsLastSibling();
 		inventoryItem.Set(itemData);
-        inventoryItem.pickedUp = true;
+        inventoryItem.pickedUp = PickUpMode.PickingUp;
         return inventoryItem;
     }
 
