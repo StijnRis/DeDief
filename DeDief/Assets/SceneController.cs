@@ -56,7 +56,7 @@ public class SceneController : MonoBehaviour
     {
         GameObject randomFloor = getRandomFloor();
 
-        player.transform.position = randomFloor.transform.position + new Vector3(0,5,0);
+        player.transform.position = randomFloor.transform.position + new Vector3(0,1,0);
     }
 
     void SetTargetAgents(GameObject target)

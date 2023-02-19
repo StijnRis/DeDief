@@ -33,14 +33,15 @@ public class Item : Interactable
     protected void Awake()
     {
         data = (ItemData) ScriptableObject.CreateInstance(typeof(ItemData));
-        int randomizer = UnityEngine.Random.Range(0,3);
+
+        int randomizer = UnityEngine.Random.Range(0,6);
 		/*Debug.Log(randomizer);*/
 		double variance = moneyValue * 0.2;
 		if (variance < 1)
 			variance = 1;
-		if (randomizer == 1)
+		if (randomizer <= 2)
 			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) + random.NextDouble() * variance);
-		else if (randomizer == 2)
+		else if (randomizer <= 4)
 			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) - random.NextDouble() * variance);
         data.InitItem(width, height, itemIcon, canBeRotated, moneyValue, gameObject);
         promptMessage = "Pick up " + name + " worth €" + moneyValue.ToString();
