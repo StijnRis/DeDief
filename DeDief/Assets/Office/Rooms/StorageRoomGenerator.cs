@@ -19,7 +19,7 @@ public class StorageRoomGenerator : RoomGenerator
     
     public void PlaceBoxesV2()
     {
-        Vector3 roomSize = Box.size - new Vector3(0.2f, 0.2f, 0.2f);
+        Vector3 roomSize = Box.size - new Vector3(0.2f, 0, 0.2f);
 
         Vector3 storageBoxSize = new Vector3(0.4f, 0.4f, 0.4f);
 

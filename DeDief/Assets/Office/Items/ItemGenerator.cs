@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemGenerator : MonoBehaviour
 {
     public bool scaleUp;
+    public bool moveDown;
     [Range(0.0f, 180f)]
     public float randomOrientationOffset = 0;
     public GameObject[] Prefabs;
@@ -23,6 +24,7 @@ public class ItemGenerator : MonoBehaviour
         }
         
         RandomRotation(randomOrientationOffset);
+        setPosition();
     }
 
     protected void placeRandom()
@@ -47,14 +49,25 @@ public class ItemGenerator : MonoBehaviour
         prefab.transform.localScale = scale;
     }
 
-    protected void RandomRotation()
-    {
-        RandomRotation(180);
-    }
-
     protected void RandomRotation(float maxOffset)
     {
         Quaternion rotation = Quaternion.Euler(0, Random.Range(-maxOffset, maxOffset), 0);
         prefab.transform.localRotation = rotation;
+    }
+
+    protected void setPosition()
+    {
+        if (moveDown)
+        {
+            BoxCollider prefabBox = prefab.GetComponent<BoxCollider>();
+            Vector3 position = new Vector3(0, -prefabBox.center.y * prefab.transform.lossyScale.y, 0);
+            /*Vector3 position = new Vector3(0, 0, 0);*/
+            /*
+            {
+                BoxCollider box = GetComponent<BoxCollider>();
+                position += new Vector3(0, -box.size.y / 2, 0);
+            }*/
+            prefab.transform.localPosition = position;
+        }
     }
 }
