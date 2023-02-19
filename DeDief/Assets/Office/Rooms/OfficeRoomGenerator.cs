@@ -14,7 +14,7 @@ public class OfficeRoomGenerator : RoomGenerator
         PlaceFloor();
         PlaceDesk();
         placePlants();
-        /*PlaceCeiling();*/
+        PlaceCeiling();
     }
 
     private void PlaceDesk()

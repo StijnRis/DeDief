@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public abstract class RoomGenerator : MonoBehaviour
+public abstract partial class RoomGenerator : MonoBehaviour
 {
     protected BoxCollider Box;
     public GameObject Wall;

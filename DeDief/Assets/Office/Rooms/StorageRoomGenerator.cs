@@ -14,7 +14,7 @@ public class StorageRoomGenerator : RoomGenerator
         PlaceWalls();
         PlaceFloor();
         PlaceBoxesV2();
-        /*PlaceCeiling();*/
+        PlaceCeiling();
     }
     
     public void PlaceBoxesV2()

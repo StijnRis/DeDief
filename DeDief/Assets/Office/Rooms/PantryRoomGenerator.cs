@@ -12,7 +12,7 @@ public class PantryRoomGenerator : RoomGenerator
         PlaceWalls();
         PlaceFloor();
         PlaceRacks();
-        /*PlaceCeiling();*/
+        PlaceCeiling();
     }
 
     private void PlaceRacks()

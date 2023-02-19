@@ -37,7 +37,6 @@ public class InputManager : MonoBehaviour
         onFoot.RotateItem.performed += vtx => inv.RotateItem();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         //tell the playermotor to move using the value from our movement action.

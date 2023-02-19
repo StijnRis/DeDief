@@ -4,12 +4,37 @@ using UnityEngine;
 
 public class CorridorGenerator : RoomGenerator
 {
+    public GameObject Door;
+
     public override void Generate()
     {
         OnDestroy();
+        CreateDoors();
         PlaceFloor();
         PlaceCeiling();
         PlaceCameras();
+    }
+
+    public void CreateDoors()
+    {
+        foreach (Door door in Doors)
+        {
+            CreateDoor(door.Start, door.End);
+        }
+    }
+
+    public  void CreateDoor(Vector3 startCorner, Vector3 endCorner)
+    {
+        float thickness = 0.05f;
+        GameObject door = Instantiate(Door, transform);
+
+        Vector3 rotation = (endCorner - startCorner).normalized;
+        float distance = Vector3.Distance(startCorner, endCorner);
+        BoxCollider WallBox = door.GetComponent<BoxCollider>();
+        WallBox.size = new Vector3(thickness, Box.size.y, distance + thickness);
+        door.transform.localPosition = startCorner + distance / 2 * rotation;
+        Quaternion quaternion = Quaternion.LookRotation(rotation, Vector3.up);
+        door.transform.localRotation = quaternion;
     }
 
 

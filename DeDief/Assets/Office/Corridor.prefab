@@ -60,3 +60,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wall: {fileID: 4427668551479185814, guid: f3d1858a8d8d66949bb60c7dda66ed80, type: 3}
   Floor: {fileID: 3660091792651605634, guid: d13cab2a5b78e7343a09561ec3f067b9, type: 3}
+  Light: {fileID: 0}
+  Door: {fileID: 7671609564197469503, guid: b929296b8f5ce8844b5e3834cf157ade, type: 3}

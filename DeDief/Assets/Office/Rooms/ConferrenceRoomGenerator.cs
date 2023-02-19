@@ -12,7 +12,7 @@ public class ConferrenceRoomGenerator : RoomGenerator
         PlaceWalls();
         PlaceFloor();
         PlaceDesk();
-        /*PlaceCeiling();*/
+        PlaceCeiling();
     }
 
     private void PlaceDesk()
