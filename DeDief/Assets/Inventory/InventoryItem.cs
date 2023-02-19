@@ -33,8 +33,10 @@ public class InventoryItem : MonoBehaviour
 	public int onGridPositionX;
 	public int onGridPositionY;
 
+	public GameObject item3d;
+
 	public bool rotated = false;
-	public bool pickedUp = false;
+	public PickUpMode pickedUp = PickUpMode.NotPickedUp;
 
 	internal void Set(ItemData itemData)
 	{
@@ -58,4 +60,11 @@ public class InventoryItem : MonoBehaviour
 			rectTransform.rotation = Quaternion.Euler(0,0, rotated == true ? 90f : 0f);
 		} 	
 	}
+}
+
+public enum PickUpMode 
+{
+	InPlayerInventory,
+	NotPickedUp,
+	PickingUp
 }

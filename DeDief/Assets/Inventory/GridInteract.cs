@@ -20,8 +20,12 @@ public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         inventoryController.placeItemMode = false;
         inventoryController.SelectedItemGrid = itemGrid;
         itemGrid.GetComponent<RectTransform>().SetAsFirstSibling();
-        if (inventoryController.SelectedItem != null)
+        if (inventoryController.SelectedItem != null) 
+        {
             inventoryController.SelectedItem.gameObject.SetActive(true);
+            Item item = inventoryController.SelectedItem.item3d.GetComponent<Item>();
+            item.ResetPosition();
+        }
         // inventoryController.inventoryHighlight.transform.SetAsFirstSibling();
     }
 
@@ -31,7 +35,9 @@ public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         inventoryController.SelectedItemGrid = null;
         inventoryController.placeItemMode = true;
         // Debug.Log(inventoryController.placeItemMode);
-        if (inventoryController.SelectedItem != null)
+        if (inventoryController.SelectedItem != null) 
+        {
             inventoryController.SelectedItem.gameObject.SetActive(false);
+        }
     }
 }

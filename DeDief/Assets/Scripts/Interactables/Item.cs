@@ -17,10 +17,14 @@ public class Item : Interactable
 	public Sprite itemIcon;
 	public bool canBeRotated;
 
+    public Vector3 oldPosition;
+	public Quaternion oldRotation;
+
     InventoryController inventoryController;
     RectTransform inventoryRectTransform;
     private ItemData data;
     // data.InitItem(width, height, itemIcon, canBeRotated, moneyValue, gameObject);
+    protected InventoryItem item;
     System.Random random = new System.Random();
 
     public void Awake()
@@ -49,14 +53,16 @@ public class Item : Interactable
 
         if (!PlayerInteract.inventoryOpen)
         {
-            Debug.Log("inventory created");
+            // Debug.Log("inventory created");
 
             // Freeze the player
             PlayerInteract.inventoryOpen = !PlayerInteract.inventoryOpen;
             inventoryController.SetInventoryActive(PlayerInteract.inventoryOpen);
-            Debug.Log("Player frozen");
+            // Debug.Log("Player frozen");
 
             // create new grid with dimensions of item and move it to the inventory canvas
+            oldPosition = transform.position;
+            oldRotation = transform.rotation;
             GameObject pickUpGrid = Instantiate(itemGrid) as GameObject;
             pickUpGrid.GetComponent<RectTransform>().SetParent(inventoryRectTransform);
             pickUpGrid.GetComponent<RectTransform>().localPosition = new Vector2(-900,300);
@@ -66,13 +72,14 @@ public class Item : Interactable
             gridScript.gridSizeWidth = width;
             gridScript.gridSizeHeight = height;
             gridScript.Init(width, height);
-            Debug.Log("inventory rendered");
+            // Debug.Log("inventory rendered");
 
             // insert item into grid
-            InventoryItem item = inventoryController.CreateItem(data);
+            item = inventoryController.CreateItem(data);
+            item.item3d = gameObject;
             pickUpGrid.GetComponent<PickUpInteract>().item = item;
             inventoryController.InsertItem(item, gridScript);
-            Debug.Log("item inserted");
+            // Debug.Log("item inserted");
             // Destroy(gameObject);
         }
         else
@@ -80,5 +87,11 @@ public class Item : Interactable
             PlayerInteract.inventoryOpen = false;
             inventoryController.SetInventoryActive(PlayerInteract.inventoryOpen);
         }
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = oldPosition;
+        transform.rotation = oldRotation;
     }
 }

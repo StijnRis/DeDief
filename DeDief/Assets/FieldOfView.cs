@@ -36,7 +36,10 @@ public class FieldOfView : MonoBehaviour
 
     private void FieldOfViewCheck()
     {
+        // Debug.Log("shit is happenings");
         Collider[] rangeChecks = Physics.OverlapSphere(eyes.transform.position, radius, targetMask);
+        // Gizmos.DrawWireSphere(eyes.transform.position, radius);
+        // Debug.Log(rangeChecks);
 
         if (rangeChecks.Length != 0)
         {

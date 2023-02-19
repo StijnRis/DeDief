@@ -1473,7 +1473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c044ed27ed8b93478987afd18b4410d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   weapon: {fileID: 7085284015364749929}
 --- !u!195 &7086050464792707583
 NavMeshAgent:
@@ -1489,7 +1488,7 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 360
-  m_StoppingDistance: 0.12
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

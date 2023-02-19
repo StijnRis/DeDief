@@ -18,6 +18,10 @@ public class SceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Spawned");
+        SpawnAgents();
+
+        PlacePlayer();
     }
 
     // Update is called once per frame
@@ -29,14 +33,8 @@ public class SceneController : MonoBehaviour
             SpawnAgents();
 
             PlacePlayer();
-            
         }
         if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Debug.Log("Target locked");
-            followPlayer = !followPlayer;
-        }
-        if (followPlayer)
         {
             SetTargetAgents(player);
         }

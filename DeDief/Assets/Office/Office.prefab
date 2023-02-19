@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6791950901422500100}
   - component: {fileID: 6791950901422500603}
   - component: {fileID: 6791950901422500101}
+  - component: {fileID: 2715684066349998915}
   m_Layer: 0
   m_Name: Office
   m_TagString: Untagged
@@ -44,10 +45,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6791950901422500607}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 30, y: 3, z: 30}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6791950901422500600
 MonoBehaviour:
@@ -61,29 +62,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a565567f479317742af08361a75b2bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Box: {fileID: 0}
-  MinArea: 5
-  MaxHallRate: 0.325
-  HallSize: 1
+  Box: {fileID: 4926617815897709897}
+  MaxHallRate: 0.3
+  HallSize: 1.5
   Corridor: {fileID: 1977530078531694865, guid: cd88545f42136044d85aad68429d8bd8, type: 3}
-  Light: {fileID: 0}
+  Light: {fileID: 100000, guid: 76f9fff599a07f047845e5ffee6863ea, type: 3}
   RoomTypes:
-  - Name: Working
-    MinLength: 2
-    AverageSize: 4
+  - MinLength: 2
+    MaxLength: 5
+    MinPercentageOccurrences: 0.6
     RoomPrefab: {fileID: 3930007208169666870, guid: 9d06b0b87fedbc94d99f2c6c9d6d184f, type: 3}
-  - Name: Talking
-    MinLength: 4
-    AverageSize: 15
-    RoomPrefab: {fileID: 3930007208169666870, guid: 9d06b0b87fedbc94d99f2c6c9d6d184f, type: 3}
-  - Name: Nothing
-    MinLength: 0
-    AverageSize: 0
-    RoomPrefab: {fileID: 9217691532615191220, guid: c733de966c340574aa46888be12a7b87, type: 3}
-  - Name: Nothing
-    MinLength: 8
-    AverageSize: 0
-    RoomPrefab: {fileID: 2908014259231293948, guid: ab72fff6b55b73e4497b4eaa724d71ec, type: 3}
+  - MinLength: 4
+    MaxLength: 8
+    MinPercentageOccurrences: 0.1
+    RoomPrefab: {fileID: 4326216356944668239, guid: 0a78134b93f7cbf42a01afd4d7ecd2d2, type: 3}
+  - MinLength: 2
+    MaxLength: 5
+    MinPercentageOccurrences: 0.1
+    RoomPrefab: {fileID: 4326216356944668239, guid: 45d50e6eb7b549b499d52dacc5772063, type: 3}
+  - MinLength: 0
+    MaxLength: 4
+    MinPercentageOccurrences: 0.1
+    RoomPrefab: {fileID: 4326216356944668239, guid: 7a0f25c58c43c1e4c96c0e531c710a93, type: 3}
 --- !u!114 &6791950901422500100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,5 +141,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  AgentCount: 50
+  AgentCount: 5
   agentPrefab: {fileID: 7085054231635045054, guid: aab5d19b74103cd4d96bce6d6b6aed4b, type: 3}
+--- !u!114 &2715684066349998915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791950901422500607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4941a95ec7c24447b4888938a93afc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 20
