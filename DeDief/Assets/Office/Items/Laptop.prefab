@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8985730869084367143
+--- !u!1 &6972130960168178915
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,59 +8,60 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1977416319142235111}
-  - component: {fileID: 4340771483675328878}
-  - component: {fileID: 1036247594788865053}
+  - component: {fileID: 5840874087244039058}
+  - component: {fileID: -1865736755200663358}
+  - component: {fileID: -6855546915352910320}
   m_Layer: 0
-  m_Name: Desk
+  m_Name: Laptop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1977416319142235111
+--- !u!4 &5840874087244039058
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8985730869084367143}
+  m_GameObject: {fileID: 6972130960168178915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.0426373, y: -1.3501779, z: -14.061252}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4340771483675328878
+--- !u!65 &-1865736755200663358
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8985730869084367143}
+  m_GameObject: {fileID: 6972130960168178915}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1036247594788865053
+--- !u!114 &-6855546915352910320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8985730869084367143}
+  m_GameObject: {fileID: 6972130960168178915}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleDown: 1
-  scaleUp: 1
-  randomOrientationOffset: 7.1
+  scaleDown: 0
+  scaleUp: 0
+  randomOrientationOffset: 26.7
   Prefabs:
-  - {fileID: 1412888549052842, guid: 683ef653b4b09b94993b7fd393c95978, type: 3}
-  - {fileID: 1338192570120840, guid: cd74bf6cea4234840b01646a5b3f339a, type: 3}
+  - {fileID: 1189782351792700, guid: 20661e78605491946911818aa730569b, type: 3}
+  - {fileID: 1179622459644578, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+  - {fileID: 1382680370001608, guid: 112cc81e36e745449bf229e4dbb3e073, type: 3}

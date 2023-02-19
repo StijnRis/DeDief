@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleUp: 1
-  moveDown: 0
+  moveDown: 1
   randomOrientationOffset: 0
   Prefabs:
   - {fileID: 173912, guid: 990ca4a6ba9b900449bc9d4d1a0c0dd0, type: 3}

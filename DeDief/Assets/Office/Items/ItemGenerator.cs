@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ItemGenerator : MonoBehaviour
 {
-    public bool scaleUp;
-    public bool moveDown;
+    public bool scaleDown = true;
+    public bool scaleUp = false;
     [Range(0.0f, 180f)]
     public float randomOrientationOffset = 0;
     public GameObject[] Prefabs;
@@ -15,12 +15,15 @@ public class ItemGenerator : MonoBehaviour
     void Start()
     {
         placeRandom();
-        if (scaleUp)
+        if (scaleUp && scaleDown)
         {
             Scale();
-        } else
+        } else if (scaleDown)
         {
             ScaleDown();
+        } else if (scaleUp)
+        {
+            throw new System.Exception("NOT implemented");
         }
         
         RandomRotation(randomOrientationOffset);
@@ -57,18 +60,9 @@ public class ItemGenerator : MonoBehaviour
 
     protected void setPosition()
     {
-        Vector3 position = new Vector3(0,0,0);
-        if (moveDown)
-        {
-            BoxCollider prefabBox = prefab.GetComponent<BoxCollider>();
-            position += new Vector3(0, -prefabBox.center.y * prefab.transform.lossyScale.y, 0);
-            /*Vector3 position = new Vector3(0, 0, 0);*/
-            /*
-            {
-                BoxCollider box = GetComponent<BoxCollider>();
-                position += new Vector3(0, -box.size.y / 2, 0);
-            }*/   
-        }
+        BoxCollider prefabBox = prefab.GetComponent<BoxCollider>();
+        Vector3 position = new Vector3(0, -prefabBox.center.y * prefab.transform.lossyScale.y, 0);
+              
         if (!scaleUp)
         {
             float size = prefab.GetComponent<BoxCollider>().size.y;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &110388551026490932
+--- !u!1 &2195484798352071677
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,55 +8,59 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1701408930050638649}
-  - component: {fileID: 3327197525085783172}
-  - component: {fileID: -4660459322832975254}
+  - component: {fileID: 8310172324299744900}
+  - component: {fileID: -6803245518878504630}
+  - component: {fileID: 397943461086798297}
   m_Layer: 0
-  m_Name: WorkStation
+  m_Name: Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1701408930050638649
+--- !u!4 &8310172324299744900
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 110388551026490932}
+  m_GameObject: {fileID: 2195484798352071677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.0826807, y: 1.6704853, z: -13.069785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3327197525085783172
+--- !u!65 &-6803245518878504630
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 110388551026490932}
+  m_GameObject: {fileID: 2195484798352071677}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-4660459322832975254
+--- !u!114 &397943461086798297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 110388551026490932}
+  m_GameObject: {fileID: 2195484798352071677}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f467dedfb64c2047b6da90d1c9ab9a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Desk: {fileID: 8985730869084367143, guid: c0c02012f5c90eb418e161a17da89fc1, type: 3}
-  Chair: {fileID: 8669365534871835233, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+  scaleDown: 1
+  scaleUp: 0
+  randomOrientationOffset: 0
+  Prefabs:
+  - {fileID: 110146, guid: aab301b5d4a9c1b4ab55351b46f6be40, type: 3}
+  - {fileID: 147494, guid: 31fa0b36e57a33f44ae905116d606e3a, type: 3}
