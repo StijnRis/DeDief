@@ -12,6 +12,7 @@ public abstract partial class RoomGenerator : MonoBehaviour
     protected Door[] Doors;
 
     private int wallIndex = 0;
+    private float wallThickness = 0.05f;
 
     public void Start()
     {
@@ -26,10 +27,10 @@ public abstract partial class RoomGenerator : MonoBehaviour
     {
         List<Vector3> points = new List<Vector3>();
         List<Vector3> noConnectPoints = new List<Vector3>();
-        points.Add(new Vector3((float)(0.5 * Box.size.x), 0, (float)(0.5 * Box.size.z)));
-        points.Add(new Vector3((float)(0.5 * Box.size.x), 0, (float)(-0.5 * Box.size.z)));
-        points.Add(new Vector3((float)(-0.5 * Box.size.x), 0, (float)(-0.5 * Box.size.z)));
-        points.Add(new Vector3((float)(-0.5 * Box.size.x), 0, (float)(0.5 * Box.size.z)));
+        points.Add(new Vector3(0.5f * Box.size.x, 0, 0.5f * Box.size.z) + new Vector3(-wallThickness / 3, 0, -wallThickness / 3));
+        points.Add(new Vector3(0.5f * Box.size.x, 0, -0.5f * Box.size.z) + new Vector3(-wallThickness / 3, 0, wallThickness / 3));
+        points.Add(new Vector3(-0.5f * Box.size.x, 0, -0.5f * Box.size.z) + new Vector3(wallThickness / 3, 0, wallThickness / 3));
+        points.Add(new Vector3(-0.5f * Box.size.x, 0, 0.5f * Box.size.z) + new Vector3(wallThickness / 3, 0, -wallThickness / 3));
         foreach (Door door in Doors)
         {
             points.Add(door.Start);
@@ -59,7 +60,7 @@ public abstract partial class RoomGenerator : MonoBehaviour
         float floorDepth = 0.1f;
         GameObject floor = Instantiate(Floor, transform);
         floor.transform.localScale = new Vector3(Box.size.x, floorDepth, Box.size.z);
-        floor.transform.position = new Vector3(transform.position.x, transform.position.y - Box.size.y / 2 - floorDepth / 2, transform.position.z);
+        floor.transform.localPosition = new Vector3(0, - Box.size.y / 2 - floorDepth / 2, 0);
         floor.layer = LayerMask.NameToLayer("Floor");
     }
 
@@ -79,7 +80,6 @@ public abstract partial class RoomGenerator : MonoBehaviour
 
     protected void CreateWall(Vector3 startCorner, Vector3 endCorner)
     {
-        float thickness = 0.1f;
         GameObject wall = Instantiate(Wall, transform);
         wall.name = "Wall" + wallIndex.ToString();
         wall.transform.SetParent(transform);
@@ -87,7 +87,7 @@ public abstract partial class RoomGenerator : MonoBehaviour
         Vector3 rotation = (endCorner - startCorner).normalized;
         float distance = Vector3.Distance(startCorner, endCorner);
         BoxCollider WallBox = wall.GetComponent<BoxCollider>();
-        WallBox.size = new Vector3(thickness, Box.size.y, distance + thickness);
+        WallBox.size = new Vector3(wallThickness, Box.size.y, distance + wallThickness);
         wall.transform.localPosition = startCorner + distance / 2 * rotation;
         Quaternion quaternion = Quaternion.LookRotation(rotation, Vector3.up);
         wall.transform.localRotation = quaternion;

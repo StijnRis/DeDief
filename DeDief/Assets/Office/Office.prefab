@@ -68,6 +68,7 @@ MonoBehaviour:
   Corridor: {fileID: 1977530078531694865, guid: cd88545f42136044d85aad68429d8bd8, type: 3}
   Light: {fileID: 8019405468033893245, guid: dc847d9027b83064c88f3d0429bc5a42, type: 3}
   Camera: {fileID: 183054, guid: 58419bfb3192e3f4eac2e8731a3db58e, type: 3}
+  Wall: {fileID: 4427668551479185814, guid: f3d1858a8d8d66949bb60c7dda66ed80, type: 3}
   RoomTypes:
   - MinLength: 2
     MaxLength: 5

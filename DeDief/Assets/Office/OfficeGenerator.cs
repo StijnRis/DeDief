@@ -12,6 +12,7 @@ public class OfficeGenerator : MonoBehaviour
     public GameObject Corridor;
     public GameObject Light;
     public GameObject Camera;
+    public GameObject Wall;
     public List<RoomType> RoomTypes;
 
     private Area House;
@@ -57,6 +58,8 @@ public class OfficeGenerator : MonoBehaviour
         {
             PlaceArea(hall, Corridor);
         }
+
+        placeSurroundingWalls();
     }
 
     private void ChunksToBlocks()
@@ -279,6 +282,29 @@ public class OfficeGenerator : MonoBehaviour
         *//*RoomType item = RoomTypes.OrderBy(x => x.getScore(area)).FirstOrDefault();
         return item;*//*
     }*/
+
+    public void placeSurroundingWalls()
+    {
+        GameObject wall1 = Instantiate(Wall, transform);
+        wall1.transform.localPosition = new Vector3(Box.size.x / 2, 0, 0);
+        BoxCollider box1 = wall1.GetComponent<BoxCollider>();
+        box1.size = new Vector3(0.04f, Box.size.y, Box.size.z);
+
+        GameObject wall2 = Instantiate(Wall, transform);
+        wall2.transform.localPosition = new Vector3(-Box.size.x / 2, 0, 0);
+        BoxCollider box2 = wall2.GetComponent<BoxCollider>();
+        box2.size = new Vector3(0.04f, Box.size.y, Box.size.z);
+
+        GameObject wall3 = Instantiate(Wall, transform);
+        wall3.transform.localPosition = new Vector3(0, 0, Box.size.z / 2);
+        BoxCollider box3 = wall3.GetComponent<BoxCollider>();
+        box3.size = new Vector3(Box.size.x, Box.size.y, 0.04f);
+
+        GameObject wall4 = Instantiate(Wall, transform);
+        wall4.transform.localPosition = new Vector3(0, 0, -Box.size.z / 2);
+        BoxCollider box4 = wall4.GetComponent<BoxCollider>();
+        box4.size = new Vector3(Box.size.x, Box.size.y, 0.04f);
+    }
 }
 
 [System.Serializable]
