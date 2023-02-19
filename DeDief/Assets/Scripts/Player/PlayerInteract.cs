@@ -84,13 +84,13 @@ public class PlayerInteract : MonoBehaviour
 
     public void GenerateRandomItem()
     {
-        Debug.Log("for your sanity I disabled this function");
+        // Debug.Log("for your sanity I disabled this function");
         // inventoryController.GenerateRandomItem();
     }
 
     public void InsertRandomItem()
     {
-        Debug.Log("for your sanity I disabled this function");
+        // Debug.Log("for your sanity I disabled this function");
         // inventoryController.InsertRandomItem();
     }
 

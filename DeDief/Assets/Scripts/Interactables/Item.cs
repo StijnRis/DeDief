@@ -53,12 +53,12 @@ public class Item : Interactable
 
         if (!PlayerInteract.inventoryOpen)
         {
-            Debug.Log("inventory created");
+            // Debug.Log("inventory created");
 
             // Freeze the player
             PlayerInteract.inventoryOpen = !PlayerInteract.inventoryOpen;
             inventoryController.SetInventoryActive(PlayerInteract.inventoryOpen);
-            Debug.Log("Player frozen");
+            // Debug.Log("Player frozen");
 
             // create new grid with dimensions of item and move it to the inventory canvas
             oldPosition = transform.position;
@@ -72,14 +72,14 @@ public class Item : Interactable
             gridScript.gridSizeWidth = width;
             gridScript.gridSizeHeight = height;
             gridScript.Init(width, height);
-            Debug.Log("inventory rendered");
+            // Debug.Log("inventory rendered");
 
             // insert item into grid
             item = inventoryController.CreateItem(data);
             item.item3d = gameObject;
             pickUpGrid.GetComponent<PickUpInteract>().item = item;
             inventoryController.InsertItem(item, gridScript);
-            Debug.Log("item inserted");
+            // Debug.Log("item inserted");
             // Destroy(gameObject);
         }
         else
