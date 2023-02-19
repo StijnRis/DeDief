@@ -23,6 +23,7 @@ public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (inventoryController.SelectedItem != null) 
         {
             inventoryController.SelectedItem.gameObject.SetActive(true);
+            inventoryController.SelectedItem.transform.SetParent(gameObject.transform);
             Item item = inventoryController.SelectedItem.item3d.GetComponent<Item>();
             item.ResetPosition();
         }

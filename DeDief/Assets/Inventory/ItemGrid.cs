@@ -7,6 +7,7 @@ public class ItemGrid : MonoBehaviour
 {
 	public const float tileSizeWidth = 64;
 	public const float tileSizeHeight = 64;
+	public Vector2 tileSize = new Vector2(tileSizeWidth, tileSizeHeight);
 
 	InventoryItem[,] inventoryItemSlot;
 
@@ -70,8 +71,8 @@ public class ItemGrid : MonoBehaviour
 		positionOnGrid.x = mousePosition.x - rectTransform.position.x;
 		positionOnGrid.y = rectTransform.position.y - mousePosition.y;
 
-		tileGridPosition.x = (int)(positionOnGrid.x / tileSizeWidth);
-		tileGridPosition.y = (int)(positionOnGrid.y / tileSizeHeight);
+		tileGridPosition.x = (int)(positionOnGrid.x / tileSize.x * InventoryController.screenScale.x);
+		tileGridPosition.y = (int)(positionOnGrid.y / tileSize.y * InventoryController.screenScale.y);
 
 		if (tileGridPosition.x < 0)
 			tileGridPosition.x = 0;
@@ -121,6 +122,7 @@ public class ItemGrid : MonoBehaviour
 
         inventoryItem.onGridPositionX = posX;
         inventoryItem.onGridPositionY = posY;
+		inventoryItem.grid = this;
 
         Vector2 position = CalculatePositionOnGrid(inventoryItem, posX, posY);
 

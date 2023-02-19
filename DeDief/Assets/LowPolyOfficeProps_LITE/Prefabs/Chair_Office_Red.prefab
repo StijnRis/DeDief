@@ -110,11 +110,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b31d458bee939b4b90fcdb9295f49ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useEvents: 0
   promptMessage: 
   name: Office Chair
   moneyValue: 10
-  itemGrid: {fileID: 8903500935582915608, guid: 0e4c092012d38f64b88541ac77c5a825, type: 3}
+  itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
   width: 7
   height: 8
   itemIcon: {fileID: 21300000, guid: dcc9eb1543e958849acc76518d763e5d, type: 3}
   canBeRotated: 1
+  oldPosition: {x: 0, y: 0, z: 0}
+  oldRotation: {x: 0, y: 0, z: 0, w: 0}
+  item: {fileID: 0}

@@ -32,11 +32,11 @@ public class InventoryItem : MonoBehaviour
 
 	public int onGridPositionX;
 	public int onGridPositionY;
+	public ItemGrid grid;
 
 	public GameObject item3d;
 
 	public bool rotated = false;
-	public PickUpMode pickedUp = PickUpMode.NotPickedUp;
 
 	internal void Set(ItemData itemData)
 	{

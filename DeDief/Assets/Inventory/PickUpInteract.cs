@@ -15,7 +15,8 @@ public class PickUpInteract : GridInteract
             // Debug.Log(transform.hierarchyCount);
             if (itemGrid.GetItem(0,0) == null && transform.childCount == 0)
             {
-                item.pickedUp = PickUpMode.InPlayerInventory;
+                if (itemObject != itemObject.GetComponent<Item>().item.item3d)
+                    Destroy(itemObject);
                 Destroy(gameObject);
                 // itemObject.SetActive(false);
             }
@@ -24,15 +25,10 @@ public class PickUpInteract : GridInteract
 
     void OnDestroy()
     {
-        // Debug.Log("item destoryed");
-        if (item.pickedUp != PickUpMode.InPlayerInventory)
-        {
-            if (itemObject.GetComponent<Weapon>() != null)
-            {
-                itemObject.GetComponent<Weapon>().ResetAgent();
-            }
-            item.pickedUp = PickUpMode.NotPickedUp;
-            // Debug.Log("not picked up");
-        }
+        Destroy(transform.parent.gameObject);
+        // if (itemObject != itemObject.GetComponent<Item>().item.item3d)
+        // {
+        //     Destroy(itemObject.GetComponent<Item>().item.item3d);
+        // }
     }
 }

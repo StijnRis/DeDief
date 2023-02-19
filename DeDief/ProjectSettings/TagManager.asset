@@ -8,6 +8,8 @@ TagManager:
   - Floor
   - Wall
   - Office
+  - InventoryCanvas
+  - InventoryPanel
   layers:
   - Default
   - TransparentFX

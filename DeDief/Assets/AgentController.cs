@@ -26,7 +26,7 @@ public class AgentController : MonoBehaviour
         // setTarget(target);
         target = GameObject.FindGameObjectWithTag("Player");
         weapon.SetActive(false);
-        weapon.GetComponent<Weapon>().agent = gameObject;
+        weapon.GetComponent<AgentWeapon>().agent = gameObject;
         aggregated = false;
     }
 

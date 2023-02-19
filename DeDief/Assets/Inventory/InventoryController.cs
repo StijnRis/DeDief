@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class InventoryController : MonoBehaviour
 	[SerializeField] GameObject itemPrefab;
 	public GameObject canvas;
     private Transform canvasTransform;
+    public CanvasScaler canvasScaler;
+    public RectTransform canvasRectTransform;
 
     Vector2Int oldPosition;
     public InventoryHighlight inventoryHighlight;
@@ -37,11 +40,20 @@ public class InventoryController : MonoBehaviour
     Vector3 point;
     Color originalItemColor;
 
+    public static Vector2 screenScale;
+
+    public GameObject panel;
+
     private void Awake()
     {
         inventoryHighlight = GetComponent<InventoryHighlight>();
         canvasTransform = canvas.GetComponent<RectTransform>();
+        canvasRectTransform = canvas.GetComponent<RectTransform>();
+        canvasScaler = canvas.GetComponent<CanvasScaler>();
+        screenScale = new Vector2(canvasScaler.referenceResolution.x / Screen.width, canvasScaler.referenceResolution.y / Screen.height);
         player = gameObject.transform.parent.gameObject;
+        panel = GameObject.FindGameObjectWithTag("InventoryPanel");
+        panel.SetActive(false);
     }
 
     private void Update()
@@ -56,16 +68,14 @@ public class InventoryController : MonoBehaviour
                 point = ray.origin + ray.direction;
                 Debug.DrawRay(ray.origin, ray.direction);
                 // Debug.Log(point);
-                selectedItem.itemData.itemPrefab.transform.position = point;
-                Destroy(selectedItem.itemData.itemPrefab.GetComponent<Rigidbody>());
-                selectedItem.itemData.itemPrefab.transform.rotation = player.transform.rotation;
-                originalItemColor = selectedItem.itemData.itemPrefab.GetComponent<MeshRenderer>().material.color;
-                selectedItem.itemData.itemPrefab.GetComponent<MeshRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-                selectedItem.itemData.itemPrefab.SetActive(true);
+                selectedItem.item3d.transform.position = point;
+                Destroy(selectedItem.item3d.GetComponent<Rigidbody>());
+                selectedItem.item3d.transform.rotation = player.transform.rotation;
+                selectedItem.item3d.SetActive(true);
             } 
             else if (selectedItem != null)
             {
-                selectedItem.itemData.itemPrefab.SetActive(false);
+                selectedItem.item3d.SetActive(false);
             }
 
             if (selectedItemGrid == null) 
@@ -106,7 +116,6 @@ public class InventoryController : MonoBehaviour
         item3d.transform.position = point;
         item3d.transform.rotation = player.transform.rotation;
         item3d.AddComponent(typeof(Rigidbody));
-        selectedItem.itemData.itemPrefab.GetComponent<MeshRenderer>().material.color = originalItemColor;
         // item3d.SetActive(true);
         Destroy(item.gameObject);
     }
@@ -221,10 +230,9 @@ public class InventoryController : MonoBehaviour
     {
         InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<InventoryItem>();
         rectTransform = inventoryItem.GetComponent<RectTransform>();
-		rectTransform.SetParent(canvasTransform);
+		rectTransform.SetParent(canvasTransform, false);
         rectTransform.SetAsLastSibling();
 		inventoryItem.Set(itemData);
-        inventoryItem.pickedUp = PickUpMode.PickingUp;
         return inventoryItem;
     }
 
@@ -259,12 +267,18 @@ public class InventoryController : MonoBehaviour
     {
         Vector2 position = Input.mousePosition;
 
+        // if (selectedItemGrid != null)
+        // {
+        //     RectTransformUtility.ScreenPointToLocalPointInRectangle(selectedItemGrid.rectTransform, Input.mousePosition, null, out position);
+        // }
+
         if (selectedItem != null)
         {
             position.x -= (selectedItem.WIDTH - 1) * ItemGrid.tileSizeWidth / 2;
             position.y += (selectedItem.HEIGHT - 1) * ItemGrid.tileSizeHeight / 2;
         }
 
+        // Debug.Log(selectedItemGrid.GetTileGridPosition(position));
         return selectedItemGrid.GetTileGridPosition(position);
     }
 
@@ -307,7 +321,7 @@ public class InventoryController : MonoBehaviour
         {
             CloseInventory();
         }
-        canvas.SetActive(inventoryOpen);
+        panel.SetActive(inventoryOpen);
         Cursor.lockState = inventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
