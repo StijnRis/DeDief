@@ -72,18 +72,9 @@ public abstract class RoomGenerator : MonoBehaviour
         ceiling.transform.rotation = transform.rotation;
         ceiling.name = "Ceiling";
 
-
-        float ceilingSurface = ceiling.transform.localScale.x * ceiling.transform.localScale.z;
-        float lightCoverage = 10f;
-        int lightAmount = Mathf.FloorToInt(ceilingSurface / lightCoverage);
-
-        for (int i = 0; i < lightAmount; i++)
-        {
-            GameObject light = Instantiate(Light, transform);
-            light.transform.localPosition = new Vector3(0, Box.size.y / 2 - ceiling.transform.localScale.y, 0);
-            light.transform.rotation = Quaternion.Euler(0, 0, 180);
-        }
-        
+        GameObject light = Instantiate(Light, transform);
+        light.transform.localPosition = new Vector3(0, Box.size.y / 2 - ceiling.transform.localScale.y, 0);
+        light.transform.rotation = Quaternion.Euler(0, 0, 180);
     }
 
     protected void CreateWall(Vector3 startCorner, Vector3 endCorner)

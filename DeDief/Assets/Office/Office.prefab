@@ -66,7 +66,8 @@ MonoBehaviour:
   MaxHallRate: 0.3
   HallSize: 1.5
   Corridor: {fileID: 1977530078531694865, guid: cd88545f42136044d85aad68429d8bd8, type: 3}
-  Light: {fileID: 100000, guid: 76f9fff599a07f047845e5ffee6863ea, type: 3}
+  Light: {fileID: 8019405468033893245, guid: dc847d9027b83064c88f3d0429bc5a42, type: 3}
+  Camera: {fileID: 183054, guid: 58419bfb3192e3f4eac2e8731a3db58e, type: 3}
   RoomTypes:
   - MinLength: 2
     MaxLength: 5

@@ -11,6 +11,7 @@ public class OfficeGenerator : MonoBehaviour
     public float HallSize = 1.2f;
     public GameObject Corridor;
     public GameObject Light;
+    public GameObject Camera;
     public List<RoomType> RoomTypes;
 
     private Area House;
