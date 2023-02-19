@@ -161,7 +161,7 @@ public class OfficeGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log(block.getSizeString());
+        Debug.Log("Can not place "+block.getSizeString());
         if (toBig)
         {
             return (true, null);
