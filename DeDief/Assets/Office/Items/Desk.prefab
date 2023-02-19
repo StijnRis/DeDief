@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1977416319142235111}
   - component: {fileID: 4340771483675328878}
   - component: {fileID: -7444093834738317883}
+  - component: {fileID: 1036247594788865053}
   m_Layer: 0
   m_Name: Desk
   m_TagString: Untagged
@@ -53,10 +54,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8985730869084367143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40b5b1ec348620e4daf760b17e88247a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeskPrefabs:
+  scaleUp: 0
+  randomOrientationOffset: 0
+  Prefabs:
+  - {fileID: 106792, guid: f6ed513feac116e41b20d43b620f8066, type: 3}
+--- !u!114 &1036247594788865053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985730869084367143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUp: 1
+  randomOrientationOffset: 7.1
+  Prefabs:
   - {fileID: 106792, guid: f6ed513feac116e41b20d43b620f8066, type: 3}

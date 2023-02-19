@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4104548722401179545}
   - component: {fileID: -2137434131597150262}
   - component: {fileID: 5958271932105732225}
+  - component: {fileID: 2679879753458376961}
   m_Layer: 0
   m_Name: StorageBox
   m_TagString: Untagged
@@ -53,13 +54,34 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144861589188783113}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58b466ca6b4ba8d43b4af3dbe023a0f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxPrefabs:
+  scaleUp: 0
+  randomOrientationOffset: 0
+  Prefabs:
   - {fileID: 121478, guid: 87c2df8e665f8664e932718fcf85c0b2, type: 3}
   - {fileID: 179172, guid: e4e5d2f7f155681449aca26cbdb2b635, type: 3}
-  - {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
   - {fileID: 182360, guid: 2ecc0b496791eed43906204037035d18, type: 3}
+  - {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+--- !u!114 &2679879753458376961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144861589188783113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUp: 0
+  randomOrientationOffset: 180
+  Prefabs:
+  - {fileID: 121478, guid: 87c2df8e665f8664e932718fcf85c0b2, type: 3}
+  - {fileID: 179172, guid: e4e5d2f7f155681449aca26cbdb2b635, type: 3}
+  - {fileID: 182360, guid: 2ecc0b496791eed43906204037035d18, type: 3}
+  - {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
