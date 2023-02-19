@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4104548722401179545}
   - component: {fileID: -2137434131597150262}
-  - component: {fileID: -2563376206323714268}
+  - component: {fileID: -3992531137942097665}
   m_Layer: 0
   m_Name: StorageRack
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-2563376206323714268
+--- !u!114 &-3992531137942097665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,8 +55,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 144861589188783113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd9685b75463ea4993bf07ec9260b75, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rackPrefabs:
+  scaleUp: 1
+  moveDown: 0
+  randomOrientationOffset: 0
+  Prefabs:
   - {fileID: 173912, guid: 990ca4a6ba9b900449bc9d4d1a0c0dd0, type: 3}
