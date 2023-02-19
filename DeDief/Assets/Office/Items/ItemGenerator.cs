@@ -57,17 +57,24 @@ public class ItemGenerator : MonoBehaviour
 
     protected void setPosition()
     {
+        Vector3 position = new Vector3(0,0,0);
         if (moveDown)
         {
             BoxCollider prefabBox = prefab.GetComponent<BoxCollider>();
-            Vector3 position = new Vector3(0, -prefabBox.center.y * prefab.transform.lossyScale.y, 0);
+            position += new Vector3(0, -prefabBox.center.y * prefab.transform.lossyScale.y, 0);
             /*Vector3 position = new Vector3(0, 0, 0);*/
             /*
             {
                 BoxCollider box = GetComponent<BoxCollider>();
                 position += new Vector3(0, -box.size.y / 2, 0);
-            }*/
-            prefab.transform.localPosition = position;
+            }*/   
         }
+        if (!scaleUp)
+        {
+            float size = prefab.GetComponent<BoxCollider>().size.y;
+            float maxSize = GetComponent<BoxCollider>().size.y;
+            position += new Vector3(0, (size - maxSize) / 2, 0);
+        }
+        prefab.transform.localPosition = position;
     }
 }
