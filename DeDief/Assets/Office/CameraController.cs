@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
 {
     public GameObject eye;
     public GameObject eye_ball;
+    public FieldOfView fov;
     
     private float speed = 20; //degrees per sec
     private float direction = 1f;
@@ -17,7 +18,8 @@ public class CameraController : MonoBehaviour
     {
         rotation = Random.Range(0, 180);
         eye_ball.transform.localRotation = Quaternion.Euler(0, -rotation, 0);
-        
+
+        fov = GetComponent<FieldOfView>();
     }
 
     // Update is called once per frame

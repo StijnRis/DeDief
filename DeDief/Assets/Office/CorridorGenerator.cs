@@ -11,7 +11,7 @@ public class CorridorGenerator : RoomGenerator
         OnDestroy();
         CreateDoors();
         PlaceFloor();
-        PlaceCeiling();
+        /*PlaceCeiling();*/
         PlaceCameras();
     }
 
@@ -62,86 +62,29 @@ public class CorridorGenerator : RoomGenerator
         for (int i = 0; i < cameraAmount; i++)
         {
             //Random position for camera
-            
+            float randomPositionX = Random.Range(0.2f, hallLength);
+            float randomPositionZ = Random.Range(0, hallWidth / 2 - 0.1f);
 
-            float randomPosition = Random.Range(0, hallLength);
-            bool canPlaceCamera = false;
+            GameObject camera = Instantiate(CameraPrefab, transform);
 
-            int tries = 0;
-            /*while (!canPlaceCamera)
+            //Random side of corridor
+            float sideMultiplier = 1f;
+            if (Random.Range(0, 2) == 1)
             {
-                randomPosition = Random.Range(0, hallLength);
-                canPlaceCamera = hasDoor(randomPosition, sideMultiplier, corridorSize);
-
-                if (tries > 30)
-                {
-                    Debug.Log("failed");
-                    break;
-                }
-                else
-                {
-                    tries += 1;
-                }
-            }*/
-
-            canPlaceCamera = true;
-
-            if (canPlaceCamera)
+                sideMultiplier *= -1f;
+            } else
             {
-                GameObject camera = Instantiate(CameraPrefab, transform);
+                camera.transform.localRotation = Quaternion.Euler(0, -180, 0);
+            }
 
-                //Random side of corridor
-                float sideMultiplier = 1f;
-                if (Random.Range(0, 2) == 1)
-                {
-                    sideMultiplier *= -1f;
-                    camera.transform.localRotation = Quaternion.Euler(0, 90, 0);
-                } else
-                {
-                    camera.transform.localRotation = Quaternion.Euler(0, -90, 0);
-                }
-
-                Vector3 position = new Vector3(randomPosition - hallLength / 2, 1f, hallWidth / 2 * sideMultiplier);
-                if (rotated)
-                {
-                    position = new Vector3(hallWidth / 2 * sideMultiplier, 1f, randomPosition - hallLength / 2);
+            Vector3 position = new Vector3(randomPositionX - hallLength / 2, box.size.y / 2 - 0.1f, randomPositionZ * sideMultiplier);
+            if (rotated)
+            {
+                position = new Vector3(randomPositionZ * sideMultiplier, box.size.y / 2 - 0.1f, randomPositionX - hallLength / 2);
                     
-                }
-                /*camera.transform.localPosition += position;*/
-                camera.transform.Translate(position, transform);
             }
+            camera.transform.Translate(position, transform);
         }
-    }
-
-    public bool hasDoor(float position, float side, Vector3 corridorSize)
-    {
-        Door[] doors = GetComponents<Door>();
-        foreach(Door door in doors)
-        {
-            Vector3 start = door.Start;
-            Vector3 end = door.End;
-            if (corridorSize.x == 2f * Mathf.Round(door.Start.z * 100f) / 100f)
-            {
-                Debug.Log("yee");
-                start = new Vector3(door.Start.x, 0, door.Start.z);
-                end = new Vector3(door.End.x, 0, door.End.z);
-            }
-            Debug.Log(start.ToString() + "    " + end.ToString());
-
-            if ((start.x > 0 && side > 0) || (start.x < 0 && side < 0)) //Check side
-            {
-                float startX = door.Start.z;
-                float endX = door.End.z;
-                if (position >= startX && position <= endX)
-                {
-                    return true;
-                } else
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     public string getLongestAxis(BoxCollider box)
