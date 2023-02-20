@@ -13,6 +13,7 @@ public abstract partial class RoomGenerator : MonoBehaviour
 
     private int wallIndex = 0;
     private float wallThickness = 0.05f;
+    protected List<GameObject> Walls;
 
     public void Start()
     {
@@ -25,6 +26,8 @@ public abstract partial class RoomGenerator : MonoBehaviour
 
     protected void PlaceWalls()
     {
+        Walls = new List<GameObject>();
+
         List<Vector3> points = new List<Vector3>();
         List<Vector3> noConnectPoints = new List<Vector3>();
         points.Add(new Vector3(0.5f * Box.size.x, 0, 0.5f * Box.size.z) + new Vector3(-wallThickness / 3, 0, -wallThickness / 3));
@@ -91,6 +94,21 @@ public abstract partial class RoomGenerator : MonoBehaviour
         wall.transform.localPosition = startCorner + distance / 2 * rotation;
         Quaternion quaternion = Quaternion.LookRotation(rotation, Vector3.up);
         wall.transform.localRotation = quaternion;
+
+        Walls.Add(wall);
+    }
+
+    protected GameObject GetBackWall()
+    {
+        foreach (GameObject wall in Walls)
+        {
+            Vector3 wallRotation = wall.transform.localRotation.eulerAngles;
+            if (wallRotation.y == 90)
+            {
+                return wall;
+            }
+        }
+        return null;
     }
 
     public void OnDestroy()

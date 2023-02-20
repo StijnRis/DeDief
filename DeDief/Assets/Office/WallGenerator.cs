@@ -7,6 +7,7 @@ public class WallGenerator : MonoBehaviour
     public GameObject Painting;
     public Material[] Materials;
     protected BoxCollider Box;
+    PaintingManager paintingManager;
 
     void Start()
     {
@@ -18,12 +19,7 @@ public class WallGenerator : MonoBehaviour
     {
         placeWall();
 
-        PaintingManager paintingManager = GetComponentInParent<PaintingManager>();
-        float wallWidth = Box.size.z;
-        if (Random.Range(0, 100) < paintingManager.amount && wallWidth > 1.5f)
-        {
-            placePainting();
-        }
+        paintingManager = GetComponentInParent<PaintingManager>();
     }
 
     private void placeWall()
@@ -39,8 +35,18 @@ public class WallGenerator : MonoBehaviour
         wall.layer = LayerMask.NameToLayer("Walls");
     }
 
-    private void placePainting()
+    public void maybePlacePainting()
     {
+        float wallWidth = Box.size.z;
+        if (Random.Range(0, 100) < paintingManager.amount && wallWidth > 1.5f)
+        {
+            placePainting();
+        }
+    }
+
+    public void placePainting()
+    {
+        Box = GetComponent<BoxCollider>();
         GameObject painting = Instantiate(Painting, transform);
 
         painting.transform.localScale = Vector3.one;

@@ -60,3 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Table: {fileID: 144861589188783113, guid: 56b2f5688eaf92a45903097dc5ae5c34, type: 3}
   Chair: {fileID: 8669365534871835233, guid: e045bb1ddd1aa3443a908fe70421a615, type: 3}
+  Items:
+  - {fileID: 6972130960168178915, guid: d8b455efa4168844f9e45f2803ad4e20, type: 3}
+  - {fileID: 6179239829115592003, guid: a58ad5e56cca7c5408956ba8e4788cee, type: 3}
+  - {fileID: 225616249287543990, guid: cd72bef73e783c448be658a757ce81da, type: 3}

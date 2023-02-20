@@ -15,6 +15,7 @@ public class OfficeRoomGenerator : RoomGenerator
         PlaceDesk();
         placePlants();
         PlaceCeiling();
+        GetBackWall().GetComponent<WallGenerator>().placePainting();
     }
 
     private void PlaceDesk()

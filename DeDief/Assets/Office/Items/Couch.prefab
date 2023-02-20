@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6179239829115592003
+--- !u!1 &1289470413651281977
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,61 +8,58 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9179380768088259115}
-  - component: {fileID: 8791421483524189663}
-  - component: {fileID: 5904788030264606126}
+  - component: {fileID: 1536277583642992965}
+  - component: {fileID: 7625668161900369095}
+  - component: {fileID: 4856876576910620896}
   m_Layer: 0
-  m_Name: Pen
+  m_Name: Couch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9179380768088259115
+--- !u!4 &1536277583642992965
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6179239829115592003}
+  m_GameObject: {fileID: 1289470413651281977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6600423, y: -1.1833422, z: -13.042944}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8791421483524189663
+--- !u!65 &7625668161900369095
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6179239829115592003}
+  m_GameObject: {fileID: 1289470413651281977}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.8, y: 1, z: 1.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5904788030264606126
+--- !u!114 &4856876576910620896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6179239829115592003}
+  m_GameObject: {fileID: 1289470413651281977}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scaleDown: 1
-  scaleUp: 0
-  randomOrientationOffset: 180
+  scaleUp: 1
+  randomOrientationOffset: 1.8
   Prefabs:
-  - {fileID: 1997056383728078, guid: 25a0ecfef2d64e744a3a13f1e8d37a38, type: 3}
-  - {fileID: 1546730394447944, guid: 5ffb34a81ed9b0748b11b3451513f590, type: 3}
-  - {fileID: 1768509151358716, guid: 95eea767e49458344b1f963160375d43, type: 3}
-  - {fileID: 1450521488085294, guid: 5d38df3483541b24eb4740bb137f8a7e, type: 3}
+  - {fileID: 189736, guid: e74203ea62daad341816376fb141a8b5, type: 3}

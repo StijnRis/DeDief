@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4104548722401179545}
   - component: {fileID: -2137434131597150262}
-  - component: {fileID: -8381559426806178263}
+  - component: {fileID: 8560464263692856925}
   m_Layer: 0
   m_Name: ConferrenceTable
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8381559426806178263
+--- !u!114 &8560464263692856925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,9 +55,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 144861589188783113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6edfb3e0ba893f346b24ca8f28287999, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConferrenceTablePrefabs:
+  scaleDown: 1
+  scaleUp: 1
+  randomOrientationOffset: 0
+  Prefabs:
   - {fileID: 1289936835854364, guid: 2e14b1c602571994f82e0f629cc6312f, type: 3}
   - {fileID: 106888, guid: 24785933d7ceaad4a800f09511c371db, type: 3}
