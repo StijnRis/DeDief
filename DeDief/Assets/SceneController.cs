@@ -12,13 +12,15 @@ public class SceneController : MonoBehaviour
     public GameObject agentPrefab;
 
     private List<GameObject> allAgents = new List<GameObject>();
+    private List<GameObject> corridorFloors = new List<GameObject>();
+
+    private bool startGame = true;
 
     bool followPlayer = false;
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartGame()
     {
-        Debug.Log("Spawned");
+        GetAllCorridorFloors();
         SpawnAgents();
 
         PlacePlayer();
@@ -27,16 +29,10 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        if (startGame) //Run if all of office is loaded
         {
-            Debug.Log("Spawned");
-            SpawnAgents();
-
-            PlacePlayer();
-        }
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            SetTargetAgents(player);
+            StartGame();
+            startGame = !startGame;
         }
     }
 
@@ -44,13 +40,44 @@ public class SceneController : MonoBehaviour
     {        
         for (int i = 0; i < AgentCount; i++)
         {
-            GameObject randomFloor = getRandomFloor();
+            GameObject randomFloor = getRandomCorridorFloor();
             GameObject agent = Instantiate(agentPrefab, randomFloor.transform.position, Quaternion.identity);
+
+            //Create waypoints
+            for (int x = 0; x < 3; x++)
+            {
+                randomFloor = getRandomCorridorFloor();
+                agent.AddComponent<Waypoint>().location = randomFloor.transform.position;
+            }
+
+            //Set first waypoint for agent
+            agent.GetComponent<AgentController>().NextWaypoint();
 
             allAgents.Add(agent);
         }
-
     }
+
+    public void SendNearestAgentToPlayer()
+    {
+        SendNearestAgentTo(player.transform.position);
+    }
+
+    public void SendNearestAgentTo(Vector3 position)
+    {
+        float shortestDistance = int.MaxValue;
+        GameObject nearestAgent = allAgents[0];
+        foreach(GameObject agent in allAgents)
+        {
+            float distance = Vector3.Distance(agent.transform.position, player.transform.position);
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                nearestAgent = agent;
+            }
+        }
+        nearestAgent.GetComponent<AgentController>().currentWaypoint = player.transform.position;
+    }
+
 
     void PlacePlayer()
     {
@@ -59,11 +86,21 @@ public class SceneController : MonoBehaviour
         player.transform.position = randomFloor.transform.position + new Vector3(0,1,0);
     }
 
-    void SetTargetAgents(GameObject target)
+
+    //Floors
+    private void GetAllCorridorFloors()
     {
-        for (int i = 0; i < allAgents.Count; i++)
+        corridorFloors = new List<GameObject>();
+        GameObject[] allFloors = GameObject.FindGameObjectsWithTag("Floor");
+        foreach (GameObject floor in allFloors)
         {
-            allAgents[i].GetComponent<AgentController>().setTarget(player);
+            GameObject parent = floor.transform.parent.gameObject;
+            Debug.Log(parent.name);
+            if (parent.GetComponent<CorridorGenerator>() != null)
+            {
+
+                corridorFloors.Add(floor);
+            }
         }
     }
 
@@ -71,6 +108,12 @@ public class SceneController : MonoBehaviour
     {
         GameObject[] allFloors = GameObject.FindGameObjectsWithTag("Floor");
         GameObject randomFloor = allFloors[Random.Range(0, allFloors.Length - 1)];
+        return randomFloor;
+    }
+
+    GameObject getRandomCorridorFloor()
+    {
+        GameObject randomFloor = corridorFloors[Random.Range(0, corridorFloors.Count - 1)];
         return randomFloor;
     }
 }

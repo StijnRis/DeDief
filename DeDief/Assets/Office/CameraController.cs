@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour
 
     private float rotation;
 
+    private SceneController sceneController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class CameraController : MonoBehaviour
         eye_ball.transform.localRotation = Quaternion.Euler(0, -rotation, 0);
 
         fov = GetComponent<FieldOfView>();
+        sceneController = GetComponentInParent<SceneController>();
     }
 
     // Update is called once per frame
@@ -34,5 +37,11 @@ public class CameraController : MonoBehaviour
         }
         rotation += speed * direction * Time.deltaTime;
         eye_ball.transform.localRotation = Quaternion.Euler(0, -rotation, 0);
+
+        if (fov.canSeePlayer)
+        {
+            sceneController.SendNearestAgentToPlayer();
+            Debug.Log("Sent nearest agent to player");
+        }
     }
 }
