@@ -14,6 +14,10 @@ public class ItemGenerator : MonoBehaviour
     protected BoxCollider prefabBox;
     protected BoxCollider box;
 
+    // for easier screenshotting
+    public bool forceSpecificItem = false;
+    public int itemToForce = 0;
+
     void Start()
     {
         box = GetComponent<BoxCollider>();
@@ -35,7 +39,15 @@ public class ItemGenerator : MonoBehaviour
 
     protected void placeRandom()
     {
-        GameObject StorageBox = Prefabs[Random.Range(0, Prefabs.Length)];
+        GameObject StorageBox;
+        if (forceSpecificItem)
+        {
+            StorageBox = Prefabs[itemToForce];
+        }
+        else
+        {
+            StorageBox = Prefabs[Random.Range(0, Prefabs.Length)];
+        }
         prefab = Instantiate(StorageBox, transform);
         prefabBox = prefab.GetComponent<BoxCollider>();
         if (prefabBox == null)

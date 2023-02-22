@@ -43,8 +43,9 @@ public class Item : Interactable
 			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) + random.NextDouble() * variance);
 		else if (randomizer <= 4)
 			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) - random.NextDouble() * variance);
-        data.InitItem(width, height, itemIcon, canBeRotated, moneyValue, gameObject);
-        promptMessage = "Pick up " + name + " worth €" + moneyValue.ToString();
+        data.InitItem(name, width, height, itemIcon, canBeRotated, moneyValue, gameObject);
+        promptTitle = "Pick up " + name;
+        promptDescription =  "Worth €" + moneyValue.ToString();
         item3d = gameObject;
     }
 

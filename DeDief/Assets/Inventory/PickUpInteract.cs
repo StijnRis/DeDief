@@ -13,12 +13,33 @@ public class PickUpInteract : GridInteract
         if (Input.GetMouseButtonDown(0))
         {
             // Debug.Log(transform.hierarchyCount);
-            if (itemGrid.GetItem(0,0) == null && transform.childCount == 0)
+            if (itemGrid.GetItem(0,0) == null)
             {
-                if (itemObject != itemObject.GetComponent<Item>().item.item3d)
-                    Destroy(itemObject);
-                Destroy(gameObject);
+                if (transform.childCount == 0) {
+                    if (itemObject != itemObject.GetComponent<Item>().item.item3d)
+                        Destroy(itemObject);
+                    // Destroy(gameObject);
+                }
                 // itemObject.SetActive(false);
+            }
+        }
+        if (itemGrid.GetItem(0,0) != null) 
+        {
+            if (itemGrid.GetItem(0,0) == item)
+            {
+                if (itemObject != itemObject.GetComponent<Item>().item.item3d) 
+                {
+                    itemObject.GetComponent<Item>().item.item3d.SetActive(true);
+                }         
+                else
+                {
+                    itemObject.SetActive(true);
+                }
+            }
+            else
+            {
+                itemGrid.GetItem(0,0).item3d.transform.position = itemObject.transform.position;
+                itemGrid.GetItem(0,0).item3d.SetActive(true);
             }
         }
     }

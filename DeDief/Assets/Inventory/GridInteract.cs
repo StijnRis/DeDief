@@ -40,5 +40,6 @@ public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             inventoryController.SelectedItem.gameObject.SetActive(false);
         }
+        inventoryController.tooltip.gameObject.SetActive(false);
     }
 }

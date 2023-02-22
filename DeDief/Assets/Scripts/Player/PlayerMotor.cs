@@ -8,7 +8,7 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool isGrounded;
-    public float speed = 5f;
+    public float walkSpeed = 5f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
     public bool lerpCrouch;
@@ -18,10 +18,13 @@ public class PlayerMotor : MonoBehaviour
     public bool lerpCrawl;
     public bool crawling;
     public float crawlTimer;
+
+    private float speed = 0;
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        speed = walkSpeed;
     }
 
     // Update is called once per frame
@@ -86,17 +89,17 @@ public class PlayerMotor : MonoBehaviour
         crouchTimer = 0;
         lerpCrouch = true;
         if (crouching && !sprinting && !crawling)
-            speed = 2;
+            speed = walkSpeed/2;
         else
-            speed = 5;
+            speed = walkSpeed;
     }
     public void Sprint()
     {
         sprinting = !sprinting;
         if (sprinting && !crouching && !crawling)
-            speed = 8;
+            speed = walkSpeed*2.5f;
         else
-            speed = 5;
+            speed = walkSpeed;
     }
     public void Crawl()
     {
@@ -104,8 +107,8 @@ public class PlayerMotor : MonoBehaviour
         crawlTimer = 0;
         lerpCrawl = true;
         if (crawling && !sprinting && !crouching)
-            speed = 1;
+            speed = walkSpeed/5;
         else
-            speed = 5;
+            speed = walkSpeed;
     }
 }

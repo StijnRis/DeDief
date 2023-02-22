@@ -44,6 +44,8 @@ public class InventoryController : MonoBehaviour
 
     public GameObject panel;
 
+    public ToolTip tooltip;
+
     private void Awake()
     {
         inventoryHighlight = GetComponent<InventoryHighlight>();
@@ -124,6 +126,7 @@ public class InventoryController : MonoBehaviour
     {
         inventoryHighlight.SetObjectAsParent(canvasTransform);    
         inventoryHighlight.Show(false);
+        tooltip.gameObject.SetActive(false);
         PlayerInteract.inventoryOpen = false;
         PickUpInteract[] pickUpGrids = canvas.GetComponentsInChildren<PickUpInteract>();
         foreach (PickUpInteract pickUpInteract in pickUpGrids)
@@ -185,6 +188,21 @@ public class InventoryController : MonoBehaviour
         if (oldPosition == positionOnGrid) { return; }
 
         oldPosition = positionOnGrid;
+
+        itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
+
+        if (itemToHighlight != null)
+        {
+            tooltip.Init(itemToHighlight.itemData.itemName, "Worth: €" + itemToHighlight.itemData.moneyValue.ToString());
+            // tooltip.Init();
+            tooltip.gameObject.SetActive(true);
+            tooltip.transform.position = Input.mousePosition;
+        }
+        else
+        {
+            tooltip.gameObject.SetActive(false);
+        }
+
         if (selectedItem == null)
         {
             itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
@@ -204,6 +222,12 @@ public class InventoryController : MonoBehaviour
         else 
         {
             inventoryHighlight.Show(selectedItemGrid.BoundryCheck(
+                positionOnGrid.x, 
+                positionOnGrid.y, 
+                selectedItem.WIDTH, 
+                selectedItem.HEIGHT
+                ));
+            Debug.Log(selectedItemGrid.BoundryCheck(
                 positionOnGrid.x, 
                 positionOnGrid.y, 
                 selectedItem.WIDTH, 
@@ -267,18 +291,12 @@ public class InventoryController : MonoBehaviour
     {
         Vector2 position = Input.mousePosition;
 
-        // if (selectedItemGrid != null)
-        // {
-        //     RectTransformUtility.ScreenPointToLocalPointInRectangle(selectedItemGrid.rectTransform, Input.mousePosition, null, out position);
-        // }
-
         if (selectedItem != null)
         {
             position.x -= (selectedItem.WIDTH - 1) * ItemGrid.tileSizeWidth / 2;
             position.y += (selectedItem.HEIGHT - 1) * ItemGrid.tileSizeHeight / 2;
         }
 
-        // Debug.Log(selectedItemGrid.GetTileGridPosition(position));
         return selectedItemGrid.GetTileGridPosition(position);
     }
 

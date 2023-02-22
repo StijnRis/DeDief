@@ -68,8 +68,8 @@ public class ItemGrid : MonoBehaviour
 	Vector2Int tileGridPosition = new Vector2Int();
 	public Vector2Int GetTileGridPosition(Vector2 mousePosition)
 	{
-		positionOnGrid.x = mousePosition.x - rectTransform.position.x;
-		positionOnGrid.y = rectTransform.position.y - mousePosition.y;
+		positionOnGrid.x = mousePosition.x - rectTransform.position.x - 0.001f;
+		positionOnGrid.y = rectTransform.position.y - mousePosition.y - 0.001f;
 
 		tileGridPosition.x = (int)(positionOnGrid.x / tileSize.x * InventoryController.screenScale.x);
 		tileGridPosition.y = (int)(positionOnGrid.y / tileSize.y * InventoryController.screenScale.y);

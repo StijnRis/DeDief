@@ -8,7 +8,8 @@ public class InteractableEditor : Editor
         Interactable interactable = (Interactable)target;
         if(target.GetType() == typeof(EventOnlyInteractable))
         {
-            interactable.promptMessage = EditorGUILayout.TextField("Promt Message", interactable.promptMessage);
+            interactable.promptTitle = EditorGUILayout.TextField("Promt Title", interactable.promptTitle);
+            interactable.promptDescription = EditorGUILayout.TextField("Promt Description", interactable.promptDescription);
             EditorGUILayout.HelpBox("EventOnlyInteractable can only use UnityEvents.", MessageType.Info);
             if (interactable.GetComponent<InteractionEvent>() == null)
             {

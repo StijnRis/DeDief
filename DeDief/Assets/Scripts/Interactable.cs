@@ -6,7 +6,9 @@ public abstract class Interactable : MonoBehaviour
 {
     public bool useEvents;
     //message displayer when player is looking at an interactable.
-    public string promptMessage;
+    public string promptTitle;
+
+    public string promptDescription;
 
     //called from player
     public void BaseInteract()

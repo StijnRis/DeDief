@@ -34,18 +34,18 @@ public class PlayerInteract : MonoBehaviour
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * distance);
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, distance, mask) && hitInfo.collider.gameObject.layer == interactableLayer)
+        if (Physics.Raycast(ray, out hitInfo, distance, mask) && hitInfo.collider.gameObject.layer == interactableLayer && !inventoryOpen)
         {
-            if (hitInfo.collider.GetComponent<Interactable>() != null && !inventoryOpen)
+            if (hitInfo.collider.GetComponent<Interactable>() != null)
             {
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
-                playerUI.UpdateText(interactable.promptMessage);
+                // playerUI.UpdateText(interactable.promptMessage);
+                playerUI.ShowToolTip(interactable.promptTitle, interactable.promptDescription);
             }
-            if (hitInfo.collider.GetComponent<Interactable>() != null && !inventoryOpen)
-            {
-                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
-                playerUI.UpdateText(interactable.promptMessage);
-            }
+        }
+        else
+        {
+            playerUI.HideToolTip();
         }
         if (inputManager.onFoot.Interact.triggered)
         {

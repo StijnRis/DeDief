@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33349833437002616}
   - component: {fileID: 23247997477077580}
   - component: {fileID: 65922350140501232}
+  - component: {fileID: -1315907883128692928}
   m_Layer: 9
   m_Name: Laptop_Closed
   m_TagString: Untagged
@@ -97,3 +98,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4128768, y: 0.023818472, z: 0.28103977}
   m_Center: {x: 0, y: 0.029341612, z: -0.00008259714}
+--- !u!114 &-1315907883128692928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189782351792700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b31d458bee939b4b90fcdb9295f49ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useEvents: 0
+  promptTitle: 2
+  promptDescription: 2
+  name: Laptop
+  moneyValue: 200
+  itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
+  width: 2
+  height: 2
+  itemIcon: {fileID: 21300000, guid: 6fbadab2054e22545a3c241f99a0b12f, type: 3}
+  canBeRotated: 0
+  oldPosition: {x: 0, y: 0, z: 0}
+  oldRotation: {x: 0, y: 0, z: 0, w: 0}
+  item: {fileID: 0}
