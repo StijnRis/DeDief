@@ -6,13 +6,15 @@ public class ItemGenerator : MonoBehaviour
 {
     public bool scaleDown = true;
     public bool scaleUp = false;
+    public bool keepAspectRatio = false;
     [Range(0.0f, 180f)]
-    public float randomOrientationOffset = 0;
+    public float maxOrientationOffset = 0;
+    public bool randomPosition = true;
     public GameObject[] Prefabs;
 
+    protected BoxCollider box;
     protected GameObject prefab;
     protected BoxCollider prefabBox;
-    protected BoxCollider box;
 
     // for easier screenshotting
     public bool forceSpecificItem = false;
@@ -22,19 +24,10 @@ public class ItemGenerator : MonoBehaviour
     {
         box = GetComponent<BoxCollider>();
         placeRandom();
-        if (scaleUp && scaleDown)
-        {
-            Scale();
-        } else if (scaleDown)
-        {
-            ScaleDown();
-        } else if (scaleUp)
-        {
-            throw new System.Exception("NOT implemented");
-        }
-        
-        RandomRotation(randomOrientationOffset);
-        setPosition();
+
+        SetScale();
+        SetRotation();
+        SetPosition();
     }
 
     protected void placeRandom()
@@ -56,33 +49,48 @@ public class ItemGenerator : MonoBehaviour
         }
     }
 
-    protected void ScaleDown()
+    protected void SetScale()
     {
-        Vector3 scale = new Vector3(Mathf.Min(1, box.size.x / prefabBox.size.x), Mathf.Min(1, box.size.y / prefabBox.size.y), Mathf.Min(1, box.size.z / prefabBox.size.z));
+        Vector3 scale = Vector3.one;
+        if (scaleUp && scaleDown)
+        {
+            scale = new Vector3(box.size.x / prefabBox.size.x, box.size.y / prefabBox.size.y, box.size.z / prefabBox.size.z);
+        }
+        else if (scaleDown)
+        {
+            scale = new Vector3(Mathf.Min(1, box.size.x / prefabBox.size.x), Mathf.Min(1, box.size.y / prefabBox.size.y), Mathf.Min(1, box.size.z / prefabBox.size.z));
+        }
+        if (keepAspectRatio)
+        {
+            float minScale = Mathf.Min(scale.x, scale.y, scale.z);
+            scale.x = minScale;
+            scale.y = minScale;
+            scale.z = minScale;
+        }
         prefab.transform.localScale = scale;
     }
 
-    protected void Scale()
+    protected void SetRotation()
     {
-        Vector3 scale = new Vector3(box.size.x / prefabBox.size.x, box.size.y / prefabBox.size.y, box.size.z / prefabBox.size.z);
-        prefab.transform.localScale = scale;
+        Quaternion rotation = Quaternion.Euler(prefab.transform.localRotation * new Vector3(0, Random.Range(0, maxOrientationOffset) - Random.Range(0, maxOrientationOffset), 0));
+        prefab.transform.localRotation *= rotation;
     }
 
-    protected void RandomRotation(float maxOffset)
-    {
-        Quaternion rotation = Quaternion.Euler(0, Random.Range(-maxOffset, maxOffset), 0);
-        prefab.transform.localRotation = rotation;
-    }
-
-    protected void setPosition()
+    protected void SetPosition()
     {
         Vector3 position = new Vector3(0, -prefabBox.center.y * prefab.transform.lossyScale.y, 0);
+        Vector3 size = transform.rotation * Vector3.Scale(box.size, transform.lossyScale);
+        Vector3 prefabSize = prefab.transform.rotation * Vector3.Scale(prefabBox.size, prefab.transform.lossyScale);
+        if (randomPosition)
+        {
+            Vector3 extraRoom = size - prefabSize;
+            position.x += Random.Range(-extraRoom.x / 2, extraRoom.x / 2);
+            position.z += Random.Range(-extraRoom.z / 2, extraRoom.z / 2);
+        }
               
         if (!scaleUp)
         {
-            float size = prefab.GetComponent<BoxCollider>().size.y * prefab.transform.lossyScale.y;
-            float maxSize = GetComponent<BoxCollider>().size.y * transform.lossyScale.y;
-            position += new Vector3(0, (size - maxSize) / 2, 0);
+            position += new Vector3(0, (prefabSize.y - size.y) / 2, 0);
         }
         prefab.transform.localPosition = position;
     }

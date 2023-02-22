@@ -58,8 +58,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleDown: 1
   scaleUp: 1
-  moveDown: 1
-  randomOrientationOffset: 0
+  keepAspectRatio: 0
+  maxOrientationOffset: 0
+  randomPosition: 1
   Prefabs:
   - {fileID: 173912, guid: 990ca4a6ba9b900449bc9d4d1a0c0dd0, type: 3}
+  forceSpecificItem: 0
+  itemToForce: 0
