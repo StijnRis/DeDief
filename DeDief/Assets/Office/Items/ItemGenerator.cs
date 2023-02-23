@@ -26,8 +26,8 @@ public class ItemGenerator : MonoBehaviour
         placeRandom();
 
         SetScale();
-        SetRotation();
         SetPosition();
+        SetRotation();
     }
 
     protected void placeRandom()
@@ -52,13 +52,16 @@ public class ItemGenerator : MonoBehaviour
     protected void SetScale()
     {
         Vector3 scale = Vector3.one;
+        Vector3 size = prefab.transform.localRotation * box.size;
+        size = new Vector3(Mathf.Abs(size.x), Mathf.Abs(size.y), Mathf.Abs(size.z));
+        Vector3 prefabSize = prefabBox.size;
         if (scaleUp && scaleDown)
         {
-            scale = new Vector3(box.size.x / prefabBox.size.x, box.size.y / prefabBox.size.y, box.size.z / prefabBox.size.z);
+            scale = new Vector3(size.x / prefabSize.x, size.y / prefabSize.y, size.z / prefabSize.z);
         }
         else if (scaleDown)
         {
-            scale = new Vector3(Mathf.Min(1, box.size.x / prefabBox.size.x), Mathf.Min(1, box.size.y / prefabBox.size.y), Mathf.Min(1, box.size.z / prefabBox.size.z));
+            scale = new Vector3(Mathf.Min(1, size.x / prefabSize.x), Mathf.Min(1, size.y / prefabSize.y), Mathf.Min(1, size.z / prefabSize.z));
         }
         if (keepAspectRatio)
         {
@@ -78,9 +81,10 @@ public class ItemGenerator : MonoBehaviour
 
     protected void SetPosition()
     {
-        Vector3 position = new Vector3(0, -prefabBox.center.y * prefab.transform.lossyScale.y, 0);
-        Vector3 size = transform.rotation * Vector3.Scale(box.size, transform.lossyScale);
-        Vector3 prefabSize = prefab.transform.rotation * Vector3.Scale(prefabBox.size, prefab.transform.lossyScale);
+        Vector3 position = new Vector3(0, -(prefab.transform.localRotation * prefabBox.center).y * (prefab.transform.localRotation * prefab.transform.lossyScale).y, 0);
+        Vector3 size = Vector3.Scale(box.size, transform.lossyScale);
+        Vector3 prefabSize = prefab.transform.localRotation * Vector3.Scale(prefabBox.size, prefab.transform.lossyScale);
+        prefabSize = new Vector3(Mathf.Abs(prefabSize.x), Mathf.Abs(prefabSize.y), Mathf.Abs(prefabSize.z));
         if (randomPosition)
         {
             Vector3 extraRoom = size - prefabSize;

@@ -25,7 +25,6 @@ public class PaintingGenerator : MonoBehaviour
 
     private System.Random random = new System.Random();
 
-    // Start is called before the first frame update
     void Start()
     {
         size = GetComponent<BoxCollider>().size;
@@ -33,12 +32,6 @@ public class PaintingGenerator : MonoBehaviour
         transform.localRotation = Quaternion.identity;
 
         Generate();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void Generate()

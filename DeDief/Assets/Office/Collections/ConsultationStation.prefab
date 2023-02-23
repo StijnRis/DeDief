@@ -64,3 +64,4 @@ MonoBehaviour:
   - {fileID: 6972130960168178915, guid: d8b455efa4168844f9e45f2803ad4e20, type: 3}
   - {fileID: 6179239829115592003, guid: a58ad5e56cca7c5408956ba8e4788cee, type: 3}
   - {fileID: 225616249287543990, guid: cd72bef73e783c448be658a757ce81da, type: 3}
+  DeskPlant: {fileID: 4739735614911746531, guid: 556237e92f524cf4fba953977148afd1, type: 3}

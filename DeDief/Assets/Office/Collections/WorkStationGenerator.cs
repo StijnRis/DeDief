@@ -14,10 +14,10 @@ public class WorkStationGenerator : MonoBehaviour
         BoxCollider box = GetComponent<BoxCollider>();
 
         GameObject desk = Instantiate(Desk, transform);
-        desk.transform.localPosition = new Vector3(0, 0, box.size.z / 4);
-        desk.transform.localRotation = Quaternion.Euler(0, 0, 0);
         BoxCollider deskBox = desk.GetComponent<BoxCollider>();
         deskBox.size = new Vector3(box.size.x, 0.6f * box.size.y, box.size.z / 2);
+        desk.transform.localPosition = new Vector3(0, -box.size.y / 2 + deskBox.size.y / 2, box.size.z / 4);
+        desk.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         float y = desk.transform.localPosition.y + deskBox.size.y / 2;
 
@@ -34,8 +34,8 @@ public class WorkStationGenerator : MonoBehaviour
         pen.transform.localRotation = Quaternion.Euler(0, 180, 0);
 
         GameObject chair = Instantiate(Chair, transform);
-        chair.transform.localPosition = new Vector3(0, 0, -box.size.z / 4);
         BoxCollider chairBox = chair.GetComponent<BoxCollider>();
         chairBox.size = new Vector3(box.size.x, box.size.y, box.size.z / 2);
+        chair.transform.localPosition = new Vector3(0, 0, -box.size.z / 4);
     }
 }

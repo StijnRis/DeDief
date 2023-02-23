@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4739735614911746531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 333227252696605875}
+  - component: {fileID: -5226089731271527062}
+  - component: {fileID: 6982913914776167665}
+  m_Layer: 0
+  m_Name: DeskPlant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &333227252696605875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739735614911746531}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-5226089731271527062
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739735614911746531}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.6, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6982913914776167665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739735614911746531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleDown: 1
+  scaleUp: 0
+  keepAspectRatio: 1
+  maxOrientationOffset: 180
+  randomPosition: 1
+  Prefabs:
+  - {fileID: 2617698962011820525, guid: d641da48ee6840f4f8c003a6f19095ac, type: 3}
+  - {fileID: 8640470755374844992, guid: c704704ca0de429419ceea98f1b44421, type: 3}
+  - {fileID: 7669032077965551175, guid: 73f80879810f29648afd560823fc3efb, type: 3}
+  - {fileID: 3865486808352798005, guid: df5e7f7335dc0044facd211901e17337, type: 3}
+  - {fileID: 8293729888495971942, guid: f9553c6642802dc49ac689eecdba623c, type: 3}
+  - {fileID: 4844499368120676698, guid: 4276babef0842e6478013e92b58080e5, type: 3}
+  - {fileID: 7439922283024258593, guid: 4ad74bef85f096e4f9157b41e000b3c8, type: 3}
+  - {fileID: 378899723050735668, guid: 3062271e642fdba43b4b3c6c00cdea5a, type: 3}
+  forceSpecificItem: 0
+  itemToForce: 0

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1399518772009771956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4607165695299665439}
+  - component: {fileID: -1097127521612442294}
+  - component: {fileID: -1960640005040203603}
+  m_Layer: 0
+  m_Name: WasteBin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4607165695299665439
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399518772009771956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-1097127521612442294
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399518772009771956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 2, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1960640005040203603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399518772009771956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d41fa707ed1a6a46afff851619f1bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleDown: 1
+  scaleUp: 0
+  keepAspectRatio: 1
+  maxOrientationOffset: 0
+  randomPosition: 1
+  Prefabs:
+  - {fileID: 172182, guid: f79f2d361a911834fa32bbe9029eebe2, type: 3}
+  - {fileID: 176140, guid: ae4812b4085471e4d9fa91c480747f82, type: 3}
+  - {fileID: 154402, guid: 6e4ecddde9795734fad196ca9a65354b, type: 3}
+  - {fileID: 182802, guid: f43818c9cb19fac4fa43f52d4a211840, type: 3}
+  forceSpecificItem: 0
+  itemToForce: 0

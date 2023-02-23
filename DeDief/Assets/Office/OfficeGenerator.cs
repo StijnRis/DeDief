@@ -9,6 +9,7 @@ public class OfficeGenerator : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float MaxHallRate = 0.15f;
     public float HallSize = 1.2f;
+    public bool ceiling = true;
     public GameObject Corridor;
     public GameObject Light;
     public GameObject Camera;

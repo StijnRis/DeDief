@@ -13,7 +13,7 @@ public class ConferrenceRoomGenerator : RoomGenerator
         PlaceFloor();
         PlaceDesk();
         PlaceCeiling();
-        GetBackWall().GetComponent<WallGenerator>().placePainting();
+        GetWall(0).GetComponent<WallGenerator>().placePainting();
     }
 
     private void PlaceDesk()

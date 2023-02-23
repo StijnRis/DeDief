@@ -6,6 +6,7 @@ public class ConsultationStationGenerator : MonoBehaviour
 {
     public GameObject Table;
     public GameObject Chair;
+    public GameObject DeskPlant;
     public GameObject[] Items;
 
     void Start()
@@ -60,6 +61,14 @@ public class ConsultationStationGenerator : MonoBehaviour
                 float x = Random.Range(maxX - 1, maxX);
                 item.transform.localPosition = new Vector3(-x, itemY + itemBox.size.y / 2, z);
                 item.transform.localRotation = Quaternion.Euler(new Vector3(0, -90, 0));
+            }
+
+            if (Random.Range(0f, 1f) < 0.7f)
+            {
+                GameObject item = Instantiate(DeskPlant, transform);
+                BoxCollider itemBox = item.GetComponent<BoxCollider>();
+                item.transform.localPosition = new Vector3(0, itemY + itemBox.size.y / 2, z);
+                item.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
     }

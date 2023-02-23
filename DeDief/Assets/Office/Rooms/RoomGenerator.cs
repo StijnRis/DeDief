@@ -69,6 +69,10 @@ public abstract partial class RoomGenerator : MonoBehaviour
 
     protected void PlaceCeiling()
     {
+        if (!GetComponentInParent<OfficeGenerator>().ceiling)
+        {
+            return;
+        }
         GameObject ceiling = GameObject.CreatePrimitive(PrimitiveType.Cube);
         ceiling.transform.SetParent(transform);
         ceiling.transform.localScale = new Vector3(Box.size.x, wallThickness, Box.size.z);
@@ -106,12 +110,12 @@ public abstract partial class RoomGenerator : MonoBehaviour
         Walls.Add(wall);
     }
 
-    protected GameObject GetBackWall()
+    protected GameObject GetWall(float rotation)
     {
         foreach (GameObject wall in Walls)
         {
             Vector3 wallRotation = wall.transform.localRotation.eulerAngles;
-            if (wallRotation.y == 90)
+            if (wallRotation.y == rotation)
             {
                 return wall;
             }

@@ -62,4 +62,6 @@ MonoBehaviour:
   Floor: {fileID: 3660091792651605634, guid: 4c4562c261d099e4ca85f0a7f29a6dd7, type: 3}
   Light: {fileID: 0}
   WorkStation: {fileID: 110388551026490932, guid: c968838f34baadc42ba9b2365bf71ce4, type: 3}
-  Plant: {fileID: 2195484798352071677, guid: ff3ac722a9641334eafcce07a1c4bc86, type: 3}
+  CornerItems:
+  - {fileID: 2195484798352071677, guid: ff3ac722a9641334eafcce07a1c4bc86, type: 3}
+  - {fileID: 1399518772009771956, guid: 51f04b1a2b0bf034082a3fc8eaa681da, type: 3}
