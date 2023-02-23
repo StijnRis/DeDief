@@ -14,6 +14,7 @@ public class OfficeGenerator : MonoBehaviour
     public GameObject Light;
     public GameObject Camera;
     public GameObject Wall;
+    public GameObject Exit;
     public List<RoomType> RoomTypes;
 
     private Area House;
@@ -73,6 +74,10 @@ public class OfficeGenerator : MonoBehaviour
 
 
             (Area chunk_a, Area hall, Area chunk_b) = chunk.SplitThree(HallSize);
+            if (Halls.Count == 0)
+            {
+                hall.exitDoor = true;
+            }
             Chunks.Add(chunk_a);
             Chunks.Add(chunk_b);
             Halls.Add(hall);
@@ -258,6 +263,12 @@ public class OfficeGenerator : MonoBehaviour
         room.transform.localPosition = new Vector3((float)(area.Left + area.GetWidth() / 2), 0, (float)(area.Top + area.GetLength() / 2));
         room.transform.localRotation = rotation;
         room.GetComponent<RoomGenerator>().Light = Light;
+
+        if (area.exitDoor)
+        {
+            ExitDoor exit = room.AddComponent<ExitDoor>();
+            exit.Door = Exit;
+        }
 
         Rooms.Add(room); 
     }

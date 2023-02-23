@@ -9,6 +9,7 @@ public class Area : System.IComparable<Area>
     public float Bottom { get; }
     public List<Area> Doors;
     public RoomType roomType;
+    public bool exitDoor;
 
     public Area(float left, float top, float right, float bottom)
     {
