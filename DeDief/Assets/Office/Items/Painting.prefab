@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4171234872303219770}
   - component: {fileID: 1757855872326989857}
   - component: {fileID: -6252158338380322601}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Painting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,6 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a29702db30d2254784af59c035d3360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Painting
+  moneyValue: 100
+  itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
 --- !u!23 &-6252158338380322601
 MeshRenderer:
   m_ObjectHideFlags: 0

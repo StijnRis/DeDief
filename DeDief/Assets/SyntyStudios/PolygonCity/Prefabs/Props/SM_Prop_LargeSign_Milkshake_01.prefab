@@ -3,15 +3,17 @@
 --- !u!1 &162776
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 470126}
   - component: {fileID: 3375148}
   - component: {fileID: 2332400}
   - component: {fileID: 64837295394645822}
-  m_Layer: 0
+  - component: {fileID: -5766525634113318975}
+  m_Layer: 9
   m_Name: SM_Prop_LargeSign_Milkshake_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20,29 +22,46 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &470126
 Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3375148
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162776}
+  m_Mesh: {fileID: 4300000, guid: 84246483d39d37a45a763afb9bd56849, type: 3}
 --- !u!23 &2332400
 MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162776}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 62e25ef75a2216f418d06453c9ad15cb, type: 2}
   m_StaticBatchInfo:
@@ -52,9 +71,11 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -63,35 +84,43 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &3375148
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 162776}
-  m_Mesh: {fileID: 4300000, guid: 84246483d39d37a45a763afb9bd56849, type: 3}
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 162776}
-  m_IsPrefabParent: 1
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &64837295394645822
 MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162776}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 4
   m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
+  m_CookingOptions: 30
   m_Mesh: {fileID: 43394630795621924, guid: 06cc8d0d43cd6f74fae5399ceeff2be8, type: 2}
+--- !u!114 &-5766525634113318975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b31d458bee939b4b90fcdb9295f49ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useEvents: 0
+  promptTitle: 
+  promptDescription: 
+  name: Milkshake
+  moneyValue: 1
+  itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
+  width: 1
+  height: 1
+  itemIcon: {fileID: 21300000, guid: 1c2c93f48298f9c4daf7e163eacf41d1, type: 3}
+  canBeRotated: 0
+  oldPosition: {x: 0, y: 0, z: 0}
+  oldRotation: {x: 0, y: 0, z: 0, w: 0}
+  item: {fileID: 0}

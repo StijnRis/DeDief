@@ -38,7 +38,7 @@ public class PlayerInteract : MonoBehaviour
         {
             if (hitInfo.collider.GetComponent<Interactable>() != null)
             {
-                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+                Interactable interactable = hitInfo.collider.GetComponent<Interactable>().GetInteractable();
                 // playerUI.UpdateText(interactable.promptMessage);
                 playerUI.ShowToolTip(interactable.promptTitle, interactable.promptDescription);
             }
@@ -63,7 +63,7 @@ public class PlayerInteract : MonoBehaviour
                 if (hitInfo.collider.GetComponent<Interactable>() != null && !inventoryOpen)
                 {
                     // Debug.Log("You can't open your inventory");
-                    Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+                    Interactable interactable = hitInfo.collider.GetComponent<Interactable>().GetInteractable();
                     interactable.BaseInteract();
                 }
             }

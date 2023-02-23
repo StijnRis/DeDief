@@ -13,8 +13,8 @@ public class Item : Interactable
     [Header("In grid settings")]
     // [SerializeField] protected GameObject itemGrid;
     [SerializeField] protected GameObject itemPanel;
-    public int width = 1;
-	public int height = 1;
+    public int width = 0;
+	public int height = 0;
 	public Sprite itemIcon;
 	public bool canBeRotated;
 
@@ -30,23 +30,48 @@ public class Item : Interactable
     protected GameObject item3d;
     protected System.Random random = new System.Random();
 
-    protected void Awake()
+    public void Set(string name, int width, int height, Sprite itemIcon, bool canBeRotated, int moneyValue, GameObject itemPanel)
+    {
+        this.name = name;
+		this.width = width;
+		this.height = height;
+		this.itemIcon = itemIcon;
+		this.canBeRotated = canBeRotated;
+		this.moneyValue = moneyValue;
+        this.itemPanel = itemPanel;
+
+        Init();
+    }
+
+    public void Init()
     {
         data = (ItemData) ScriptableObject.CreateInstance(typeof(ItemData));
-
-        int randomizer = UnityEngine.Random.Range(0,6);
-		/*Debug.Log(randomizer);*/
-		double variance = moneyValue * 0.2;
-		if (variance < 1)
-			variance = 1;
-		if (randomizer <= 2)
-			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) + random.NextDouble() * variance);
-		else if (randomizer <= 4)
-			moneyValue = Convert.ToInt32(Convert.ToDouble(moneyValue) - random.NextDouble() * variance);
         data.InitItem(name, width, height, itemIcon, canBeRotated, moneyValue, gameObject);
         promptTitle = "Pick up " + name;
         promptDescription =  "Worth €" + moneyValue.ToString();
+    }
+
+    protected void Awake()
+    {
         item3d = gameObject;
+        moneyValue = RandomizeMoneyValue(moneyValue);
+
+        if (name != null && width > 0 && height > 0 && itemIcon != null && moneyValue > 0)
+            Init();
+    }
+
+    public int RandomizeMoneyValue(int value)
+    {
+        int randomizer = UnityEngine.Random.Range(0, 6);
+        /*Debug.Log(randomizer);*/
+        double variance = value * 0.2;
+        if (variance < 1)
+            variance = 1;
+        if (randomizer <= 2)
+            value = Convert.ToInt32(Convert.ToDouble(value) + random.NextDouble() * variance);
+        else if (randomizer <= 4)
+            value = Convert.ToInt32(Convert.ToDouble(value) - random.NextDouble() * variance);
+        return value;
     }
 
     protected override void Interact()

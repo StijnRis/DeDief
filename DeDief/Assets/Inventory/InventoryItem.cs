@@ -61,10 +61,3 @@ public class InventoryItem : MonoBehaviour
 		} 	
 	}
 }
-
-public enum PickUpMode 
-{
-	InPlayerInventory,
-	NotPickedUp,
-	PickingUp
-}

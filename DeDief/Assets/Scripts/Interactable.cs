@@ -7,7 +7,6 @@ public abstract class Interactable : MonoBehaviour
     public bool useEvents;
     //message displayer when player is looking at an interactable.
     public string promptTitle;
-
     public string promptDescription;
 
     //called from player
@@ -16,6 +15,11 @@ public abstract class Interactable : MonoBehaviour
         if(useEvents)
             GetComponent<InteractionEvent>().OnInteract.Invoke();
         Interact();
+    }
+
+    public virtual Interactable GetInteractable() 
+    {
+        return this;
     }
 
     protected virtual void Interact()
