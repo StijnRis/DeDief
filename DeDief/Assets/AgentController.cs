@@ -64,8 +64,7 @@ public class AgentController : MonoBehaviour
             if (fov.canSeePlayer && lastShootingTime > 2f)
             {
                 lastShootingTime = 0;
-                /*StartCoroutine("Shoot");
-                StopCoroutine("Shoot");*/
+                Shoot();
             }
             lastShootingTime += Time.deltaTime;
         }
@@ -133,14 +132,9 @@ public class AgentController : MonoBehaviour
         this.currentWaypoint = waypoints[waypointIndex].location;
     }
 
-    IEnumerator Shoot()
+    void Shoot()
     {
-        //Pause agent
-        agent.isStopped = true;
-
-        yield return new WaitForSeconds(0.5f);
-
-        agent.isStopped = false;
+        target.GetComponent<PlayerHealth>().TakeDamage(20f);
     }
 
     private void RotateTowards(Transform target) 

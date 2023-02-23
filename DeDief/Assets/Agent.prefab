@@ -1509,7 +1509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 637eea39bf9705042bf0ce9707ef2e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 12.9
+  radius: 5
   angle: 120
   playerRef: {fileID: 0}
   eyes: {fileID: 7085115894708595518}
@@ -1519,6 +1519,7 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 64
+  log: 0
   canSeePlayer: 0
 --- !u!1 &7085063242255032262
 GameObject:
