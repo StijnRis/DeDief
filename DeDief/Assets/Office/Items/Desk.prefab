@@ -60,7 +60,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleDown: 1
   scaleUp: 1
-  randomOrientationOffset: 7.1
+  keepAspectRatio: 0
+  maxOrientationOffset: 0
+  randomPosition: 1
   Prefabs:
   - {fileID: 1412888549052842, guid: 683ef653b4b09b94993b7fd393c95978, type: 3}
   - {fileID: 1338192570120840, guid: cd74bf6cea4234840b01646a5b3f339a, type: 3}
+  forceSpecificItem: 0
+  itemToForce: 0

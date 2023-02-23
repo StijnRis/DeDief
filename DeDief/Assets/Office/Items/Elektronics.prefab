@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -1865736755200663358}
   - component: {fileID: -6855546915352910320}
   m_Layer: 0
-  m_Name: Laptop
+  m_Name: Elektronics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,8 +60,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleDown: 0
   scaleUp: 0
-  randomOrientationOffset: 26.7
+  keepAspectRatio: 0
+  maxOrientationOffset: 26.6
+  randomPosition: 1
   Prefabs:
   - {fileID: 1189782351792700, guid: 20661e78605491946911818aa730569b, type: 3}
   - {fileID: 1179622459644578, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
   - {fileID: 1382680370001608, guid: 112cc81e36e745449bf229e4dbb3e073, type: 3}
+  - {fileID: 1092883800961010, guid: bd7dac146a034144fb4a57250777c4d9, type: 3}
+  forceSpecificItem: 0
+  itemToForce: 0

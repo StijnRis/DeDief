@@ -5,11 +5,16 @@ using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
+    public GameObject weapon;
+    public Vector3 currentWaypoint;
+
     private NavMeshAgent agent;
     private FieldOfView fov;
     private Animator animator;
     private GameObject target;
-    public GameObject weapon;
+
+    private int waypointIndex = 0;
+    
     
     bool aggregated;
     // bool idling;
@@ -33,13 +38,16 @@ public class AgentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fov.canSeePlayer)
-            setTarget(target);
         aggregated = fov.canSeePlayer;
-        if (Input.GetKeyDown("space"))
+        if (aggregated)
         {
-            aggregated = !aggregated;
+            setTarget(target.transform.position);
+        } else
+        {
+            setTarget(currentWaypoint);
         }
+
+        
         if (weapon != null) {
             if (aggregated)
             {
@@ -54,6 +62,7 @@ public class AgentController : MonoBehaviour
         {
             animator.SetBool("aggregated", false);
         }
+
         if (agent.velocity.magnitude == 0 && !aggregated)
         {
             StartCoroutine("LookAround");
@@ -67,6 +76,8 @@ public class AgentController : MonoBehaviour
         {
             agent.updateRotation = false;
             RotateTowards(target.transform);
+
+            NextWaypoint();
         }
         else 
         {
@@ -76,9 +87,23 @@ public class AgentController : MonoBehaviour
         animator.SetFloat("Move", agent.velocity.magnitude);
     }
 
-    public void setTarget(GameObject target)
+    public void setTarget(Vector3 position)
     {
-        agent.SetDestination(target.transform.position);
+        agent.SetDestination(position);
+    }
+
+    public void NextWaypoint()
+    {
+        Waypoint[] waypoints = GetComponents<Waypoint>();
+        if (waypointIndex + 1 >= waypoints.Length)
+        {
+            waypointIndex = 0;
+        }
+        else
+        {
+            waypointIndex++;
+        }
+        this.currentWaypoint = waypoints[waypointIndex].location;
     }
 
     private void RotateTowards(Transform target) 

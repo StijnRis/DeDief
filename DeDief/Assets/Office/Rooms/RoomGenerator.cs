@@ -30,10 +30,10 @@ public abstract partial class RoomGenerator : MonoBehaviour
 
         List<Vector3> points = new List<Vector3>();
         List<Vector3> noConnectPoints = new List<Vector3>();
-        points.Add(new Vector3(0.5f * Box.size.x, 0, 0.5f * Box.size.z) + new Vector3(-wallThickness / 3, 0, -wallThickness / 3));
-        points.Add(new Vector3(0.5f * Box.size.x, 0, -0.5f * Box.size.z) + new Vector3(-wallThickness / 3, 0, wallThickness / 3));
-        points.Add(new Vector3(-0.5f * Box.size.x, 0, -0.5f * Box.size.z) + new Vector3(wallThickness / 3, 0, wallThickness / 3));
-        points.Add(new Vector3(-0.5f * Box.size.x, 0, 0.5f * Box.size.z) + new Vector3(wallThickness / 3, 0, -wallThickness / 3));
+        points.Add(new Vector3(0.5f * Box.size.x, 0, 0.5f * Box.size.z) + new Vector3(-wallThickness / 2, 0, -wallThickness / 2));
+        points.Add(new Vector3(0.5f * Box.size.x, 0, -0.5f * Box.size.z) + new Vector3(-wallThickness / 2, 0, wallThickness / 2));
+        points.Add(new Vector3(-0.5f * Box.size.x, 0, -0.5f * Box.size.z) + new Vector3(wallThickness / 2, 0, wallThickness / 2));
+        points.Add(new Vector3(-0.5f * Box.size.x, 0, 0.5f * Box.size.z) + new Vector3(wallThickness / 2, 0, -wallThickness / 2));
         foreach (Door door in Doors)
         {
             points.Add(door.Start);
@@ -71,13 +71,13 @@ public abstract partial class RoomGenerator : MonoBehaviour
     {
         GameObject ceiling = GameObject.CreatePrimitive(PrimitiveType.Cube);
         ceiling.transform.SetParent(transform);
-        ceiling.transform.localScale = new Vector3(Box.size.x, 0.1f, Box.size.z);
-        ceiling.transform.position = new Vector3(transform.position.x, transform.position.y + Box.size.y / 2, transform.position.z);
+        ceiling.transform.localScale = new Vector3(Box.size.x, wallThickness, Box.size.z);
+        ceiling.transform.position = new Vector3(transform.position.x, transform.position.y + Box.size.y / 2 - wallThickness, transform.position.z);
         ceiling.transform.rotation = transform.rotation;
         ceiling.name = "Ceiling";
 
         GameObject light = Instantiate(Light, transform);
-        light.transform.localPosition = new Vector3(0, Box.size.y / 2 - ceiling.transform.localScale.y, 0);
+        light.transform.localPosition = new Vector3(0, Box.size.y / 2 - wallThickness * 2, 0);
         light.transform.rotation = Quaternion.Euler(0, 0, 180);
     }
 
@@ -90,8 +90,16 @@ public abstract partial class RoomGenerator : MonoBehaviour
         Vector3 rotation = (endCorner - startCorner).normalized;
         float distance = Vector3.Distance(startCorner, endCorner);
         BoxCollider WallBox = wall.GetComponent<BoxCollider>();
-        WallBox.size = new Vector3(wallThickness, Box.size.y, distance + wallThickness);
-        wall.transform.localPosition = startCorner + distance / 2 * rotation;
+        Vector3 size = new Vector3(wallThickness, Box.size.y - wallThickness, distance);
+        if (rotation.x > 0.5 || rotation.x < -0.5)
+        {
+            size.z += wallThickness;
+        } else
+        {
+            size.z -= wallThickness;
+        }
+        WallBox.size = size;
+        wall.transform.localPosition = startCorner + distance / 2 * rotation - new Vector3(0, wallThickness, 0);
         Quaternion quaternion = Quaternion.LookRotation(rotation, Vector3.up);
         wall.transform.localRotation = quaternion;
 

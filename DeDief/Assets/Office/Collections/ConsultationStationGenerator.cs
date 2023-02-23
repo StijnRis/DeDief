@@ -43,7 +43,7 @@ public class ConsultationStationGenerator : MonoBehaviour
                 float maxX = tableSize.size.x / 2 - itemBox.size.x / 2;
                 float x = Random.Range(maxX - 1, maxX);
                 item.transform.localPosition = new Vector3(x, itemY + itemBox.size.y / 2, z);
-                item.transform.localRotation = Quaternion.Euler(new Vector3(0, -90, 0));
+                item.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
             }
 
             GameObject chair2 = Instantiate(Chair, transform);
@@ -59,7 +59,7 @@ public class ConsultationStationGenerator : MonoBehaviour
                 float maxX = tableSize.size.x / 2 - itemBox.size.x / 2;
                 float x = Random.Range(maxX - 1, maxX);
                 item.transform.localPosition = new Vector3(-x, itemY + itemBox.size.y / 2, z);
-                item.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
+                item.transform.localRotation = Quaternion.Euler(new Vector3(0, -90, 0));
             }
         }
     }
