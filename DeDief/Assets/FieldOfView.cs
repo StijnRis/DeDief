@@ -15,6 +15,8 @@ public class FieldOfView : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstructionMask;
 
+    public bool log = false;
+
     public bool canSeePlayer;
 
     private void Start()
@@ -36,24 +38,34 @@ public class FieldOfView : MonoBehaviour
 
     private void FieldOfViewCheck()
     {
-        // Debug.Log("shit is happenings");
-        Collider[] rangeChecks = Physics.OverlapSphere(eyes.transform.position, radius, targetMask);
+        //Debug.Log("shit is happenings");
+        Vector3 offset = new Vector3(0, 10, 0);
+        Collider[] rangeChecks = Physics.OverlapCapsule(eyes.transform.position - offset, eyes.transform.position + offset, radius, targetMask);
         // Gizmos.DrawWireSphere(eyes.transform.position, radius);
-        // Debug.Log(rangeChecks);
 
         if (rangeChecks.Length != 0)
         {
             Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - eyes.transform.position).normalized;
+            Vector3 directionToTarget = eyes.transform.position - target.position;
+            Vector3 eyeDirection = new Vector3(eyes.transform.forward.x, 0, eyes.transform.forward.z);
 
-            if (Vector3.Angle(eyes.transform.forward, directionToTarget) < angle / 2)
+            if (log)
+            {
+                Debug.Log("angle between " + eyeDirection + " and " + directionToTarget + " gives: " + Vector3.Angle(eyeDirection, directionToTarget));
+            }
+            
+            if (Vector3.Angle(eyeDirection, -directionToTarget) < angle / 2)
             {
                 float distanceToTarget = Vector3.Distance(eyes.transform.position, target.position);
 
                 if (!Physics.Raycast(eyes.transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                {
                     canSeePlayer = true;
+                }
                 else
+                {
                     canSeePlayer = false;
+                }
             }
             else
                 canSeePlayer = false;

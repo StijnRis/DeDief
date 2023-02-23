@@ -14,9 +14,11 @@ public class AgentController : MonoBehaviour
     private GameObject target;
 
     private int waypointIndex = 0;
-    
+    private float followTime = 0;
+    private float lastShootingTime = 0;
     
     bool aggregated;
+    bool followPlayer;
     // bool idling;
 
     float lookPeriod = 5f;
@@ -33,16 +35,41 @@ public class AgentController : MonoBehaviour
         weapon.SetActive(false);
         weapon.GetComponent<AgentWeapon>().agent = gameObject;
         aggregated = false;
+        followPlayer = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         aggregated = fov.canSeePlayer;
-        if (aggregated)
+        if (fov.canSeePlayer)
         {
+            followPlayer = true;
+            followTime = 0;
+        }
+
+        if (followPlayer)
+        {
+            aggregated = true;
             setTarget(target.transform.position);
-        } else
+            if (followTime < 5f)
+            {
+                followTime += Time.deltaTime;
+            }
+            else
+            {
+                followPlayer = false;
+            }
+
+            if (fov.canSeePlayer && lastShootingTime > 2f)
+            {
+                lastShootingTime = 0;
+                /*StartCoroutine("Shoot");
+                StopCoroutine("Shoot");*/
+            }
+            lastShootingTime += Time.deltaTime;
+        }
+        else
         {
             setTarget(currentWaypoint);
         }
@@ -104,6 +131,16 @@ public class AgentController : MonoBehaviour
             waypointIndex++;
         }
         this.currentWaypoint = waypoints[waypointIndex].location;
+    }
+
+    IEnumerator Shoot()
+    {
+        //Pause agent
+        agent.isStopped = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        agent.isStopped = false;
     }
 
     private void RotateTowards(Transform target) 

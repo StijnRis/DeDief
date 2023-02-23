@@ -41,7 +41,6 @@ public class CameraController : MonoBehaviour
         if (fov.canSeePlayer)
         {
             sceneController.SendNearestAgentToPlayer();
-            Debug.Log("Sent nearest agent to player");
         }
     }
 }

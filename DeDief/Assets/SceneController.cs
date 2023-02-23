@@ -65,17 +65,20 @@ public class SceneController : MonoBehaviour
     public void SendNearestAgentTo(Vector3 position)
     {
         float shortestDistance = int.MaxValue;
-        GameObject nearestAgent = allAgents[0];
-        foreach(GameObject agent in allAgents)
+        if (allAgents.Count > 0)
         {
-            float distance = Vector3.Distance(agent.transform.position, player.transform.position);
-            if (distance < shortestDistance)
+            GameObject nearestAgent = allAgents[0];
+            foreach (GameObject agent in allAgents)
             {
-                shortestDistance = distance;
-                nearestAgent = agent;
+                float distance = Vector3.Distance(agent.transform.position, player.transform.position);
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestAgent = agent;
+                }
             }
+            nearestAgent.GetComponent<AgentController>().currentWaypoint = player.transform.position;
         }
-        nearestAgent.GetComponent<AgentController>().currentWaypoint = player.transform.position;
     }
 
 

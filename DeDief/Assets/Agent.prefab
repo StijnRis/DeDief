@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 7085284015364749929}
-  currentWaypoint: {fileID: 0}
+  currentWaypoint: {x: 0, y: 0, z: 0}
 --- !u!195 &7086050464792707583
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1510,7 +1510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 12.9
-  angle: 76
+  angle: 120
   playerRef: {fileID: 0}
   eyes: {fileID: 7085115894708595518}
   targetMask:
