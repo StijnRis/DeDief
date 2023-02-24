@@ -42,6 +42,33 @@ public class PickUpInteract : GridInteract
                 itemGrid.GetItem(0,0).item3d.SetActive(true);
             }
         }
+        // for (int x = 0; x < itemGrid.gridSizeWidth; x++)
+        // {
+        //     for (int y = 0; y < itemGrid.gridSizeHeight; y++)
+        //     {
+        //         Debug.Log(x.ToString() + "," + y.ToString());
+        //         if (itemGrid.GetItem(x,y) != null)
+        //         {
+        //             if (itemGrid.GetItem(x,y) == item)
+        //             {
+        //                 if (itemObject != itemObject.GetComponent<Item>().item.item3d) 
+        //                 {
+        //                     itemObject.GetComponent<Item>().item.item3d.SetActive(true);
+        //                 }         
+        //                 else
+        //                 {
+        //                     itemObject.SetActive(true);
+        //                 }
+        //             }
+        //             else
+        //             {
+        //                 itemGrid.GetItem(x,y).item3d.transform.position = itemObject.transform.position;
+        //                 itemGrid.GetItem(x,y).item3d.SetActive(true);
+        //             }
+        //         }
+        //         Debug.Log("done checks");
+        //     }
+        // }
     }
 
     void OnDestroy()

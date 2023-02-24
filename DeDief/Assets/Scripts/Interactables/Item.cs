@@ -71,6 +71,8 @@ public class Item : Interactable
             value = Convert.ToInt32(Convert.ToDouble(value) + random.NextDouble() * variance);
         else if (randomizer <= 4)
             value = Convert.ToInt32(Convert.ToDouble(value) - random.NextDouble() * variance);
+        if (value == 0)
+            value = 1;
         return value;
     }
 

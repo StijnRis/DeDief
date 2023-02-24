@@ -89,19 +89,10 @@ public class AgentController : MonoBehaviour
             animator.SetBool("aggregated", false);
         }
 
-        if (agent.velocity.magnitude == 0 && !aggregated)
-        {
-            StartCoroutine("LookAround");
-        }
-        else
-        {
-            StopCoroutine("LookAround");
-        }
-
         if(agent.remainingDistance < agent.stoppingDistance) 
         {
-            agent.updateRotation = false;
-            RotateTowards(target.transform);
+            // agent.updateRotation = false;
+            // RotateTowards(target.transform);
 
             NextWaypoint();
         }
@@ -142,31 +133,5 @@ public class AgentController : MonoBehaviour
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
-    }
-
-    IEnumerator LookAround() 
-    {
-        float lookPeriod = 5f; // change look every 5 seconds
-        float maxRotationSpeed = 90f; // turn no faster than 90 degrees per second
-
-        while(true) 
-        {
-            float timeToNextLook = lookPeriod;
-
-            while (timeToNextLook > 0) {
-                // Get random offset from forward
-                float targetYRotation = Random.Range(-90f, 90f);
-
-                // calculate target rotation
-                Quaternion targetRotation = Quaternion.LookRotation(transform.forward) 
-                                        * Quaternion.Euler(0,targetYRotation,0);
-
-                // rotate towards target limited by speed
-                Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotationSpeed * Time.deltaTime);
-
-                timeToNextLook -= Time.deltaTime;
-                yield return null;
-            }
-        }
     }
 }

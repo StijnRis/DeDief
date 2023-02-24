@@ -11,6 +11,10 @@ public class ItemGrid : MonoBehaviour
 
 	InventoryItem[,] inventoryItemSlot;
 
+	public InventoryItem[,] inventory {
+		get => inventoryItemSlot;
+	}
+
 	RectTransform rectTransform;
 
 	public int gridSizeWidth = 20;

@@ -21,10 +21,12 @@ public class PickUpPanel : MonoBehaviour
     {
         itemTitle.text = name;
         valueText.text = "Worth: €" + moneyValue.ToString();
-        pickUpGrid.Init(width, height);
+        int initWidth = width;
+        int initHeight = height;
+        pickUpGrid.Init(initWidth, initHeight);
         pickUpGrid.GetComponent<PickUpInteract>().itemObject = itemObject;
         pickUpGrid.GetComponent<PickUpInteract>().item = item;
-        panelSize = new Vector2(width * ItemGrid.tileSizeWidth + 200, height * ItemGrid.tileSizeHeight + 200) * InventoryController.screenScale;
+        panelSize = new Vector2(initWidth * ItemGrid.tileSizeWidth + 200, initHeight * ItemGrid.tileSizeHeight + 200) * InventoryController.screenScale;
         GetComponent<RectTransform>().sizeDelta = panelSize;
 
         RectTransform gridRect = pickUpGrid.GetComponent<RectTransform>();
