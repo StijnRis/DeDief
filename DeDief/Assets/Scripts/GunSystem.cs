@@ -32,7 +32,7 @@ public class GunSystem : MonoBehaviour
     {
         Ray ray = new Ray(fpsCam.transform.position, fpsCam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * range);
-        if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnemy))
         {
             toolTip.Init("yes", "yes");
         }
@@ -50,13 +50,21 @@ public class GunSystem : MonoBehaviour
         readyToShoot = false;
         Debug.Log("test");
 
-        //RayCast`
+        //RayCast
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnemy))
         {
+            Debug.Log("test2");
             Debug.Log(rayHit.collider.name);
 
             if (rayHit.collider.CompareTag("Agent"))
-                rayHit.collider.GetComponent<PlayerHealth>().TakeDamage(damage);
+            {
+                Debug.Log("test3");
+            }
+
+            if (rayHit.collider.GetComponent<AgentController>() != null)
+            {
+                Debug.Log("test4");
+            }
         }
 
         bulletsLeft--;

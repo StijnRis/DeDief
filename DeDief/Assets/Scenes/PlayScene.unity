@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1578,9 +1578,17 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5139807621314856062, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
+      propertyPath: range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139807621314856062, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: toolTip
       value: 
       objectReference: {fileID: 1543788390}
+    - target: {fileID: 5139807621314856062, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
+      propertyPath: fireRate
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5139807621314856062, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: attachPoint
       value: 
@@ -1591,7 +1599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5139807621314856062, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: whatIsEnemy.m_Bits
-      value: 1024
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6049979406186034731, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: m_Radius
