@@ -11,7 +11,7 @@ public class CorridorGenerator : RoomGenerator
         OnDestroy();
         CreateDoors();
         PlaceFloor();
-        /*PlaceCeiling();*/
+        PlaceCeiling();
         PlaceCameras();
     }
 
