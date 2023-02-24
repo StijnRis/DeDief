@@ -23,7 +23,7 @@ public class SceneController : MonoBehaviour
         GetAllCorridorFloors();
         SpawnAgents();
 
-        PlacePlayer();
+        /*PlacePlayer();*/
     }
 
     // Update is called once per frame
@@ -82,12 +82,12 @@ public class SceneController : MonoBehaviour
     }
 
 
-    void PlacePlayer()
+    /*void PlacePlayer()
     {
         GameObject randomFloor = getRandomFloor();
 
         player.transform.position = randomFloor.transform.position + new Vector3(0,1,0);
-    }
+    }*/
 
 
     //Floors
@@ -98,7 +98,7 @@ public class SceneController : MonoBehaviour
         foreach (GameObject floor in allFloors)
         {
             GameObject parent = floor.transform.parent.gameObject;
-            Debug.Log(parent.name);
+            /*Debug.Log(parent.name);*/
             if (parent.GetComponent<CorridorGenerator>() != null)
             {
 
