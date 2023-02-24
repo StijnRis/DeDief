@@ -125,6 +125,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cfd1539-6e20-4223-b3e2-f6df5e28bf47"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""8fb2e121-20fa-4385-9a25-0def618dfd6d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -290,6 +308,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RotateItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba22d688-7c6e-454f-9ba2-7cde2d5d9517"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f78ef342-3a6b-4181-9a69-5abea2e3b25c"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -827,6 +867,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_RandomItem = m_OnFoot.FindAction("RandomItem", throwIfNotFound: true);
         m_OnFoot_InsertItem = m_OnFoot.FindAction("InsertItem", throwIfNotFound: true);
         m_OnFoot_RotateItem = m_OnFoot.FindAction("RotateItem", throwIfNotFound: true);
+        m_OnFoot_Shoot = m_OnFoot.FindAction("Shoot", throwIfNotFound: true);
+        m_OnFoot_Reload = m_OnFoot.FindAction("Reload", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -909,6 +951,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_RandomItem;
     private readonly InputAction m_OnFoot_InsertItem;
     private readonly InputAction m_OnFoot_RotateItem;
+    private readonly InputAction m_OnFoot_Shoot;
+    private readonly InputAction m_OnFoot_Reload;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -924,6 +968,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @RandomItem => m_Wrapper.m_OnFoot_RandomItem;
         public InputAction @InsertItem => m_Wrapper.m_OnFoot_InsertItem;
         public InputAction @RotateItem => m_Wrapper.m_OnFoot_RotateItem;
+        public InputAction @Shoot => m_Wrapper.m_OnFoot_Shoot;
+        public InputAction @Reload => m_Wrapper.m_OnFoot_Reload;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -966,6 +1012,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @RotateItem.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRotateItem;
                 @RotateItem.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRotateItem;
                 @RotateItem.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRotateItem;
+                @Shoot.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnShoot;
+                @Reload.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -1003,6 +1055,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @RotateItem.started += instance.OnRotateItem;
                 @RotateItem.performed += instance.OnRotateItem;
                 @RotateItem.canceled += instance.OnRotateItem;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -1125,6 +1183,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnRandomItem(InputAction.CallbackContext context);
         void OnInsertItem(InputAction.CallbackContext context);
         void OnRotateItem(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -290,6 +290,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5139807621314856062, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
+      propertyPath: attachPoint
+      value: 
+      objectReference: {fileID: 1838408599}
     - target: {fileID: 6049979406186034731, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: m_Radius
       value: 0.05
@@ -1269,6 +1273,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   building: {fileID: 1831929740}
   meshSurface: {fileID: 0}
+--- !u!4 &1838408599 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2597383515856550141, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
+  m_PrefabInstance: {fileID: 492586739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1908511554
 GameObject:
   m_ObjectHideFlags: 0

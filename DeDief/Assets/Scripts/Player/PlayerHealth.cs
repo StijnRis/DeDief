@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
+        if (health <= 10)
+            Debug.Log(health);
 
     }
 
