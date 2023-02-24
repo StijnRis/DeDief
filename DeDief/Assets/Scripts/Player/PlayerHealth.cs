@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public float chipSpeed = 2f;
     public Image frontHealthBar;
     public Image backHealthBar;
+    public float healTimer = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +22,8 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         health = Mathf.Clamp(health, 0, maxHealth);
+        healTimer = Mathf.Clamp(healTimer, 0, 50);
         UpdateHealthUI();
-        if (health <= 10)
-            Debug.Log(health);
 
     }
 
@@ -52,12 +52,20 @@ public class PlayerHealth : MonoBehaviour
                 percentageComplete = percentageComplete * percentageComplete;
                 frontHealthBar.fillAmount = Mathf.Lerp(fillF, backHealthBar.fillAmount, percentageComplete);
             }
+
+            healTimer -= Time.deltaTime;
+
+            if (healTimer <= 0 && health < 100)
+            {
+                RestoreHealth(1);
+            }
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
         lerpTimer = 0f;
+        healTimer = 10f;
     }
 
     public void RestoreHealth(float heal)

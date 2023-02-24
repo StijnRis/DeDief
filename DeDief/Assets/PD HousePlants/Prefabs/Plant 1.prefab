@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 1781143346985616626}
   - component: {fileID: 4563011901406064696}
   - component: {fileID: 8222944553974889347}
+  - component: {fileID: 8902903805002235931}
   m_Layer: 0
   m_Name: Plant 1
   m_TagString: Untagged
@@ -182,3 +183,28 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5140283650297659984, guid: 1ac80f5c0fda6a5449ca9b77076008ab, type: 3}
+--- !u!114 &8902903805002235931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2617698962011820525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b31d458bee939b4b90fcdb9295f49ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useEvents: 0
+  promptTitle: 
+  promptDescription: 
+  name: Plant
+  moneyValue: 10
+  itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
+  width: 2
+  height: 5
+  itemIcon: {fileID: 21300000, guid: 404e20f7437852f4b92b1e3622410cab, type: 3}
+  canBeRotated: 1
+  oldPosition: {x: 0, y: 0, z: 0}
+  oldRotation: {x: 0, y: 0, z: 0, w: 0}
+  item: {fileID: 0}

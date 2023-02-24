@@ -61,7 +61,7 @@ public class AgentController : MonoBehaviour
                 followPlayer = false;
             }
 
-            if (fov.canSeePlayer && lastShootingTime > 2f)
+            if (fov.canSeePlayer && lastShootingTime > 2f && weapon != null)
             {
                 lastShootingTime = 0;
                 Shoot();

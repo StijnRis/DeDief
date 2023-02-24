@@ -18,25 +18,39 @@ public class GunSystem : MonoBehaviour
     public Transform attachPoint;
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
+    public ToolTip toolTip; 
 
     private void Awake()
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        reloading = false;
+        shooting = false;
     }
 
-    public void Shoot()
+    private void Update()
     {
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0) {
-            Fire();
+        Ray ray = new Ray(fpsCam.transform.position, fpsCam.transform.forward);
+        Debug.DrawRay(ray.origin, ray.direction * range);
+        if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
+        {
+            toolTip.Init("yes", "yes");
         }
     }
 
-    private void Fire()
+    public void Fire()
+    {
+        if (readyToShoot && !shooting && !reloading && bulletsLeft > 0) {
+            Shoot();
+        }
+    }
+
+    private void Shoot()
     {
         readyToShoot = false;
+        Debug.Log("test");
 
-        //RayCast
+        //RayCast`
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnemy))
         {
             Debug.Log(rayHit.collider.name);

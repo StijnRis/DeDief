@@ -24,6 +24,11 @@ public class ToolTip : MonoBehaviour
         description.text = descriptionText;
     }
 
+    public void InitInteract(string titleText, string descriptionText)
+    {
+        
+    }
+
     void Update()
     {
         transform.SetAsLastSibling();

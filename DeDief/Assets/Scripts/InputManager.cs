@@ -23,7 +23,8 @@ public class InputManager : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
         inv = GetComponent<PlayerInteract>();
-        gun = GetComponent<GunSystem>();
+        // gun = GetComponent<GunSystem>();
+        gun = Camera.main.transform.GetChild(0).GetComponent<GunSystem>();
 
         onFoot.Jump.performed += ctx => motor.Jump();
         onFoot.Crouch.performed += ctx => motor.Crouch();
@@ -33,7 +34,7 @@ public class InputManager : MonoBehaviour
         onFoot.Crawl.performed += ctx => motor.Crawl();
         onFoot.Crawl.canceled += ctx => motor.Crawl();
         
-        onFoot.Shoot.performed += ctx => gun.Shoot();
+        onFoot.Shoot.performed += ctx => gun.Fire();
 
         onFoot.Inventory.performed += vtx => inv.OpenInventory();
         onFoot.RandomItem.performed += vtx => inv.GenerateRandomItem();
