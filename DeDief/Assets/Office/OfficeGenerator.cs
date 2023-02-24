@@ -15,6 +15,7 @@ public class OfficeGenerator : MonoBehaviour
     public GameObject Camera;
     public GameObject Wall;
     public GameObject Exit;
+    public GameObject Player;
     public List<RoomType> RoomTypes;
 
     private Area House;
@@ -111,7 +112,7 @@ public class OfficeGenerator : MonoBehaviour
             }
             else
             {
-                Debug.Log("Place "+block.getSizeString() + " for "+roomType.RoomPrefab.name);
+                /*Debug.Log("Place "+block.getSizeString() + " for "+roomType.RoomPrefab.name);*/
                 Coverage[roomType] += (float) block.GetArea();
                 UnreachableAreas.Add(block);
                 block.roomType = roomType;
@@ -171,7 +172,7 @@ public class OfficeGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log("Can not place "+block.getSizeString());
+        /*Debug.Log("Can not place "+block.getSizeString());*/
         if (toBig)
         {
             return (true, null);
@@ -268,6 +269,7 @@ public class OfficeGenerator : MonoBehaviour
         {
             ExitDoor exit = room.AddComponent<ExitDoor>();
             exit.Door = Exit;
+            exit.Player = Player;
         }
 
         Rooms.Add(room); 
