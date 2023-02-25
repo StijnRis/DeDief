@@ -98,4 +98,10 @@ public class ItemGenerator : MonoBehaviour
         }
         prefab.transform.localPosition = position;
     }
+
+    public Interactable GetInteractable()
+    {
+        Interactable interactable = prefab.GetComponent<Item>();
+        return interactable;
+    }
 }

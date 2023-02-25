@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3375160}
   - component: {fileID: 2381166}
   - component: {fileID: 9548090}
-  m_Layer: 0
+  - component: {fileID: -3115789751387453666}
+  m_Layer: 9
   m_Name: waste bin_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,3 +105,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &-3115789751387453666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b31d458bee939b4b90fcdb9295f49ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useEvents: 0
+  promptTitle: 
+  promptDescription: 
+  name: Waste Bin
+  moneyValue: 10
+  itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
+  width: 3
+  height: 5
+  itemIcon: {fileID: 21300000, guid: 5614abb8d9ece4f48aaed4c874a20451, type: 3}
+  canBeRotated: 1
+  oldPosition: {x: 0, y: 0, z: 0}
+  oldRotation: {x: 0, y: 0, z: 0, w: 0}
+  item: {fileID: 0}

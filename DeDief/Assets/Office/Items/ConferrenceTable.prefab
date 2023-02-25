@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4104548722401179545}
   - component: {fileID: -2137434131597150262}
   - component: {fileID: 8560464263692856925}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ConferrenceTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

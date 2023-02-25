@@ -19,7 +19,5 @@ public class UIController : MonoBehaviour
     private void startGame()
     {
         SceneManager.LoadScene("PlayScene", LoadSceneMode.Single);
-
-        // Destroy(gameObject);
     }
 }

@@ -22,7 +22,6 @@ public class PlayerUI : MonoBehaviour
     public void UpdateText(string promptMessage)
     {
         promptText.text = promptMessage;
-        valueText.text = "Total value: €" + ValueCounter.totalValue.ToString();
     }
 
     public void ShowToolTip(string promptTitle, string promptDescription)
