@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Agent.unity
     guid: ffd4d2772932efc418bf1c95cceb55b0
   - enabled: 1
-    path: Assets/Scenes/UITest.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: 5f07e51a4c69f2a4fbd246570e36fbdc
   - enabled: 1
     path: Assets/Scenes/WorldGeneration.unity
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayScene.unity
     guid: d630851887c84814d91a072b134891aa
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: a086b401439383941a7fa549d3cc06eb
   m_configObjects: {}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
@@ -14,16 +15,44 @@ public class SceneController : MonoBehaviour
     private List<GameObject> allAgents = new List<GameObject>();
     private List<GameObject> corridorFloors = new List<GameObject>();
 
-    private bool startGame = true;
+    [HideInInspector] public bool startGame = false;
+    [HideInInspector] public bool prepareGame = false;
+    [HideInInspector] public bool gameisRunning = false;
+    [HideInInspector] public bool endGame = false;
+
+    public GameObject mainMenuPrefab;
+    public GameObject gameOverPrefab;
+    public ValueCounter valueCounter;
+
+    public static int totalValue = 0;
 
     bool followPlayer = false;
 
-    public void StartGame()
+    // Game flow
+    private void StartGame()
     {
+        ResetGame();
+        
         GetAllCorridorFloors();
         SpawnAgents();
 
-        /*PlacePlayer();*/
+        PlacePlayer();
+
+        startGame = !startGame;
+        gameisRunning = true;
+    }
+
+    private void EndGame()
+    {
+        // GameOverController gameOverController = Instantiate(gameOverPrefab).GetComponent<GameOverController>();
+        
+        // gameOverController.mainMenuPrefab = mainMenuPrefab;
+        // gameOverController.SetMoneyValue(moneyValue);
+
+        SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+
+        gameisRunning = false;
+        endGame = false;
     }
 
     // Update is called once per frame
@@ -32,7 +61,15 @@ public class SceneController : MonoBehaviour
         if (startGame) //Run if all of office is loaded
         {
             StartGame();
-            startGame = !startGame;
+            // Cursor.lockState = CursorLockMode.Locked;
+        }
+        if (gameisRunning)
+        {
+            totalValue = valueCounter.totalValue;
+            if (endGame)
+            {
+                EndGame();
+            }
         }
     }
 
@@ -82,12 +119,17 @@ public class SceneController : MonoBehaviour
     }
 
 
-    /*void PlacePlayer()
+    void PlacePlayer()
     {
         GameObject randomFloor = getRandomFloor();
 
         player.transform.position = randomFloor.transform.position + new Vector3(0,1,0);
-    }*/
+    }
+
+    private void ResetGame()
+    {
+        valueCounter.totalValue = 0;
+    }
 
 
     //Floors

@@ -145,6 +145,7 @@ MonoBehaviour:
   frontHealthBar: {fileID: 318055742}
   backHealthBar: {fileID: 1446182564}
   healTimer: 0
+  sceneController: {fileID: 0}
 --- !u!1 &89180609
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,6 +974,10 @@ PrefabInstance:
       propertyPath: AgentCount
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6791950901422500101, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+      propertyPath: valueCounter
+      value: 
+      objectReference: {fileID: 2142663773}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: Camera
       value: 

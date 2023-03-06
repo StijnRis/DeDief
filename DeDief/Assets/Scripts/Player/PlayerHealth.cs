@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,13 @@ public class PlayerHealth : MonoBehaviour
     public Image frontHealthBar;
     public Image backHealthBar;
     public float healTimer = 0f;
+
+    public SceneController sceneController;
+
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
+        ResetHealth();
     }
 
     // Update is called once per frame
@@ -31,34 +35,40 @@ public class PlayerHealth : MonoBehaviour
     {
         // Debug.Log(health);
         
-            float fillF = frontHealthBar.fillAmount;
-            float fillB = backHealthBar.fillAmount;
-            float hFraction = health / maxHealth;
-            if(fillB > hFraction)
-            {
-                frontHealthBar.fillAmount = hFraction;
-                backHealthBar.color = Color.red;
-                lerpTimer += Time.deltaTime;
-                float percentageComplete = lerpTimer / chipSpeed;
-                percentageComplete = percentageComplete * percentageComplete;
-                backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentageComplete);
-            }
-            if(fillF < hFraction)
-            {
-                backHealthBar.fillAmount = hFraction;
-                backHealthBar.color = Color.green;
-                lerpTimer += Time.deltaTime;
-                float percentageComplete = lerpTimer / chipSpeed;
-                percentageComplete = percentageComplete * percentageComplete;
-                frontHealthBar.fillAmount = Mathf.Lerp(fillF, backHealthBar.fillAmount, percentageComplete);
-            }
+        float fillF = frontHealthBar.fillAmount;
+        float fillB = backHealthBar.fillAmount;
+        float hFraction = health / maxHealth;
+        if(fillB > hFraction)
+        {
+            frontHealthBar.fillAmount = hFraction;
+            backHealthBar.color = Color.red;
+            lerpTimer += Time.deltaTime;
+            float percentageComplete = lerpTimer / chipSpeed;
+            percentageComplete = percentageComplete * percentageComplete;
+            backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentageComplete);
+        }
+        if(fillF < hFraction)
+        {
+            backHealthBar.fillAmount = hFraction;
+            backHealthBar.color = Color.green;
+            lerpTimer += Time.deltaTime;
+            float percentageComplete = lerpTimer / chipSpeed;
+            percentageComplete = percentageComplete * percentageComplete;
+            frontHealthBar.fillAmount = Mathf.Lerp(fillF, backHealthBar.fillAmount, percentageComplete);
+        }
 
-            healTimer -= Time.deltaTime;
+        healTimer -= Time.deltaTime;
 
-            if (healTimer <= 0 && health < 100)
-            {
-                RestoreHealth(1);
-            }
+        if (healTimer <= 0 && health < 100)
+        {
+            RestoreHealth(1);
+        }
+
+        if (health <= 0)
+        {
+            sceneController = GameObject.FindGameObjectWithTag("Office").GetComponent<SceneController>();
+            sceneController.endGame = true;
+        }
     }
 
     public void TakeDamage(float damage)
@@ -71,6 +81,12 @@ public class PlayerHealth : MonoBehaviour
     public void RestoreHealth(float heal)
     {
         health += heal;
+        lerpTimer = 0f;
+    }
+
+    public void ResetHealth()
+    {
+        health = maxHealth;
         lerpTimer = 0f;
     }
 }
