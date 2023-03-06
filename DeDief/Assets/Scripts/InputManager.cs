@@ -35,6 +35,7 @@ public class InputManager : MonoBehaviour
         onFoot.Crawl.canceled += ctx => motor.Crawl();
         
         onFoot.Shoot.performed += ctx => gun.Fire();
+        onFoot.Reload.performed += ctx => gun.Reload();
 
         onFoot.Inventory.performed += vtx => inv.OpenInventory();
         onFoot.RandomItem.performed += vtx => inv.GenerateRandomItem();
