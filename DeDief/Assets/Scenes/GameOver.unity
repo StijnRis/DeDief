@@ -186,6 +186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneController: {fileID: 0}
   moneyValue: 0
+  everStolenValue: 0
+  loadingScreen: {fileID: 3064073568696287886, guid: f21bd98212ea8a74baef9cbc04499cb1, type: 3}
 --- !u!1 &940743142
 GameObject:
   m_ObjectHideFlags: 0

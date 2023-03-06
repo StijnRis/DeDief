@@ -9,6 +9,7 @@ public class AgentController : MonoBehaviour
     public Vector3 currentWaypoint;
     public GameObject agentObject;
     public bool destroyed = false;
+    public float agentDamage;
 
     private NavMeshAgent agent;
     private FieldOfView fov;
@@ -72,6 +73,17 @@ public class AgentController : MonoBehaviour
         }
         else
         {
+            if(agent.remainingDistance < agent.stoppingDistance) 
+            {
+                // agent.updateRotation = false;
+                // RotateTowards(target.transform);
+
+                NextWaypoint();
+            }
+            else 
+            {
+                agent.updateRotation = true;
+            }
             setTarget(currentWaypoint);
         }
 
@@ -91,17 +103,7 @@ public class AgentController : MonoBehaviour
             animator.SetBool("aggregated", false);
         }
 
-        if(agent.remainingDistance < agent.stoppingDistance) 
-        {
-            // agent.updateRotation = false;
-            // RotateTowards(target.transform);
-
-            NextWaypoint();
-        }
-        else 
-        {
-            agent.updateRotation = true;
-        }
+        
         
         animator.SetFloat("Move", agent.velocity.magnitude);
     }
@@ -127,7 +129,7 @@ public class AgentController : MonoBehaviour
 
     void Shoot()
     {
-        target.GetComponent<PlayerHealth>().TakeDamage(20f);
+        target.GetComponent<PlayerHealth>().TakeDamage(agentDamage);
     }
 
     private void RotateTowards(Transform target) 

@@ -4,8 +4,8 @@
             <ui:Label text="Game Over" display-tooltip-when-elided="true" name="Title" style="font-size: 69px; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
         <ui:VisualElement style="align-items: center;">
-            <ui:Label text="Total value of stolen items: " display-tooltip-when-elided="true" name="ValueLabel" style="font-size: 42px; color: rgb(255, 255, 255);" />
-            <ui:Label text="€0" display-tooltip-when-elided="true" name="ValueText" style="font-size: 42px; color: rgb(255, 255, 255);" />
+            <ui:Label text="Total value of inventory: €0" display-tooltip-when-elided="true" name="ValueText" style="font-size: 42px; color: rgb(255, 255, 255);" />
+            <ui:Label text="Total value ever stolen: €0" display-tooltip-when-elided="true" name="EverStolenText" style="font-size: 42px; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
         <ui:VisualElement style="align-items: center; justify-content: space-around; flex-direction: row; height: auto;">
             <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="MenuButton" style="font-size: 50px; padding-left: 50px; padding-right: 50px; padding-top: 10px; padding-bottom: 10px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);" />

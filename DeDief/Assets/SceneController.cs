@@ -25,6 +25,7 @@ public class SceneController : MonoBehaviour
     public ValueCounter valueCounter;
 
     public static int totalValue = 0;
+    public static int totalEverStolen = 0;
 
     bool followPlayer = false;
 
@@ -36,7 +37,7 @@ public class SceneController : MonoBehaviour
         GetAllCorridorFloors();
         SpawnAgents();
 
-        PlacePlayer();
+        // PlacePlayer();
 
         startGame = !startGame;
         gameisRunning = true;
@@ -119,16 +120,17 @@ public class SceneController : MonoBehaviour
     }
 
 
-    void PlacePlayer()
-    {
-        GameObject randomFloor = getRandomFloor();
+    // void PlacePlayer()
+    // {
+    //     GameObject randomFloor = getRandomFloor();
 
-        player.transform.position = randomFloor.transform.position + new Vector3(0,1,0);
-    }
+    //     player.transform.position = randomFloor.transform.position + new Vector3(0,1,0);
+    // }
 
     private void ResetGame()
     {
         valueCounter.totalValue = 0;
+        totalEverStolen = 0;
     }
 
 

@@ -1478,6 +1478,7 @@ MonoBehaviour:
   currentWaypoint: {x: 0, y: 0, z: 0}
   agentObject: {fileID: 7085054231635045054}
   destroyed: 0
+  agentDamage: 40
 --- !u!195 &7086050464792707583
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1521,7 +1522,7 @@ MonoBehaviour:
     m_Bits: 256
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 704
   log: 0
   canSeePlayer: 0
 --- !u!136 &7156502666985907720

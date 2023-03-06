@@ -7,7 +7,11 @@ using UnityEngine.SceneManagement;
 public class GameOverController : UIController
 {
     public int moneyValue = 0;
+    public int everStolenValue = 0;
     private Label valueText;
+    private Label everStolenText;
+
+    public GameObject loadingScreen;
 
     protected override void UISetup()
     {
@@ -17,23 +21,27 @@ public class GameOverController : UIController
         Button menuButton = root.Q<Button>("MenuButton");
         Button playButton = root.Q<Button>("PlayButton");
         valueText = root.Q<Label>("ValueText");
+        everStolenText = root.Q<Label>("EverStolenText");
 
         moneyValue = SceneController.totalValue;
-        SetMoneyValue(moneyValue);
+        everStolenValue = SceneController.totalEverStolen;
+        SetMoneyValue(moneyValue, everStolenValue);
 
         menuButton.clicked += () => MainMenu();
         playButton.clicked += () => PlayAgain();
     }
 
-    public void SetMoneyValue(int moneyValue)
+    public void SetMoneyValue(int moneyValue, int everStolenValue)
     {
-        valueText.text = "€" + moneyValue.ToString();
+        valueText.text = "Total value of inventory: €" + moneyValue.ToString();
+        everStolenText.text = "Total value ever stolen: €" + everStolenValue.ToString();
     }
 
     private void PlayAgain()
     {
         Debug.Log("clack");
         SceneManager.LoadScene("PlayScene", LoadSceneMode.Single);
+        Instantiate(loadingScreen);
         Destroy(gameObject);
     }
 
@@ -41,6 +49,7 @@ public class GameOverController : UIController
     {
         Debug.Log("click");
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        Instantiate(loadingScreen);
         Destroy(gameObject);
     }
 

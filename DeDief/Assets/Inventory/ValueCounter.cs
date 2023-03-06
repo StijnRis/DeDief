@@ -24,6 +24,7 @@ public class ValueCounter : MonoBehaviour
     public void AddValue(int valueToAdd)
     {
         totalValue += valueToAdd;
+        SceneController.totalEverStolen += valueToAdd;
     }
 
     public void SubtractValue(int valueToSubtract)

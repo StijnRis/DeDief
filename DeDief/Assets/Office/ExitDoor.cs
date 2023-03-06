@@ -7,6 +7,8 @@ public class ExitDoor : MonoBehaviour
     public GameObject Door;
     public GameObject Player;
 
+    public SceneController sceneController;
+
     void Start()
     {
         Vector3 size = GetComponentInParent<BoxCollider>().size;

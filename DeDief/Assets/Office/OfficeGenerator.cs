@@ -30,6 +30,7 @@ public class OfficeGenerator : MonoBehaviour
 
     private void Start()
     {
+        sceneController = GetComponent<SceneController>();
         Generate();
     }
 
@@ -273,6 +274,9 @@ public class OfficeGenerator : MonoBehaviour
         if (area.exitDoor)
         {
             ExitDoor exit = room.AddComponent<ExitDoor>();
+            ExitDoorCollider exitDoorCollider = Exit.GetComponent<ExitDoorCollider>();
+            exitDoorCollider.Player = Player;
+            exitDoorCollider.sceneController = sceneController;
             exit.Door = Exit;
             exit.Player = Player;
         }
