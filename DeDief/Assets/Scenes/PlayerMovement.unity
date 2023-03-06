@@ -338,7 +338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 1
-  promptMessage: Damage Player
+  promptTitle: 
+  promptDescription: 
 --- !u!1 &436870022
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +700,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 0
-  promptMessage: Open Door
+  promptTitle: 
+  promptDescription: 
   door: {fileID: 1245225033}
 --- !u!1001 &552618333
 PrefabInstance:
@@ -776,14 +778,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 0
-  promptMessage: Pick Up
+  promptTitle: 
+  promptDescription: 
   name: Item
   moneyValue: 0
-  itemGrid: {fileID: 8903500935582915608, guid: 0e4c092012d38f64b88541ac77c5a825, type: 3}
+  itemPanel: {fileID: 0}
   width: 1
   height: 1
   itemIcon: {fileID: 0}
   canBeRotated: 0
+  oldPosition: {x: 0, y: 0, z: 0}
+  oldRotation: {x: 0, y: 0, z: 0, w: 0}
+  item: {fileID: 0}
 --- !u!54 &572058603
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -831,14 +837,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 0
-  promptMessage: Pick Up
+  promptTitle: 
+  promptDescription: 
   name: Item
   moneyValue: 0
-  itemGrid: {fileID: 8903500935582915608, guid: 0e4c092012d38f64b88541ac77c5a825, type: 3}
+  itemPanel: {fileID: 0}
   width: 1
   height: 1
   itemIcon: {fileID: 0}
   canBeRotated: 0
+  oldPosition: {x: 0, y: 0, z: 0}
+  oldRotation: {x: 0, y: 0, z: 0, w: 0}
+  item: {fileID: 0}
 --- !u!65 &593144962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -929,7 +939,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 1
-  promptMessage: Heal Player
+  promptTitle: 
+  promptDescription: 
 --- !u!65 &640754365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1329,6 +1340,7 @@ MonoBehaviour:
   chipSpeed: 2
   frontHealthBar: {fileID: 123040934}
   backHealthBar: {fileID: 1408395762}
+  healTimer: 0
 --- !u!1 &836849549 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8903500935582915608, guid: f1f39b9ad67b9e44da3146b6925b6499, type: 3}
@@ -1994,6 +2006,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ba90134ba96e949b4c956aff1df4ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  valueText: {fileID: 0}
+  totalValue: 0
 --- !u!1 &1408395760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2734,6 +2748,10 @@ PrefabInstance:
     - target: {fileID: 2547903990938567704, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597383515856550138, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2597383515856550141, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: m_LocalRotation.w
