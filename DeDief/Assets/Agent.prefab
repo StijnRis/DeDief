@@ -1476,6 +1476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 7085284015364749929}
   currentWaypoint: {x: 0, y: 0, z: 0}
+  agentObject: {fileID: 7085054231635045054}
+  destroyed: 0
 --- !u!195 &7086050464792707583
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2921,6 +2923,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7086871110313415822}
     m_Modifications:
+    - target: {fileID: 1324608018887474, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
+      propertyPath: m_Name
+      value: Trigger2
+      objectReference: {fileID: 0}
     - target: {fileID: 1324608018887474, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
       propertyPath: m_Layer
       value: 9

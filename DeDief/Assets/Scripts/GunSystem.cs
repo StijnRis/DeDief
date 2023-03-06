@@ -1,4 +1,4 @@
-
+using TMPro;
 using UnityEngine;
 
 public class GunSystem : MonoBehaviour
@@ -18,7 +18,9 @@ public class GunSystem : MonoBehaviour
     public Transform attachPoint;
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
-    public ToolTip toolTip; 
+    public ToolTip toolTip;
+
+    public TextMeshProUGUI ammo;
 
     private void Awake()
     {
@@ -30,12 +32,7 @@ public class GunSystem : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = new Ray(fpsCam.transform.position, fpsCam.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * range);
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnemy))
-        {
-            toolTip.Init("yes", "yes");
-        }
+        ammo.SetText(bulletsLeft + " / " + magazineSize);
     }
 
     public void Fire()
@@ -48,22 +45,20 @@ public class GunSystem : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
-        Debug.Log("test");
 
         //RayCast
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnemy))
         {
-            Debug.Log("test2");
             Debug.Log(rayHit.collider.name);
+            
 
             if (rayHit.collider.CompareTag("Agent"))
             {
-                Debug.Log("test3");
-            }
-
-            if (rayHit.collider.GetComponent<AgentController>() != null)
-            {
-                Debug.Log("test4");
+                AgentController destr = rayHit.collider.GetComponent<AgentController>();
+                if (destr.destroyed == false)
+                {
+                    rayHit.collider.GetComponent<AgentController>().Destroy();
+                }
             }
         }
 

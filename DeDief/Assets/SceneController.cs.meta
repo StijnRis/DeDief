@@ -3,7 +3,9 @@ guid: 24f5ae6c07b62104c93acee9db68cc35
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - agentPrefab: {fileID: 7085054231635045054, guid: aab5d19b74103cd4d96bce6d6b6aed4b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

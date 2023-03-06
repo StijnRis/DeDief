@@ -7,6 +7,8 @@ public class AgentController : MonoBehaviour
 {
     public GameObject weapon;
     public Vector3 currentWaypoint;
+    public GameObject agentObject;
+    public bool destroyed = false;
 
     private NavMeshAgent agent;
     private FieldOfView fov;
@@ -133,5 +135,14 @@ public class AgentController : MonoBehaviour
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+    }
+
+    public void Destroy()
+    {
+        if (!destroyed)
+        {
+            DestroyObject(agentObject);
+            destroyed = true;
+        }
     }
 }
