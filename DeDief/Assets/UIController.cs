@@ -6,18 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+    public SceneController sceneController;
 
     private void OnEnable()
     {
-        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-
-        Button startButton = root.Q<Button>("StartButton");
-
-        startButton.clicked += () => startGame();
+        // sceneController = GameObject.FindGameObjectWithTag("Office").GetComponent<SceneController>();
+        // transform.SetAsLastSibling();
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UISetup();
     }
 
-    private void startGame()
+    protected virtual void UISetup()
     {
-        SceneManager.LoadScene("PlayScene", LoadSceneMode.Single);
+
     }
 }

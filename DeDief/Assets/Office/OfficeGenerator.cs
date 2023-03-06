@@ -26,6 +26,8 @@ public class OfficeGenerator : MonoBehaviour
 
     private IDictionary<RoomType, float> Coverage;
 
+    public SceneController sceneController;
+
     private void Start()
     {
         Generate();
@@ -63,6 +65,9 @@ public class OfficeGenerator : MonoBehaviour
         }
 
         placeSurroundingWalls();
+
+        sceneController = GetComponent<SceneController>();
+        sceneController.startGame = true;
     }
 
     private void ChunksToBlocks()

@@ -46,7 +46,7 @@ public class InventoryController : MonoBehaviour
 
     public ToolTip tooltip;
 
-    private void Awake()
+    private void Start()
     {
         inventoryHighlight = GetComponent<InventoryHighlight>();
         canvasTransform = canvas.GetComponent<RectTransform>();
