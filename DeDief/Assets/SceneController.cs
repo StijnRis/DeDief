@@ -96,8 +96,15 @@ public class SceneController : MonoBehaviour
 
         //Set first waypoint for agent
         agent.GetComponent<AgentController>().NextWaypoint();
-
-        allAgents.Add(agent);
+    }
+    
+    public List<GameObject> GetAllAgents() {
+        List<GameObject> list = new List<GameObject>();
+        GameObject[] allAgents = FindGameObjectsWithTag("Agent");
+        foreach (GameObject agent in allAgents) {
+            list.Add(agent);
+        }
+        return list;
     }
 
     public void SendNearestAgentToPlayer()
@@ -108,6 +115,7 @@ public class SceneController : MonoBehaviour
     public void SendNearestAgentTo(Vector3 position)
     {
         float shortestDistance = int.MaxValue;
+        allAgents = GetAllAgents();
         if (allAgents.Count > 0)
         {
             GameObject nearestAgent = allAgents[0];
