@@ -83,6 +83,8 @@ public class PantryRoomGenerator : RoomGenerator
             rack.transform.Translate(new Vector3(-rackDepth * 0.5f, bottomPosition, mostLeftPosition + rackWidth * i), wall.transform);
 
             rack.transform.rotation = wall.transform.rotation * Quaternion.Euler(0, -90, 0);
+
+            rack.AddComponent<Value>().value = value / rackAmount;
         }
     }
 }

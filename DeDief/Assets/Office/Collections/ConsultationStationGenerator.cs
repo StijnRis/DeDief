@@ -11,12 +11,14 @@ public class ConsultationStationGenerator : MonoBehaviour
 
     void Start()
     {
+        float value = GetComponent<Value>().value;
         BoxCollider box = GetComponent<BoxCollider>();
 
         Vector3 chairSize = new Vector3(1, 2, 1);
         Vector3 deskSize = new Vector3(box.size.x - chairSize.x * 2, 0.7f, box.size.z);
 
         GameObject table = Instantiate(Table, transform);
+        table.AddComponent<Value>().value = 0.5f * value;
         BoxCollider tableSize = table.GetComponent<BoxCollider>();
         tableSize.size = deskSize;
 
@@ -32,6 +34,7 @@ public class ConsultationStationGenerator : MonoBehaviour
             float z = -0.5f * (amount_of_chairs - 1) + chairSize.z * i;
 
             GameObject chair1 = Instantiate(Chair, transform);
+            chair1.AddComponent<Value>().value = 0.4f * value / amount_of_chairs;
             chair1.transform.localPosition = new Vector3(x1, -box.size.y / 2 + chairSize.y / 2, z);
             chair1.transform.localRotation = Quaternion.Euler(new Vector3(0, -90, 0));
             BoxCollider chair1Box = chair1.GetComponent<BoxCollider>();
@@ -40,6 +43,7 @@ public class ConsultationStationGenerator : MonoBehaviour
             if (Random.Range(0f, 1f) < 0.5f)
             {
                 GameObject item = Instantiate(getRandomItem(), transform);
+                item.AddComponent<Value>().value = 0.1f * value;
                 BoxCollider itemBox = item.GetComponent<BoxCollider>();
                 float maxX = tableSize.size.x / 2 - itemBox.size.x / 2;
                 float x = Random.Range(maxX - 1, maxX);
@@ -48,6 +52,7 @@ public class ConsultationStationGenerator : MonoBehaviour
             }
 
             GameObject chair2 = Instantiate(Chair, transform);
+            chair2.AddComponent<Value>().value = 0.4f * value / amount_of_chairs;
             chair2.transform.localPosition = new Vector3(x2, -box.size.y / 2 + chairSize.y / 2, z);
             chair2.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
             BoxCollider chair2Box = chair2.GetComponent<BoxCollider>();
@@ -56,6 +61,7 @@ public class ConsultationStationGenerator : MonoBehaviour
             if (Random.Range(0f, 1f) < 0.5f)
             {
                 GameObject item = Instantiate(getRandomItem(), transform);
+                item.AddComponent<Value>().value = 0.1f * value;
                 BoxCollider itemBox = item.GetComponent<BoxCollider>();
                 float maxX = tableSize.size.x / 2 - itemBox.size.x / 2;
                 float x = Random.Range(maxX - 1, maxX);
@@ -66,6 +72,7 @@ public class ConsultationStationGenerator : MonoBehaviour
             if (Random.Range(0f, 1f) < 0.7f)
             {
                 GameObject item = Instantiate(DeskPlant, transform);
+                item.AddComponent<Value>().value = 0.1f * value;
                 BoxCollider itemBox = item.GetComponent<BoxCollider>();
                 item.transform.localPosition = new Vector3(0, itemY + itemBox.size.y / 2, z);
                 item.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -78,6 +85,4 @@ public class ConsultationStationGenerator : MonoBehaviour
         int x = Random.Range(0, Items.Length);
         return Items[x];
     }
-
-
 }

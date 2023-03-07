@@ -115,7 +115,7 @@ MonoBehaviour:
   promptTitle: 
   promptDescription: 
   name: Milkshake
-  moneyValue: 1
+  moneyValue: 8
   itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
   width: 1
   height: 1

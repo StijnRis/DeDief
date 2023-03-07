@@ -116,7 +116,7 @@ MonoBehaviour:
   promptTitle: 
   promptDescription: 
   name: Plant
-  moneyValue: 10
+  moneyValue: 2
   itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
   width: 2
   height: 2

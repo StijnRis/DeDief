@@ -30,18 +30,55 @@ public class ItemGenerator : MonoBehaviour
         SetRotation();
     }
 
+    public float GetAverageValue()
+    {
+        float total = 0;
+        foreach (GameObject prefab in Prefabs)
+        {
+            Item itemCard = prefab.GetComponent<Item>();
+            if (itemCard != null)
+            {
+                total += itemCard.moneyValue;
+            }
+        }
+        return total;
+    }
+
     protected void placeRandom()
     {
-        GameObject StorageBox;
+        Value value = GetComponent<Value>();
+        GameObject item;
         if (forceSpecificItem)
         {
-            StorageBox = Prefabs[itemToForce];
+            item = Prefabs[itemToForce];
         }
         else
         {
-            StorageBox = Prefabs[Random.Range(0, Prefabs.Length)];
+            float closest = -1;
+            List<GameObject> options = new List<GameObject>();
+            foreach (GameObject prefab in Prefabs)
+            {
+                Item itemCard = prefab.GetComponent<Item>();
+                if ((itemCard == null && closest == -1) || value == null)
+                {
+                    options.Add(prefab);
+                } else
+                {
+                    float distance = Mathf.Abs(itemCard.moneyValue - value.value);
+                    if (distance == closest)
+                    {
+                        options.Add(prefab);
+                    } else if (distance * Random.Range(0.8f, 1.25f) < closest || closest == -1)
+                    {
+                        closest = distance;
+                        options = new List<GameObject>();
+                        options.Add(prefab);
+                    }
+                }
+            }
+            item = options[Random.Range(0, options.Count)];
         }
-        prefab = Instantiate(StorageBox, transform);
+        prefab = Instantiate(item, transform);
         prefabBox = prefab.GetComponent<BoxCollider>();
         if (prefabBox == null)
         {

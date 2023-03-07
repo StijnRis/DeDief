@@ -41,6 +41,8 @@ public class StorageRoomGenerator : RoomGenerator
                     GameObject storageBox = Instantiate(StorageBox, transform);
                     storageBox.transform.localPosition = new Vector3(x, -roomSize.y / 2 + storageBoxSize.y / 2, z);
                     amountBoxes += 1;
+
+                    storageBox.AddComponent<Value>().value = value / averageAmount;
                 }
                 amountChecked += 1;
             }

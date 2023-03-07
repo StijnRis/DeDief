@@ -60,4 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wall: {fileID: 4427668551479185814, guid: f3d1858a8d8d66949bb60c7dda66ed80, type: 3}
   Floor: {fileID: 3660091792651605634, guid: 4c4562c261d099e4ca85f0a7f29a6dd7, type: 3}
+  Light: {fileID: 0}
+  value: 0
+  valueRank: 3
   ConsulattionStation: {fileID: 4104058476974082637, guid: d1a77dccdb292d84f9bb0c411bc4e27c, type: 3}

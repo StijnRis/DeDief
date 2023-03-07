@@ -26,5 +26,7 @@ public class ConferrenceRoomGenerator : RoomGenerator
 
         BoxCollider DeskSize = desk.GetComponent<BoxCollider>();
         DeskSize.size = maxSize;
+
+        desk.AddComponent<Value>().value = value;
     }
 }

@@ -17,7 +17,11 @@ public class OfficeRoomGenerator : RoomGenerator
         PlaceDesk();
         placeCornerItems();
         PlaceCeiling();
-        GetWall(90).GetComponent<WallGenerator>().placePainting();
+        GameObject wall = GetWall(90);
+        if (wall != null)
+        {
+            wall.GetComponent<WallGenerator>().placePainting();
+        }
     }
 
     private void PlaceDesk()
@@ -27,6 +31,8 @@ public class OfficeRoomGenerator : RoomGenerator
         Vector3 size = new Vector3(Mathf.Min(2, Box.size.x - 0.5f), Mathf.Min(1, Box.size.y - 0.5f), Mathf.Min(1.4f, Box.size.z - 0.5f));
         workStationBox.size = size;
         workStation.transform.localPosition = new Vector3(0, -Box.size.y / 2 + workStationBox.size.y / 2, - Box.size.z / 2.2f + size.z / 2);
+
+        workStation.AddComponent<Value>().value = 0.7f * value;
     }
 
     private void placeCornerItems()
@@ -41,6 +47,7 @@ public class OfficeRoomGenerator : RoomGenerator
                 BoxCollider plant1Box = plant1.GetComponent<BoxCollider>();
                 plant1Box.size = size;
                 plant1.transform.localPosition = new Vector3(-Box.size.x / 2 + size.x, -Box.size.y / 2 + plant1Box.size.y / 2, Box.size.z / 2.2f - size.z / 2);
+                plant1.AddComponent<Value>().value = 0.2f * value;
             }
 
             if (Random.Range(0, 2f) < 1)
@@ -49,6 +56,7 @@ public class OfficeRoomGenerator : RoomGenerator
                 BoxCollider plant2Box = plant2.GetComponent<BoxCollider>();
                 plant2Box.size = size;
                 plant2.transform.localPosition = new Vector3(Box.size.x / 2 - size.x, -Box.size.y / 2 + plant2Box.size.y / 2, Box.size.z / 2.2f - size.z / 2);
+                plant2.AddComponent<Value>().value = 0.2f * value;
             }
         }
     }

@@ -9,7 +9,8 @@ public class OfficeGenerator : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float MaxHallRate = 0.15f;
     public float HallSize = 1.2f;
-    public bool ceiling = true;
+    public float Value = 1000;
+    public bool Ceiling = true;
     public GameObject Corridor;
     public GameObject Light;
     public GameObject Camera;
@@ -23,6 +24,7 @@ public class OfficeGenerator : MonoBehaviour
     private float TotalRoomArea;
     private List<Area> Chunks, Halls, Blocks, UnreachableAreas, Areas;
     private List<GameObject> Rooms;
+    private float totalRank;
 
     private IDictionary<RoomType, float> Coverage;
 
@@ -56,9 +58,10 @@ public class OfficeGenerator : MonoBehaviour
         BlocksToAreas();
         AddDoors();
 
+        CalculateTotalValueRank();
         foreach (Area area in Areas)
         {
-            PlaceRoom(area);
+            PlaceArea(area, area.roomType.RoomPrefab);
         }
         foreach (Area hall in Halls)
         {
@@ -69,6 +72,15 @@ public class OfficeGenerator : MonoBehaviour
 
         sceneController = GetComponent<SceneController>();
         sceneController.startGame = true;
+    }
+
+    private void CalculateTotalValueRank()
+    {
+        totalRank = 0;
+        foreach (Area area in Areas)
+        {
+            totalRank += area.roomType.RoomPrefab.GetComponent<RoomGenerator>().valueRank;
+        }
     }
 
     private void ChunksToBlocks()
@@ -234,12 +246,6 @@ public class OfficeGenerator : MonoBehaviour
         }
     }
 
-    public void PlaceRoom(Area area)
-    {
-        GameObject roomPrefab = area.roomType.RoomPrefab;
-        PlaceArea(area, roomPrefab);
-    }
-
     public void PlaceArea(Area area, GameObject roomPrefab)
     {
         GameObject room = Instantiate(roomPrefab, transform);
@@ -280,6 +286,10 @@ public class OfficeGenerator : MonoBehaviour
             exit.Door = Exit;
             exit.Player = Player;
         }
+
+        // value
+        float roomValue = room.GetComponent<RoomGenerator>().valueRank / totalRank * Value * Random.Range(0.25f, 4f);
+        room.GetComponent<RoomGenerator>().value = roomValue;
 
         Rooms.Add(room); 
     }

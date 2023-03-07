@@ -114,7 +114,7 @@ MonoBehaviour:
   promptTitle: 
   promptDescription: 
   name: Apple
-  moneyValue: 1
+  moneyValue: 2
   itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
   width: 1
   height: 1

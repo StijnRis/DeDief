@@ -9,6 +9,8 @@ public abstract partial class RoomGenerator : MonoBehaviour
     public GameObject Wall;
     public GameObject Floor;
     public GameObject Light;
+    public float value;
+    public float valueRank = 1;
     protected Door[] Doors;
 
     private int wallIndex = 0;
@@ -69,7 +71,7 @@ public abstract partial class RoomGenerator : MonoBehaviour
 
     protected void PlaceCeiling()
     {
-        if (!GetComponentInParent<OfficeGenerator>().ceiling)
+        if (!GetComponentInParent<OfficeGenerator>().Ceiling)
         {
             return;
         }

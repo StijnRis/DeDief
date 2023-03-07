@@ -65,7 +65,8 @@ MonoBehaviour:
   Box: {fileID: 4926617815897709897}
   MaxHallRate: 0.3
   HallSize: 2.07
-  ceiling: 1
+  Value: 2000
+  Ceiling: 1
   Corridor: {fileID: 1977530078531694865, guid: cd88545f42136044d85aad68429d8bd8, type: 3}
   Light: {fileID: 8019405468033893245, guid: dc847d9027b83064c88f3d0429bc5a42, type: 3}
   Camera: {fileID: 183054, guid: 58419bfb3192e3f4eac2e8731a3db58e, type: 3}

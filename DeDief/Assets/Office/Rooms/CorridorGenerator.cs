@@ -31,10 +31,11 @@ public class CorridorGenerator : RoomGenerator
         Vector3 rotation = (endCorner - startCorner).normalized;
         float distance = Vector3.Distance(startCorner, endCorner);
         BoxCollider WallBox = door.GetComponent<BoxCollider>();
-        WallBox.size = new Vector3(thickness, Box.size.y, distance + thickness);
+        WallBox.size = new Vector3(thickness, 1, distance + thickness);
         door.transform.localPosition = startCorner + distance / 2 * rotation;
         Quaternion quaternion = Quaternion.LookRotation(rotation, Vector3.up);
         door.transform.localRotation = quaternion;
+        door.transform.localScale = new Vector3(1, Box.size.y, distance + thickness);
     }
 
 
