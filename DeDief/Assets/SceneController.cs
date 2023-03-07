@@ -100,7 +100,7 @@ public class SceneController : MonoBehaviour
     
     public List<GameObject> GetAllAgents() {
         List<GameObject> list = new List<GameObject>();
-        GameObject[] allAgents = FindGameObjectsWithTag("Agent");
+        GameObject[] allAgents = GameObject.FindGameObjectsWithTag("Agent");
         foreach (GameObject agent in allAgents) {
             list.Add(agent);
         }
