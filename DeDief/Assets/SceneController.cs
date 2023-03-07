@@ -78,21 +78,26 @@ public class SceneController : MonoBehaviour
     {        
         for (int i = 0; i < AgentCount; i++)
         {
-            GameObject randomFloor = getRandomCorridorFloor();
-            GameObject agent = Instantiate(agentPrefab, randomFloor.transform.position, Quaternion.identity);
-
-            //Create waypoints
-            for (int x = 0; x < 3; x++)
-            {
-                randomFloor = getRandomCorridorFloor();
-                agent.AddComponent<Waypoint>().location = randomFloor.transform.position;
-            }
-
-            //Set first waypoint for agent
-            agent.GetComponent<AgentController>().NextWaypoint();
-
-            allAgents.Add(agent);
+            SpawnAgent();
         }
+    }
+    
+    public void SpawnAgent() 
+    {
+        GameObject randomFloor = getRandomCorridorFloor();
+        GameObject agent = Instantiate(agentPrefab, randomFloor.transform.position, Quaternion.identity);
+
+        //Create waypoints
+        for (int x = 0; x < 3; x++)
+        {
+            randomFloor = getRandomCorridorFloor();
+            agent.AddComponent<Waypoint>().location = randomFloor.transform.position;
+        }
+
+        //Set first waypoint for agent
+        agent.GetComponent<AgentController>().NextWaypoint();
+
+        allAgents.Add(agent);
     }
 
     public void SendNearestAgentToPlayer()
