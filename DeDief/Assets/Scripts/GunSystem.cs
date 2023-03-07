@@ -58,6 +58,7 @@ public class GunSystem : MonoBehaviour
                 if (destr.destroyed == false)
                 {
                     rayHit.collider.GetComponent<AgentController>().Destroy();
+                    GetComponentInParent<SceneController>().SpawnAgent();
                 }
             }
         }
