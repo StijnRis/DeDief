@@ -11,6 +11,7 @@ public class PlayerMotor : MonoBehaviour
     public float walkSpeed = 5f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
+    public float sprintSpeed;
     public bool lerpCrouch;
     public bool crouching;
     public float crouchTimer;
@@ -97,7 +98,7 @@ public class PlayerMotor : MonoBehaviour
     {
         sprinting = !sprinting;
         if (sprinting && !crouching && !crawling)
-            speed = walkSpeed*2.5f;
+            speed = sprintSpeed;
         else
             speed = walkSpeed;
     }
