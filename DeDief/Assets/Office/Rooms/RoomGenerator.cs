@@ -81,6 +81,7 @@ public abstract partial class RoomGenerator : MonoBehaviour
         ceiling.transform.position = new Vector3(transform.position.x, transform.position.y + Box.size.y / 2 - wallThickness, transform.position.z);
         ceiling.transform.rotation = transform.rotation;
         ceiling.name = "Ceiling";
+        ceiling.layer = LayerMask.NameToLayer("Ceiling");
 
         GameObject light = Instantiate(Light, transform);
         light.transform.localPosition = new Vector3(0, Box.size.y / 2 - wallThickness * 2, 0);

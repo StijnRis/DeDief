@@ -60,7 +60,15 @@ public class FieldOfView : MonoBehaviour
 
                 Ray ray = new Ray(eyes.transform.position, directionToTarget);
 
-                if (!Physics.Raycast(eyes.transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                /*if (!Physics.Raycast(eyes.transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                {
+                    canSeePlayer = true;
+                }
+                else
+                {
+                    canSeePlayer = false;
+                }*/
+                if (!Physics.Linecast(eyes.transform.position, target.position, obstructionMask))
                 {
                     canSeePlayer = true;
                 }

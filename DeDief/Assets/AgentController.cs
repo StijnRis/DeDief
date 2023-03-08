@@ -10,6 +10,7 @@ public class AgentController : MonoBehaviour
     public GameObject agentObject;
     public bool destroyed = false;
     public float agentDamage;
+    public float shootCooldownSeconds;
     public GameObject seenAlertPrefab;
 
     private NavMeshAgent agent;
@@ -24,8 +25,6 @@ public class AgentController : MonoBehaviour
     bool aggregated;
     bool followPlayer;
     // bool idling;
-
-    float lookPeriod = 5f;
 	
     // Start is called before the first frame update
     void Start()
@@ -54,6 +53,12 @@ public class AgentController : MonoBehaviour
             seenAlert.Init("by an agent", inventoryController);
             followPlayer = true;
             followTime = 0;
+
+            //Rotate towards player
+            if (agent.velocity.magnitude < 0.1f)
+            {
+                RotateToPlayer();
+            }
         }
 
         if (followPlayer)
@@ -69,7 +74,8 @@ public class AgentController : MonoBehaviour
                 followPlayer = false;
             }
 
-            if (fov.canSeePlayer && lastShootingTime > 2f && weapon != null)
+            //Shoot every 2 seconds
+            if (fov.canSeePlayer && lastShootingTime > shootCooldownSeconds && weapon != null)
             {
                 lastShootingTime = 0;
                 Shoot();
@@ -78,16 +84,9 @@ public class AgentController : MonoBehaviour
         }
         else
         {
-            if(agent.remainingDistance < agent.stoppingDistance) 
-            {
-                // agent.updateRotation = false;
-                // RotateTowards(target.transform);
-
+            if(agent.remainingDistance < agent.stoppingDistance)
+            {    
                 NextWaypoint();
-            }
-            else 
-            {
-                agent.updateRotation = true;
             }
             setTarget(currentWaypoint);
         }
@@ -132,23 +131,25 @@ public class AgentController : MonoBehaviour
         this.currentWaypoint = waypoints[waypointIndex].location;
     }
 
+    void RotateToPlayer()
+    {
+        int damping = 2;
+        var lookPos = target.transform.position - transform.position;
+        lookPos.y = 0;
+        var rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
+    }
+
     void Shoot()
     {
         target.GetComponent<PlayerHealth>().TakeDamage(agentDamage);
-    }
-
-    private void RotateTowards(Transform target) 
-    {
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
     }
 
     public void Destroy()
     {
         if (!destroyed)
         {
-            DestroyObject(agentObject);
+            Destroy(agentObject);
             destroyed = true;
         }
     }

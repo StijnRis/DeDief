@@ -1480,7 +1480,7 @@ MonoBehaviour:
   destroyed: 0
   agentDamage: 40
   seenAlertPrefab: {fileID: 1334107488127546347, guid: 4222a5526f225cd4496efa745a8d3cee, type: 3}
-  sceneController: {fileID: 6791950901422500101, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+  shootCooldownSeconds: 1
 --- !u!195 &7086050464792707583
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1515,7 +1515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 637eea39bf9705042bf0ce9707ef2e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
+  radius: 10
   angle: 120
   playerRef: {fileID: 0}
   eyes: {fileID: 7085115894708595518}
@@ -1524,7 +1524,7 @@ MonoBehaviour:
     m_Bits: 256
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 704
+    m_Bits: 2752
   log: 0
   canSeePlayer: 0
 --- !u!136 &7156502666985907720
