@@ -58,7 +58,15 @@ public class FieldOfView : MonoBehaviour
             {
                 float distanceToTarget = Vector3.Distance(eyes.transform.position, target.position);
 
-                if (!Physics.Raycast(eyes.transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                /*if (!Physics.Raycast(eyes.transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                {
+                    canSeePlayer = true;
+                }
+                else
+                {
+                    canSeePlayer = false;
+                }*/
+                if (!Physics.Linecast(eyes.transform.position, target.position, obstructionMask))
                 {
                     canSeePlayer = true;
                 }

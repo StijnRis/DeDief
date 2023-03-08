@@ -63,6 +63,7 @@ public class GunSystem : MonoBehaviour
                 {
                     rayHit.collider.GetComponent<AgentController>().Destroy();
                     office.SpawnAgent();
+                    office.SpawnAgent();
                 }
             }
         }

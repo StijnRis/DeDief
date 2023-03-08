@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5328b068fe65d244eb2c5f3500e3ff3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10000
+  maxHealth: 300
   chipSpeed: 2
   frontHealthBar: {fileID: 318055742}
   backHealthBar: {fileID: 1446182564}

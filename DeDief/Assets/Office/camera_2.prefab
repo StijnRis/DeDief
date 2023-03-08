@@ -267,7 +267,7 @@ MonoBehaviour:
     m_Bits: 256
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 2752
   log: 0
   canSeePlayer: 0
 --- !u!1 &8463451805531886229
