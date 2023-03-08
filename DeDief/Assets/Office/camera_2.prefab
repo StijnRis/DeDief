@@ -246,6 +246,7 @@ MonoBehaviour:
   eye: {fileID: 8463451805531886229}
   eye_ball: {fileID: 7204414098830588940}
   fov: {fileID: 0}
+  seenAlertPrefab: {fileID: 1334107488127546347, guid: 4222a5526f225cd4496efa745a8d3cee, type: 3}
 --- !u!114 &-5418212084196142880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 637eea39bf9705042bf0ce9707ef2e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
+  radius: 7
   angle: 96
   playerRef: {fileID: 0}
   eyes: {fileID: 8463451805531886229}

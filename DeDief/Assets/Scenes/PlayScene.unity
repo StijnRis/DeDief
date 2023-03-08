@@ -1608,6 +1608,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8076171097573083628, guid: 26ed6f144dacd884cbd1962ff1e93631, type: 3}
     - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 44609928}
+    - target: {fileID: 6791950901422500600, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
       propertyPath: ceiling
       value: 1
       objectReference: {fileID: 0}
@@ -2583,6 +2587,10 @@ PrefabInstance:
       propertyPath: tooltip
       value: 
       objectReference: {fileID: 1797874413}
+    - target: {fileID: 4544151658924784473, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
+      propertyPath: valueCounter
+      value: 
+      objectReference: {fileID: 2142663773}
     - target: {fileID: 4929607212995720357, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4779,3 +4787,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueText: {fileID: 684110118}
   totalValue: 0
+  addToTotalEverStolen: 0

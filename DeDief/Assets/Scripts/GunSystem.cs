@@ -41,7 +41,7 @@ public class GunSystem : MonoBehaviour
 
     public void Fire()
     {
-        if (readyToShoot && !shooting && !reloading && bulletsLeft > 0) {
+        if (readyToShoot && !shooting && !reloading && bulletsLeft > 0 && !PlayerInteract.inventoryOpen) {
             Shoot();
         }
     }
@@ -62,7 +62,7 @@ public class GunSystem : MonoBehaviour
                 if (destr.destroyed == false)
                 {
                     rayHit.collider.GetComponent<AgentController>().Destroy();
-                    office.SpawnAgent();
+                    GameObject.FindGameObjectWithTag("Office").GetComponent<SceneController>().SpawnAgent();
                 }
             }
         }

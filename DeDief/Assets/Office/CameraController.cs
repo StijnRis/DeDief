@@ -7,7 +7,8 @@ public class CameraController : MonoBehaviour
     public GameObject eye;
     public GameObject eye_ball;
     public FieldOfView fov;
-    
+    public GameObject seenAlertPrefab;
+
     private float speed = 20; //degrees per sec
     private float direction = 1f;
 
@@ -23,6 +24,7 @@ public class CameraController : MonoBehaviour
 
         fov = GetComponent<FieldOfView>();
         sceneController = GetComponentInParent<SceneController>();
+        // seenAlert = GameObject.FindGameObjectWithTag("SeenAlert").GetComponent<SeenAlert>();
     }
 
     // Update is called once per frame
@@ -40,6 +42,9 @@ public class CameraController : MonoBehaviour
 
         if (fov.canSeePlayer)
         {
+            SeenAlert seenAlert = Instantiate(seenAlertPrefab).GetComponent<SeenAlert>();
+            InventoryController inventoryController = Camera.main.GetComponent<InventoryController>();
+            seenAlert.Init("on camera", inventoryController);
             sceneController.SendNearestAgentToPlayer();
         }
     }

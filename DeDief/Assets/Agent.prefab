@@ -1479,6 +1479,7 @@ MonoBehaviour:
   agentObject: {fileID: 7085054231635045054}
   destroyed: 0
   agentDamage: 40
+  seenAlertPrefab: {fileID: 1334107488127546347, guid: 4222a5526f225cd4496efa745a8d3cee, type: 3}
   sceneController: {fileID: 6791950901422500101, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
 --- !u!195 &7086050464792707583
 NavMeshAgent:

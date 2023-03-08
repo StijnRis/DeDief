@@ -115,6 +115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eye: {fileID: 7386751762285843404}
   eye_ball: {fileID: 6749455672016901549}
+  fov: {fileID: 0}
+  seenAlertPrefab: {fileID: 1334107488127546347, guid: 4222a5526f225cd4496efa745a8d3cee, type: 3}
 --- !u!1 &6749455672016901549
 GameObject:
   m_ObjectHideFlags: 0

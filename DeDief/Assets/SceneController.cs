@@ -143,7 +143,7 @@ public class SceneController : MonoBehaviour
     private void ResetGame()
     {
         valueCounter.totalValue = 0;
-        totalEverStolen = 0;
+        // totalEverStolen = 0;
     }
 
 

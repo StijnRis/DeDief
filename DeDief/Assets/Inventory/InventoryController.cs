@@ -46,6 +46,8 @@ public class InventoryController : MonoBehaviour
 
     public ToolTip tooltip;
 
+    public ValueCounter valueCounter;
+
     private void Start()
     {
         inventoryHighlight = GetComponent<InventoryHighlight>();
@@ -133,6 +135,8 @@ public class InventoryController : MonoBehaviour
         {
             Destroy(pickUpInteract.gameObject);
         }
+        SceneController.totalEverStolen += valueCounter.addToTotalEverStolen;
+        valueCounter.addToTotalEverStolen = 0;
         // SetInventoryActive(PlayerInteract.inventoryOpen);
     }
 
@@ -341,5 +345,17 @@ public class InventoryController : MonoBehaviour
         }
         panel.SetActive(inventoryOpen);
         Cursor.lockState = inventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
+    public bool CheckDuplicateSeenAlert(string name)
+    {
+        SeenAlert[] seenAlerts = canvas.GetComponentsInChildren<SeenAlert>();
+        // Debug.Log("yes?");
+        // Debug.Log(seenAlerts);
+        if (seenAlerts.Length > 1)
+        {
+            return true;
+        }
+        return false;
     }
 }

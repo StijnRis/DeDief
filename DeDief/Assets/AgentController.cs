@@ -10,6 +10,7 @@ public class AgentController : MonoBehaviour
     public GameObject agentObject;
     public bool destroyed = false;
     public float agentDamage;
+    public GameObject seenAlertPrefab;
 
     private NavMeshAgent agent;
     private FieldOfView fov;
@@ -32,6 +33,7 @@ public class AgentController : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
         fov = gameObject.GetComponent<FieldOfView>();
         animator = gameObject.GetComponent<Animator>();
+        // seenAlert = GameObject.FindGameObjectWithTag("SeenAlert").GetComponent<SeenAlert>();
 
         // setTarget(target);
         target = GameObject.FindGameObjectWithTag("Player");
@@ -47,6 +49,9 @@ public class AgentController : MonoBehaviour
         aggregated = fov.canSeePlayer;
         if (fov.canSeePlayer)
         {
+            SeenAlert seenAlert = Instantiate(seenAlertPrefab).GetComponent<SeenAlert>();
+            InventoryController inventoryController = Camera.main.GetComponent<InventoryController>();
+            seenAlert.Init("by an agent", inventoryController);
             followPlayer = true;
             followTime = 0;
         }
