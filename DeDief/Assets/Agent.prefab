@@ -1479,6 +1479,7 @@ MonoBehaviour:
   agentObject: {fileID: 7085054231635045054}
   destroyed: 0
   agentDamage: 40
+  sceneController: {fileID: 6791950901422500101, guid: b11950b3add79e646a0dca11fd2735d8, type: 3}
 --- !u!195 &7086050464792707583
 NavMeshAgent:
   m_ObjectHideFlags: 0

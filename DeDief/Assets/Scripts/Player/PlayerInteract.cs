@@ -15,7 +15,9 @@ public class PlayerInteract : MonoBehaviour
     // public GameObject inventory;
     private InventoryController inventoryController;
     public static bool inventoryOpen = false;
+    public static bool settingsOpen = false;
     public int interactableLayer;
+    public GameObject settings;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,7 @@ public class PlayerInteract : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         inventoryController = Camera.main.GetComponent<InventoryController>();
         interactableLayer = LayerMask.NameToLayer("Interactables");
+        settings.SetActive(false);
     }
 
     // Update is called once per frame
@@ -87,8 +90,11 @@ public class PlayerInteract : MonoBehaviour
 
     public void OpenInventory()
     {
-        inventoryOpen = !inventoryOpen;
-        inventoryController.SetInventoryActive(inventoryOpen);
+        if (!settingsOpen)
+        {
+            inventoryOpen = !inventoryOpen;
+            inventoryController.SetInventoryActive(inventoryOpen);
+        }
     }
 
     public void GenerateRandomItem()
@@ -111,5 +117,12 @@ public class PlayerInteract : MonoBehaviour
     public void DropItem(GameObject itemPrefab)
     {
         GameObject itemObject = Instantiate(itemPrefab);
+    }
+
+    public void OpenSettings()
+    {
+        settingsOpen = !settingsOpen;
+        settings.SetActive(settingsOpen);
+        Cursor.lockState = settingsOpen ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }

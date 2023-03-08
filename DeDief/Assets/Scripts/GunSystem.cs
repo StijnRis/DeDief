@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -21,6 +23,7 @@ public class GunSystem : MonoBehaviour
     public ToolTip toolTip;
 
     public TextMeshProUGUI ammo;
+    public SceneController office;
 
     private void Awake()
     {
@@ -28,6 +31,7 @@ public class GunSystem : MonoBehaviour
         readyToShoot = true;
         reloading = false;
         shooting = false;
+        office = GameObject.FindGameObjectWithTag("Office").GetComponent<SceneController>();
     }
 
     private void Update()
@@ -58,7 +62,7 @@ public class GunSystem : MonoBehaviour
                 if (destr.destroyed == false)
                 {
                     rayHit.collider.GetComponent<AgentController>().Destroy();
-                    GetComponentInParent<SceneController>().SpawnAgent();
+                    office.SpawnAgent();
                 }
             }
         }
