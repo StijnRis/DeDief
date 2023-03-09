@@ -33,6 +33,7 @@ public class OfficeGenerator : MonoBehaviour
     private void Start()
     {
         sceneController = GetComponent<SceneController>();
+        Value = 1000 * Mathf.Pow(2, SceneController.officeLevel - 1);
         Generate();
     }
 

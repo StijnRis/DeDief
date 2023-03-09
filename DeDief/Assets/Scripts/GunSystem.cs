@@ -41,9 +41,11 @@ public class GunSystem : MonoBehaviour
 
     public void Fire()
     {
-        if (readyToShoot && !shooting && !reloading && bulletsLeft > 0 && !PlayerInteract.inventoryOpen) {
+        if (readyToShoot && !shooting && !reloading && bulletsLeft > 0 && !PlayerInteract.inventoryOpen && Cursor.lockState == CursorLockMode.Locked) {
             Shoot();
-        }
+        } else if (!PlayerInteract.inventoryOpen && !PlayerInteract.settingsOpen) {
+            FindObjectOfType<AudioManager>().Play("PlayerGunEmpty");
+        } 
     }
 
     private void Shoot()
@@ -67,6 +69,8 @@ public class GunSystem : MonoBehaviour
                 }
             }
         }
+
+        FindObjectOfType<AudioManager>().Play("PlayerShoot");
 
         bulletsLeft--;
         Invoke("ResetShot", fireRate);

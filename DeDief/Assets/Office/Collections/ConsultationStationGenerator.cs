@@ -12,6 +12,7 @@ public class ConsultationStationGenerator : MonoBehaviour
     void Start()
     {
         float value = GetComponent<Value>().value;
+
         BoxCollider box = GetComponent<BoxCollider>();
 
         Vector3 chairSize = new Vector3(1, 2, 1);

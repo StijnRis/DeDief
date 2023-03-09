@@ -37,6 +37,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""UnlockCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c247781-699d-48af-9ebc-7caed5ee2d2c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""545aa359-4381-45e3-bf1a-df0c85eb94c6"",
@@ -350,6 +359,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Settings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7564bbd-5c5a-40b1-a142-b6c98230113a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UnlockCursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -877,6 +897,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // OnFoot
         m_OnFoot = asset.FindActionMap("OnFoot", throwIfNotFound: true);
         m_OnFoot_Movement = m_OnFoot.FindAction("Movement", throwIfNotFound: true);
+        m_OnFoot_UnlockCursor = m_OnFoot.FindAction("UnlockCursor", throwIfNotFound: true);
         m_OnFoot_Jump = m_OnFoot.FindAction("Jump", throwIfNotFound: true);
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Crouch = m_OnFoot.FindAction("Crouch", throwIfNotFound: true);
@@ -962,6 +983,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_OnFoot;
     private IOnFootActions m_OnFootActionsCallbackInterface;
     private readonly InputAction m_OnFoot_Movement;
+    private readonly InputAction m_OnFoot_UnlockCursor;
     private readonly InputAction m_OnFoot_Jump;
     private readonly InputAction m_OnFoot_Look;
     private readonly InputAction m_OnFoot_Crouch;
@@ -980,6 +1002,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         private @PlayerInput m_Wrapper;
         public OnFootActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_OnFoot_Movement;
+        public InputAction @UnlockCursor => m_Wrapper.m_OnFoot_UnlockCursor;
         public InputAction @Jump => m_Wrapper.m_OnFoot_Jump;
         public InputAction @Look => m_Wrapper.m_OnFoot_Look;
         public InputAction @Crouch => m_Wrapper.m_OnFoot_Crouch;
@@ -1005,6 +1028,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnMovement;
+                @UnlockCursor.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnUnlockCursor;
+                @UnlockCursor.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnUnlockCursor;
+                @UnlockCursor.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnUnlockCursor;
                 @Jump.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnJump;
@@ -1051,6 +1077,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @UnlockCursor.started += instance.OnUnlockCursor;
+                @UnlockCursor.performed += instance.OnUnlockCursor;
+                @UnlockCursor.canceled += instance.OnUnlockCursor;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -1202,6 +1231,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IOnFootActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnUnlockCursor(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);

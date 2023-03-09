@@ -1,53 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using UnityEditor;
 
-[CustomEditor(typeof(OfficeGenerator))]
-public class CustomInspectorOfficeGenerator : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-
-
-        OfficeGenerator office = (OfficeGenerator)target;
-        if (GUILayout.Button("Generate"))
-        {
-            office.Generate();
-        }
-    }
-}
-
-[CustomEditor(typeof(RoomGenerator), true)]
-public class CustomInspectorRoomGenerator : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
+// [CustomEditor(typeof(OfficeGenerator))]
+// public class CustomInspectorOfficeGenerator : Editor
+// {
+//     public override void OnInspectorGUI()
+//     {
+//         base.OnInspectorGUI();
 
 
-        RoomGenerator room = (RoomGenerator)target;
-        if (GUILayout.Button("Generate"))
-        {
-            room.Generate();
-        }
-    }
-}
+//         OfficeGenerator office = (OfficeGenerator)target;
+//         if (GUILayout.Button("Generate"))
+//         {
+//             office.Generate();
+//         }
+//     }
+// }
 
-[CustomEditor(typeof(WallGenerator))]
-public class CustomInspectorWallGenerator : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
+// [CustomEditor(typeof(RoomGenerator), true)]
+// public class CustomInspectorRoomGenerator : Editor
+// {
+//     public override void OnInspectorGUI()
+//     {
+//         base.OnInspectorGUI();
 
 
-        WallGenerator wall = (WallGenerator)target;
-        if (GUILayout.Button("Generate"))
-        {
-            wall.Generate();
-        }
-    }
-}
+//         RoomGenerator room = (RoomGenerator)target;
+//         if (GUILayout.Button("Generate"))
+//         {
+//             room.Generate();
+//         }
+//     }
+// }
+
+// [CustomEditor(typeof(WallGenerator))]
+// public class CustomInspectorWallGenerator : Editor
+// {
+//     public override void OnInspectorGUI()
+//     {
+//         base.OnInspectorGUI();
+
+
+//         WallGenerator wall = (WallGenerator)target;
+//         if (GUILayout.Button("Generate"))
+//         {
+//             wall.Generate();
+//         }
+//     }
+// }
 

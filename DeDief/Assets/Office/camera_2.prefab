@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 637eea39bf9705042bf0ce9707ef2e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 7
+  radius: 10
   angle: 96
   playerRef: {fileID: 0}
   eyes: {fileID: 8463451805531886229}

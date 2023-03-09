@@ -135,8 +135,6 @@ public class InventoryController : MonoBehaviour
         {
             Destroy(pickUpInteract.gameObject);
         }
-        SceneController.totalEverStolen += valueCounter.addToTotalEverStolen;
-        valueCounter.addToTotalEverStolen = 0;
         // SetInventoryActive(PlayerInteract.inventoryOpen);
     }
 

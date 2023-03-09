@@ -125,4 +125,9 @@ public class PlayerInteract : MonoBehaviour
         settings.SetActive(settingsOpen);
         Cursor.lockState = settingsOpen ? CursorLockMode.None : CursorLockMode.Locked;
     }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
 }

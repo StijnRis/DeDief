@@ -63,7 +63,6 @@ MonoBehaviour:
   keepAspectRatio: 0
   maxOrientationOffset: 26.6
   randomPosition: 1
-  value: 100
   Prefabs:
   - {fileID: 1189782351792700, guid: 20661e78605491946911818aa730569b, type: 3}
   - {fileID: 1179622459644578, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}

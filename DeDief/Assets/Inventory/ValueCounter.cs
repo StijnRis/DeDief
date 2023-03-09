@@ -9,7 +9,7 @@ public class ValueCounter : MonoBehaviour
     ItemGrid itemGrid;
     public TextMeshProUGUI valueText;
     public int totalValue = 0;
-    public int addToTotalEverStolen = 0;
+    // public int addToBalance = 0;
 
     private void Awake()
     {
@@ -25,12 +25,12 @@ public class ValueCounter : MonoBehaviour
     public void AddValue(int valueToAdd)
     {
         totalValue += valueToAdd;
-        addToTotalEverStolen += valueToAdd;
+        // addToBalance += valueToAdd;
     }
 
     public void SubtractValue(int valueToSubtract)
     {
         totalValue -= valueToSubtract;
-        addToTotalEverStolen -= valueToSubtract;
+        // addToBalance -= valueToSubtract;
     }
 }

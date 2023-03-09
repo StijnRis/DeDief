@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "UnlockCursor",
+                    "type": "Button",
+                    "id": "2c247781-699d-48af-9ebc-7caed5ee2d2c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "545aa359-4381-45e3-bf1a-df0c85eb94c6",
@@ -328,6 +337,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Settings",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7564bbd-5c5a-40b1-a142-b6c98230113a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UnlockCursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

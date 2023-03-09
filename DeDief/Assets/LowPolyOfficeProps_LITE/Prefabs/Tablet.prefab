@@ -113,12 +113,12 @@ MonoBehaviour:
   useEvents: 0
   promptTitle: 
   promptDescription: 
-  name: Item
+  name: Tablet
   moneyValue: 400
-  itemPanel: {fileID: 0}
-  width: 0
-  height: 0
-  itemIcon: {fileID: 0}
+  itemPanel: {fileID: 2355428623065976094, guid: 2e3807917717ba14ea28c5e7a91a92e9, type: 3}
+  width: 2
+  height: 2
+  itemIcon: {fileID: 21300000, guid: 5f011707d5d26ab4096f26b955fb7f78, type: 3}
   canBeRotated: 0
   oldPosition: {x: 0, y: 0, z: 0}
   oldRotation: {x: 0, y: 0, z: 0, w: 0}

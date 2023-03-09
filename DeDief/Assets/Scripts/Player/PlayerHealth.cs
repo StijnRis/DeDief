@@ -67,6 +67,8 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             sceneController = GameObject.FindGameObjectWithTag("Office").GetComponent<SceneController>();
+            GameOverController.didPlayerDie = true;
+            GameOverController.addToBalance = 0;
             sceneController.endGame = true;
         }
     }

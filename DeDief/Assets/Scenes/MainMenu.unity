@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneController: {fileID: 0}
   loadingScreen: {fileID: 3064073568696287886, guid: f21bd98212ea8a74baef9cbc04499cb1, type: 3}
+  secondsToConfirm: 5
 --- !u!1 &940743142
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,62 +432,4 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1985492763
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1985492765}
-  - component: {fileID: 1985492764}
-  m_Layer: 0
-  m_Name: ThumbManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1985492764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985492763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d109aa393c3c3c048a8bcd8815f6ae77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotationX: 0
-  RotationY: 0
-  RotationZ: 0
-  isCameraOrthographic: 0
-  CameraBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
-  CameraX: 0
-  CameraY: 0
-  CameraZ: -8
-  Filename: Image
-  ExportFile: 0
-  ResolutionWidth: 128
-  ResolutionHeight: 128
-  FrameResolution: 16
-  FrameRate: 1
---- !u!4 &1985492765
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985492763}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 961.87573, y: 559.65027, z: -5.979687}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -11,6 +11,7 @@ TagManager:
   - InventoryCanvas
   - InventoryPanel
   - SeenAlert
+  - AudioManager
   layers:
   - Default
   - TransparentFX

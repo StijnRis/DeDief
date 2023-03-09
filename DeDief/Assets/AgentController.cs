@@ -21,6 +21,7 @@ public class AgentController : MonoBehaviour
     private int waypointIndex = 0;
     private float followTime = 0;
     private float lastShootingTime = 0;
+    private bool playAimSound = true;
     
     bool aggregated;
     bool followPlayer;
@@ -96,9 +97,15 @@ public class AgentController : MonoBehaviour
             if (aggregated)
             {
                 weapon.SetActive(true);
+                if (playAimSound)
+                {
+                    FindObjectOfType<AudioManager>().Play("AgentAim");
+                    playAimSound = false;
+                }
             } else
             {
                 weapon.SetActive(false);
+                playAimSound = true;
             }
             animator.SetBool("aggregated", aggregated);
         }
@@ -143,6 +150,7 @@ public class AgentController : MonoBehaviour
     void Shoot()
     {
         target.GetComponent<PlayerHealth>().TakeDamage(agentDamage);
+        FindObjectOfType<AudioManager>().Play("AgentShoot");
     }
 
     public void Destroy()

@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameOverController : UIController
 {
-    public int moneyValue = 0;
-    public int everStolenValue = 0;
     private Label valueText;
-    private Label everStolenText;
+    private Label balanceText;
+
+    public static bool didPlayerDie = false;
 
     public GameObject loadingScreen;
+    public static int addToBalance;
 
     protected override void UISetup()
     {
@@ -21,20 +22,23 @@ public class GameOverController : UIController
         Button menuButton = root.Q<Button>("MenuButton");
         Button playButton = root.Q<Button>("PlayButton");
         valueText = root.Q<Label>("ValueText");
-        everStolenText = root.Q<Label>("EverStolenText");
+        balanceText = root.Q<Label>("BalanceText");
 
-        moneyValue = SceneController.totalValue;
-        everStolenValue = SceneController.totalEverStolen;
-        SetMoneyValue(moneyValue, everStolenValue);
+        MainMenuController.balance += addToBalance;
+        SetMoneyValue(addToBalance, MainMenuController.balance);
 
         menuButton.clicked += () => MainMenu();
         playButton.clicked += () => PlayAgain();
     }
 
-    public void SetMoneyValue(int moneyValue, int everStolenValue)
+    public void SetMoneyValue(int moneyValue, int balance)
     {
-        valueText.text = "Total value of inventory: €" + moneyValue.ToString();
-        everStolenText.text = "Total value ever stolen: €" + everStolenValue.ToString();
+        valueText.text = "You have stolen: €" + moneyValue.ToString();
+        balanceText.text = "Balance: €" + balance.ToString();
+        if (didPlayerDie)
+        {
+            valueText.text = valueText.text + " (you died)";
+        }
     }
 
     private void PlayAgain()

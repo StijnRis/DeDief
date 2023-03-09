@@ -14,6 +14,8 @@ public class ExitDoorCollider : Interactable
         Debug.Log(Player);
         if (collision.gameObject == Player)
         {
+            GameOverController.didPlayerDie = false;
+            GameOverController.addToBalance = SceneController.totalValue;
             sceneController.endGame = true;
         }
     }

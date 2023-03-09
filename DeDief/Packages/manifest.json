@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.andreadev3d.thumbcreator": "https://github.com/AndreaDev3D/ThumbCreator.git",
     "com.unity.ai.navigation": "1.0.0-exp.4",
     "com.unity.collab-proxy": "1.17.7",
     "com.unity.feature.development": "1.0.1",

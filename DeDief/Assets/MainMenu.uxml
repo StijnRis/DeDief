@@ -1,10 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement style="width: 100%; height: 100%; -unity-background-scale-mode: stretch-to-fill; justify-content: space-around; background-color: rgb(9, 45, 87);">
         <ui:VisualElement style="align-items: center;">
-            <ui:Label text="De Dief" display-tooltip-when-elided="true" style="font-size: 69px; color: rgba(255, 255, 255, 255);" />
+            <ui:Label text="Robber Simulator" display-tooltip-when-elided="true" style="font-size: 69px; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
         <ui:VisualElement style="align-items: center; justify-content: space-around; flex-direction: row; height: auto;">
-            <ui:Button text="Play Game" display-tooltip-when-elided="true" name="StartButton" style="font-size: 50px; padding-left: 200px; padding-right: 200px; padding-top: 10px; padding-bottom: 10px; background-color: rgba(255, 255, 255, 255); color: rgba(0, 0, 0, 255);" />
+            <ui:VisualElement>
+                <ui:Label text="Your balance: €0" display-tooltip-when-elided="true" name="BalanceText" style="font-size: 42px; color: rgb(255, 255, 255);" />
+                <ui:Label text="Current office level: 0" display-tooltip-when-elided="true" name="OfficeLevel" style="font-size: 42px; color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:Button text="Upgrade Office" display-tooltip-when-elided="true" name="UpgradeButton" style="font-size: 50px; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); margin-left: 10px; margin-right: 10px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="align-items: center; justify-content: space-around; flex-direction: row; height: auto;">
+            <ui:Button text="Play Game" display-tooltip-when-elided="true" name="StartButton" style="font-size: 50px; padding-left: 200px; padding-right: 200px; padding-top: 10px; padding-bottom: 10px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

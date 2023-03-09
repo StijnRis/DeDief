@@ -8,13 +8,13 @@ public class PaintingManager : MonoBehaviour
     [Range(0,100)]
     public int amount = 20;
 
-    private string paintingPath = "/Office/Decoration/paintings/";
+    private string paintingPath = Application.streamingAssetsPath;
     List<Texture2D> paintingTextures = new List<Texture2D>();
 
     // Start is called before the first frame update
     void Start()
     {
-        DirectoryInfo dir = new DirectoryInfo(Application.dataPath + paintingPath);
+        DirectoryInfo dir = new DirectoryInfo(Application.streamingAssetsPath);
         var files = dir.GetFiles("painting_*.jpg");
 
         foreach(FileInfo file in files)

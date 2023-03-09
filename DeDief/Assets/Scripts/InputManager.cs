@@ -42,6 +42,8 @@ public class InputManager : MonoBehaviour
         onFoot.RandomItem.performed += vtx => inv.GenerateRandomItem();
         onFoot.InsertItem.performed += vtx => inv.InsertRandomItem();
         onFoot.RotateItem.performed += vtx => inv.RotateItem();
+
+        // onFoot.UnlockCursor.performed += vtx => inv.UnlockCursor();
     }
 
     void FixedUpdate()

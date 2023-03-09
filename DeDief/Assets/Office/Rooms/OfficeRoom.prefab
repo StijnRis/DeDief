@@ -61,6 +61,8 @@ MonoBehaviour:
   Wall: {fileID: 4427668551479185814, guid: f3d1858a8d8d66949bb60c7dda66ed80, type: 3}
   Floor: {fileID: 3660091792651605634, guid: 4c4562c261d099e4ca85f0a7f29a6dd7, type: 3}
   Light: {fileID: 0}
+  value: 0
+  valueRank: 1
   WorkStation: {fileID: 110388551026490932, guid: c968838f34baadc42ba9b2365bf71ce4, type: 3}
   CornerItems:
   - {fileID: 2195484798352071677, guid: ff3ac722a9641334eafcce07a1c4bc86, type: 3}

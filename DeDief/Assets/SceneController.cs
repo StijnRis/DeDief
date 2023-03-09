@@ -25,7 +25,8 @@ public class SceneController : MonoBehaviour
     public ValueCounter valueCounter;
 
     public static int totalValue = 0;
-    public static int totalEverStolen = 0;
+
+    public static int officeLevel = 1;
 
     bool followPlayer = false;
 
