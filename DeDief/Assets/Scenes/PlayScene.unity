@@ -2605,7 +2605,7 @@ PrefabInstance:
       objectReference: {fileID: 409880097}
     - target: {fileID: 5139807621314856062, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: range
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5139807621314856062, guid: b4560d272c308e14ab6eca4e81d378d9, type: 3}
       propertyPath: office
