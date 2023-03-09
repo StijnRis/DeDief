@@ -55,7 +55,7 @@ public class GunSystem : MonoBehaviour
         //RayCast
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnemy))
         {
-            Debug.Log(rayHit.collider.name);
+            Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward);
             
 
             if (rayHit.collider.CompareTag("Agent"))
@@ -64,6 +64,17 @@ public class GunSystem : MonoBehaviour
                 if (destr.destroyed == false)
                 {
                     rayHit.collider.GetComponent<AgentController>().Destroy();
+                    GameObject.FindGameObjectWithTag("Office").GetComponent<SceneController>().SpawnAgent();
+                    office.SpawnAgent();
+                }
+            }
+
+            if (rayHit.collider.GetComponent<AgentWeapon>() != null)
+            {
+                AgentController destr = rayHit.collider.GetComponent<AgentWeapon>().agent.GetComponent<AgentController>();
+                if (destr.destroyed == false)
+                {
+                    rayHit.collider.GetComponent<AgentWeapon>().agent.GetComponent<AgentController>().Destroy();
                     GameObject.FindGameObjectWithTag("Office").GetComponent<SceneController>().SpawnAgent();
                     office.SpawnAgent();
                 }
